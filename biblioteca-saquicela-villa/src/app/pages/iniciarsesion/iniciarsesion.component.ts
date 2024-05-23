@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './iniciarsesion.component.html',
-  styleUrl: './iniciarsesion.component.css'
+  styleUrl: './iniciarsesion.component.scss'
 })
 export class IniciarsesionComponent {
 

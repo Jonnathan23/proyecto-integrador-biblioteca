@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ModulobooksComponent } from './modulobooks.component';
+import { ModulebooksComponent } from './modulebooks.component';
 import { BooksComponent } from './books/books.component';
-import { AdminComponent } from './admin/admin.component';
+import { AdminbooksComponent } from './adminbooks/adminbooks.component';
 
 
 
 @NgModule({
   declarations: [
-    ModulobooksComponent,
+    ModulebooksComponent,
     BooksComponent,
-    AdminComponent
+    AdminbooksComponent
   ],
   imports: [
     CommonModule
-  ], exports:[ModulobooksComponent]
+  ]
 })
-export class ModulobooksModule { }
+export class ModulebooksModule { }
