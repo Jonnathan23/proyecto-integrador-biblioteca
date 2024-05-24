@@ -14,6 +14,7 @@ import { AdminbooksComponent } from './adminbooks/adminbooks.component';
   ],
   imports: [
     CommonModule
-  ]
+  ],
+  exports:[ModulebooksComponent]
 })
 export class ModulebooksModule { }

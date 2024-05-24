@@ -1,1 +1,5 @@
-<p>modulebooks works!</p>
+@if (admin) {
+    <app-adminbooks [books]="allBooks"/>
+}@else {
+    <app-books [books]="allBooks" />
+}
