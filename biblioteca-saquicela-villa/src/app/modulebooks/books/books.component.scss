@@ -1,108 +1,135 @@
 @use '../../../styles/variables' as *;
 
+/* BOOKS */
 main {
     width: 100%;
     background-image: linear-gradient(to top, $degradado_azul_top 0%, $degradado_azul_bot);
-
+    
 }
 
 .cont {
     width: 90%;
     margin: auto;
-    padding: 2rem;
+    padding: 2rem;    
 }
 
-/* SUB HEADER */
+/* SECTION */
 
-.cont--two--section {
+.cont--two--section{
     width: 100%;
+    
     display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+    flex-direction: column; 
+    margin-bottom: 2rem;
 }
 
-.cont--search{    
-    width: 30%;
+.cont--two--title{
+    border-bottom: $azul_claro solid .3rem;
+    padding: 1rem;       
+}
+.cont--search{
+    width: 100%;    
+    padding-left: 2rem;
 }
 
 .search--book{
-    width: 100%;
+    width: 70%;
     padding: .5rem;
-    border: $azul_claro solid .8rem;
+    border: $azul_oscuro solid 1rem;
     background-color: transparent;
     color: $blanco;
 }
 
-.cont--two--section .cont--two--title {
-    color: $blanco;
-    font-size: 2rem;
-    padding: 1.5rem;
+    /* BOOKS */
 
-    border-bottom: $azul_claro solid .2rem;
-}
-
-.cont--two--section p {
-    width: 60%;
-    text-align: justify;
-}
-
-/* BOOKS */
-
-.cont--books {
+.cont--books{
     width: 100%;
+    margin: auto;
+
     display: flex;
     flex-direction: column;
-    margin-top: 2rem;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
 }
 
-.book {
+.book{
+    background-color: $fondoItem;
+    padding: 3rem;
     width: 80%;
     height: 95%;
     margin: auto;
-    background-color: $fondoItem;
-    padding: 2rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;    
- 
+      
 }
 
-.book .book--content{
-    width: 80%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 3rem;
-
-    color: $blanco; 
+.book--title{
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
 }
 
-@media (min-width: 480px) {
-    .cont--books{        
+.book--content span{
+    font-weight: bold;
+}
+
+
+@media(min-width:480px){
+    .cont--books{
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 50% 50%;
+    }
+
+    .book{
+        width: 90%;
+    }
+    .cont--search{
+        width: 60%;    
         
     }
 }
 
-@media(min-width: 780px){
+@media(min-width:780px){
     .cont--books{        
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .book{
+        width: 90%;
     }
 }
-
 .book:hover{
     box-shadow: 13px 20px 17px 3px rgba(0,0,0,.53);
-    transform: scale(1.0625);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transform: scale(1.0625);    
 }
 
-.book--img img{
+
+.book--img img {
     width: 100%;
 }
+
+.book__text{
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    pad: 1rem;
+}
+
+.book__text p{
+    text-align: justify;
+}
+
+
+
+
+
+
+
+
+
