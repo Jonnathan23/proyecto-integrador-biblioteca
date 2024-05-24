@@ -29,7 +29,7 @@ export const categories: CategoryType [] = [
     },
     {
         title:'Tragedia',
-        description:'Donec orci metus, rutrum eu dignissim et, tempus vel sapien. Mauris feugiat neque commodo ultrices varius. Ut in sodales nisi.',
+        description:'Dnec orci metus, rutrum eu dignissim et, tempus vel sapien. Mauris feugiat neque commodo ultrices varius. Ut in sodales nisi.',
         image:'assets/img/cohete.jpg'
     }
 

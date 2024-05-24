@@ -8,7 +8,7 @@ import { DatabookService } from '../services/databook.service';
   styleUrl: './modulebooks.component.scss'
 })
 export class ModulebooksComponent {
-  admin = true
+  admin = false
   allBooks:BookType[] = []
   constructor(private bookService:DatabookService){}
 

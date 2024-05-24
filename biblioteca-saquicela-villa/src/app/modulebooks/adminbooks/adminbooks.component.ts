@@ -17,7 +17,7 @@ export class AdminbooksComponent {
     autor: '',
     category: ""
   }
-  cbText = 'Seleccione categoria'
+  cbText = 'Seleccione Categoria'
   ourCategories:CategoryType[] = [...categories]
 
   // Verificador de la selección de img

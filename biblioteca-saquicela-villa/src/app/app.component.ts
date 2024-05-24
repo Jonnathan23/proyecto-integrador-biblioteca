@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
- import { RouterOutlet } from '@angular/router';
+ import { RouterLink, RouterOutlet } from '@angular/router';
 import { BienvenidaComponent } from './pages/bienvenida/bienvenida.component';
 import { FooterComponent } from './footer/footer.component';
  import { ModulebooksModule } from './modulebooks/modulebooks.module';
@@ -7,7 +7,7 @@ import { FooterComponent } from './footer/footer.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-   imports: [RouterOutlet, BienvenidaComponent,FooterComponent],
+   imports: [RouterOutlet, BienvenidaComponent,FooterComponent, RouterLink],
     templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

@@ -92,8 +92,13 @@ main {
         
     }
 }
-
 @media(min-width:780px){
+    .cont--books{        
+        grid-template-columns: repeat(3, 1fr);
+    }
+}  
+
+@media(min-width:1440px){
     .cont--books{        
         grid-template-columns: repeat(4, 1fr);
     }
