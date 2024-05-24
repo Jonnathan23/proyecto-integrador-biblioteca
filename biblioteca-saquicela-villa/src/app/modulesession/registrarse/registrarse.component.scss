@@ -1,6 +1,6 @@
 @use '../../../assets/styles/variables' as *;
 
-main{
+body{
     width: 100%;
     height: auto;
     background-image: linear-gradient(to top, $degradado_azul_bot 0%, $degradado_azul_top 100%);
@@ -19,10 +19,6 @@ main{
     width: 300px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
 }
-form {
-    display: flex;
-    flex-direction: column;
-}
 
 h2{
     color: $blanco;
@@ -39,6 +35,7 @@ label{
 }
 
 input[type="text"], 
+input[type="email"],
 input[type="password"]{
     margin-bottom: 1rem;
     padding: 0.5rem;
@@ -50,7 +47,10 @@ input[type="password"]{
     color: $blanco;
 }
 
-
+input[type="checkbox"] {
+    margin-bottom: 1rem;
+    transform: scale(1.2);
+}
 
 
 button{

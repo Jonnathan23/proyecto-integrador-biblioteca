@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
  import { RouterOutlet } from '@angular/router';
 import { BienvenidaComponent } from './pages/bienvenida/bienvenida.component';
 import { FooterComponent } from './footer/footer.component';
- import { ModulebooksModule } from './modulebooks/modulebooks.module';
+import { ModulesessionModule } from './modulesession/modulesession.module';
+import { IniciarsesionComponent } from './pages/iniciarsesion/iniciarsesion.component';
  
 @Component({
   selector: 'app-root',
   standalone: true,
-   imports: [RouterOutlet, BienvenidaComponent,FooterComponent],
+   imports: [RouterOutlet, BienvenidaComponent,FooterComponent, ModulesessionModule, IniciarsesionComponent],
     templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
