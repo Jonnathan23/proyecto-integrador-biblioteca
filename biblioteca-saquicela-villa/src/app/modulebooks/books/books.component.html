@@ -10,11 +10,14 @@
             @for (book of books; track books) {
             <div class="book">
                 <div class="book--content">
-                    <h5> {{book.name}}</h5>                    
-                    <p>Categoria: {{book.category}}</p>
+                    <h3> {{book.name}}</h3>                    
+                    <p>Autor: {{book.autor}}</p>
                 </div>
                 <div class="book--img">
                     <img src="{{book.image}}" alt="{{book.name}}">                    
+                </div>
+                <div>
+                    <p>{{book.description}}</p>
                 </div>
             </div>
             }
