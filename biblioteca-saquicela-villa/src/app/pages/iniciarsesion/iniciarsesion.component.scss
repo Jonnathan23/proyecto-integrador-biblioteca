@@ -1,4 +1,4 @@
-@use '../../../assets/styles/variables' as *;
+@use '../../../styles/variables' as *;
 
 main{
     width: 100%;
@@ -45,7 +45,7 @@ input[type="password"]{
     border: none;
     border-radius: 5px;
     width: 100%;
-    font-family: $fuemte;
+    font-family: $fuente;
     background-color: $azul_oscuro;
     color: $blanco;
 }
