@@ -1,18 +1,22 @@
-<body>
-    <main>
-        <div class="form-container">
-            <h2>Ingrese Sessión</h2>
-            <form>
+<main>
+    <div class="form-container">
+        <h2>Iniciar Sessión</h2>
+        <form>
+            <div class="campo">
                 <label for="username">Username o email</label>
                 <input type="text" id="username" name="username" required>
-                
+            </div>
+
+            <div class="campo">
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" required>
-                
-                <button type="submit">Ingresar</button>
-                <p><a href="#">Registrarse</a></p>
-                
-            </form>
-        </div>
-    </main>
-</body>
+            </div>
+
+            <div class="campo">
+                <a class="campo__bt" type="submit">Ingresar</a>
+                <a class="campo__iniciar" routerLink="iniciar">Ya tienes Cuenta</a>
+            </div>
+
+        </form>
+    </div>
+</main>
