@@ -10,6 +10,7 @@ import { DatabookService } from '../services/databook.service';
 export class ModulebooksComponent {
   admin = true
   allBooks:BookType[] = []
+  
   constructor(private bookService:DatabookService){}
 
   ngOnInit(){
