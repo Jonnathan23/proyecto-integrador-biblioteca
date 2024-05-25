@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { BookType, CategoryType } from '../../../../assets/models/models';
 import { categories } from '../../../../assets/data/categorias';
 import { DatabookService } from '../../../services/databook.service';
+import { error } from '../../../../alerts/alerts';
 
 @Component({
   selector: 'app-admin',
@@ -69,44 +70,25 @@ export class AdminComponent {
 
   saveBook(src: string) {
     if (!this.book.name) {
-      this.message('Nombre')
+      error('Nombre')
       return;
     }
     if (!this.book.description) {
-      this.message('Descripción')
+      error('Descripción')
       return;
     }
     if (!this.selected) {
-      this.message('Seleccionar Imagen')
+      error('Seleccionar Imagen')
       return;
     }
     if(this.book.category ===''){
-      this.message('Seleccionar Categoria')
+      error('Seleccionar Categoria')
       return;
     }
 
-    this.book.image = src
-
-    this.message(false)
+    this.book.image = src    
     this.bookService.addBook(this.book)
 
-  }
-
-    //Funcion para mensaje de error o de guardado
-  // Recibe un texto o un Boleano: False
-  message(msg: string | boolean) {
-    const div = document.getElementById("msg")
-    const message = document.createElement('P');
-
-      //texto: error, bolleano: false -> guardar
-    message.textContent = msg ? `El campo ${msg} está vacío` : `Se ha guardado con exito`    
-    message.classList.add(msg ? 'error' : 'guardar')
-
-    div?.appendChild(message)
-
-    //Desaparezca después de 5s
-    setTimeout(() => message.remove(), 10000);
-
-  }
+  }  
 
 }

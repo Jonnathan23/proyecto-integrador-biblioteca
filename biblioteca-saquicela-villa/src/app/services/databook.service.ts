@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Firestore, addDoc, collection, getDocs, onSnapshot, query } from '@angular/fire/firestore';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { BookType } from '../../assets/models/models';
+import { save } from '../../alerts/alerts';
 
 
 @Injectable({
@@ -37,6 +38,7 @@ export class DatabookService {
   addBook(book: BookType) {
     console.log('Libro añadido')
     addDoc(collection(this.fireStore, 'books'), Object.assign({}, book))
+    save()
   }
 
   getBooks(): Observable<BookType[]> {
