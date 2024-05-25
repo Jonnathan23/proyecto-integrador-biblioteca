@@ -1,15 +1,18 @@
 import { Component, Input } from '@angular/core';
-import { BookType, CategoryType } from '../../../assets/models/models';
-import { DatabookService } from '../../services/databook.service';
-import { categories } from '../../../assets/data/categorias';
+import { BookType, CategoryType } from '../../../../assets/models/models';
+import { categories } from '../../../../assets/data/categorias';
+import { DatabookService } from '../../../services/databook.service';
 
 @Component({
-  selector: 'app-adminbooks',
-  templateUrl: './adminbooks.component.html',
-  styleUrl: './adminbooks.component.scss'
+  selector: 'app-admin',
+  standalone: true,
+  imports: [],
+  templateUrl: './admin.component.html',
+  styleUrl: './admin.component.scss'
 })
-export class AdminbooksComponent {
+export class AdminComponent {
   @Input({required:true}) books?:BookType[];
+
   book: BookType = {
     name: '',
     description: '',
@@ -23,8 +26,10 @@ export class AdminbooksComponent {
   // Verificador de la selección de img
   selected = false
 
-
   constructor(private bookService: DatabookService){}
+
+
+  
 
   selectImg(e: Event, img: HTMLImageElement) {
     const input = e.target as HTMLInputElement
@@ -103,8 +108,5 @@ export class AdminbooksComponent {
     setTimeout(() => message.remove(), 10000);
 
   }
-
-  
-
 
 }

@@ -1,0 +1,5 @@
+@if (admin) {
+    <app-admin [books]="allBooks" />    
+}@else {
+    <app-books [books]="allBooks" />
+}

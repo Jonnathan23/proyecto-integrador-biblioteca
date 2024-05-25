@@ -1,17 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { IniciosessionComponent } from './iniciosession.component';
 
-describe('IniciosessionComponent', () => {
-  let component: IniciosessionComponent;
-  let fixture: ComponentFixture<IniciosessionComponent>;
+import { AdminbooksComponent } from './adminbooks.component';
+
+describe('AdminbooksComponent', () => {
+  let component: AdminbooksComponent;
+  let fixture: ComponentFixture<AdminbooksComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [IniciosessionComponent]
+      imports: [AdminbooksComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(IniciosessionComponent);
+    fixture = TestBed.createComponent(AdminbooksComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
