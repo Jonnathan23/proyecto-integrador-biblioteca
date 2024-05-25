@@ -19,7 +19,7 @@
                 <div class="book__text">
                     <p>{{book.description}}</p>
                     <div class="book__bts">
-                        <input class="book__bt" type="button" value="Modificar">
+                        <input (click)="selectBook(book)" class="book__bt" type="button" value="Modificar">
                         <input class="book__bt" type="button" value="Eliminar">
                     </div>
                 </div>

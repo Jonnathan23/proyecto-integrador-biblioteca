@@ -1,8 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, Input, Renderer2, ViewChild } from '@angular/core';
 import { BookType, CategoryType } from '../../../../assets/models/models';
 import { categories } from '../../../../assets/data/categorias';
 import { DatabookService } from '../../../services/databook.service';
 import { error } from '../../../../alerts/alerts';
+import { __values } from 'tslib';
 
 @Component({
   selector: 'app-admin',
@@ -12,8 +13,21 @@ import { error } from '../../../../alerts/alerts';
   styleUrl: './admin.component.scss'
 })
 export class AdminComponent {
-  @Input({required:true}) books?:BookType[];
+  @Input({ required: true }) books?: BookType[];
+  ourCategories: CategoryType[] = [...categories]
+  // Verificador de la selección de img
+  selected = false
+  cbText = 'Seleccione Categoria'
 
+  //Seleccionar elementos del doom
+  @ViewChild('name') txtName!: ElementRef;
+  @ViewChild('autor') txtAutor!: ElementRef;
+  @ViewChild('description') txtDescription!: ElementRef;
+  @ViewChild('cbCategory') cbCategory!: ElementRef;
+  @ViewChild('book_img') imgBook!: ElementRef;
+
+
+  //Inicializacion del objeto
   book: BookType = {
     name: '',
     description: '',
@@ -21,16 +35,13 @@ export class AdminComponent {
     autor: '',
     category: ""
   }
-  cbText = 'Seleccione Categoria'
-  ourCategories:CategoryType[] = [...categories]
-
-  // Verificador de la selección de img
-  selected = false
-
-  constructor(private bookService: DatabookService){}
 
 
-  
+
+  constructor(private bookService: DatabookService, private render:Renderer2) { }
+
+
+
 
   selectImg(e: Event, img: HTMLImageElement) {
     const input = e.target as HTMLInputElement
@@ -48,8 +59,8 @@ export class AdminComponent {
     }
   }
 
-  selectCategory(e:Event){
-    const category = e.target as HTMLInputElement    
+  selectCategory(e: Event) {
+    const category = e.target as HTMLInputElement
     this.book.category = category.value
 
     console.log(this.book.category)
@@ -60,14 +71,15 @@ export class AdminComponent {
     this.book.name = name
 
   }
-  getAutor(autor: string){
+
+  getAutor(autor: string) {
     this.book.autor = autor
   }
 
   getDescription(desciption: string) {
     this.book.description = desciption
   }
-
+  //Invoca a la alerta Error o guarda el documento
   saveBook(src: string) {
     if (!this.book.name) {
       error('Nombre')
@@ -81,14 +93,26 @@ export class AdminComponent {
       error('Seleccionar Imagen')
       return;
     }
-    if(this.book.category ===''){
+    if (this.book.category === '') {
       error('Seleccionar Categoria')
       return;
     }
 
-    this.book.image = src    
+    this.book.image = src
     this.bookService.addBook(this.book)
 
-  }  
+  }
+
+  selectBook(book:BookType){
+    console.log('Clic para modificar')
+    this.render.setAttribute(this.txtName.nativeElement, 'value', book.name)
+    this.render.setAttribute(this.txtAutor.nativeElement,'value',book.autor)
+    this.render.setAttribute(this.txtDescription.nativeElement,'value', book.description)
+    this.render.setAttribute(this.cbCategory.nativeElement,'value',book.category)
+    this.render.setAttribute(this.imgBook.nativeElement,'src',book.image)
+
+  }
+
 
 }
+

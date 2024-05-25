@@ -76,7 +76,6 @@ main {
     font-weight: bold;
 }
 
-
 @media(min-width:480px){
     .cont--books{
         display: grid;
@@ -91,6 +90,11 @@ main {
         
     }
 }
+@media(min-width:780px){
+    .cont--books{        
+        grid-template-columns: repeat(3, 1fr);
+    }
+}  
 
 @media(min-width:1440px){
     .cont--books{        
