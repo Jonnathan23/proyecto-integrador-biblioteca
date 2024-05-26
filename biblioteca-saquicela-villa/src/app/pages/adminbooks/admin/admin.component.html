@@ -6,9 +6,12 @@
                 <input class="search--book" type="text" name="txtSearch" id="" placeholder="Buscar libro">
             </div>
         </section>
+        
         <div class="cont--books">
             <!--Boton para agregar libros-->
-
+            <button (click)="showAdminLibrary()" title="Agregar Libro" class="book book__add">                
+                    <img src="assets/img/addBook.jpg" alt="agregar libro">                
+            </button>
 
             <!--Libros-->
             @for (book of books; track books) {
@@ -17,9 +20,11 @@
                     <h3 class="book--title"> {{book.name}}</h3>
                     <p><span>Autor:</span> {{book.autor}}</p>
                 </div>
+
                 <div class="book--img">
                     <img src="{{book.image}}" alt="{{book.name}}">
                 </div>
+
                 <div class="book__text">
                     <p>{{book.description}}</p>
                     <div class="book__bts">
@@ -27,12 +32,16 @@
                         <input class="book__bt" type="button" value="Eliminar">
                     </div>
                 </div>
+
             </div>
             }
         </div>
     </div>
 </main>
 
-@if (addBook) {    
-    <app-addbook></app-addbook>
+@if (adminLibrary) {
+    <div class="cont">
+        <input (click)="hideAdminLibrary()" type="button" value="Cerrar">
+        <app-addbook />
+    </div>
 }

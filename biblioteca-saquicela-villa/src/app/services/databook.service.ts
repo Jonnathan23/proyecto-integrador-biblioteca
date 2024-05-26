@@ -10,6 +10,7 @@ import { save } from '../../alerts/alerts';
 })
 export class DatabookService {
   private static instance: DatabookService;
+  
   private booksSubject = new BehaviorSubject<BookType[]>([]);
   books$: Observable<BookType[]> = this.booksSubject.asObservable();
 
