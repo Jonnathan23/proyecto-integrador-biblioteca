@@ -152,7 +152,7 @@ main {
     text-align: justify;
 }
 
-/* Butons */
+/* Buttons */
 
 .book__bts {
     display: flex;
@@ -173,4 +173,29 @@ main {
     cursor: pointer;
     background-color: $bt_color_selected;
     transition: background-color 0.3s ease;
+}
+
+.cont__bt__cerrar{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    
+}
+
+.bt__cerrar{
+    border: none;
+    background-color: $bt_color;
+    color: $blanco;
+    border-radius: .5rem;
+
+    padding: 2rem;
+
+    transition: background-color .3s ease, transform .3s ease;
+}
+
+.bt__cerrar:hover{
+    cursor: pointer;    
+    background-color: $bt_color_selected;
+    transform: scale(1.075);
+
 }

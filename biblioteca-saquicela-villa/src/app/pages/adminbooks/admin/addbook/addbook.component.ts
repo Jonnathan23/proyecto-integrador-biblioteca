@@ -1,17 +1,16 @@
 import { Component, ElementRef, Input, Renderer2, ViewChild } from '@angular/core';
 import { error } from '../../../../../alerts/alerts';
 import { BookType } from '../../../../../assets/models/models';
-import { DatabookService } from '../../../../services/databook.service';
 import { categories } from '../../../../../assets/data/categorias';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { inspect } from 'util';
+import { BtaddbookComponent } from "../btaddbook/btaddbook.component";
+import { BtmodifybookComponent } from "../btmodifybook/btmodifybook.component";
 
 @Component({
-  selector: 'app-addbook',
-  standalone: true,
-  imports: [],
-  templateUrl: './addbook.component.html',
-  styleUrl: './addbook.component.scss'
+    selector: 'app-addbook',
+    standalone: true,
+    templateUrl: './addbook.component.html',
+    styleUrl: './addbook.component.scss',
+    imports: [BtaddbookComponent, BtmodifybookComponent]
 })
 export class AddbookComponent {
   private static instance: AddbookComponent;
@@ -40,7 +39,7 @@ export class AddbookComponent {
     category: ""
   }
 
-  constructor(private bookService: DatabookService, private render: Renderer2) {
+  constructor(private render: Renderer2) {
     if (AddbookComponent.instance) return AddbookComponent.instance
     AddbookComponent.instance = this;
   }
@@ -119,25 +118,29 @@ export class AddbookComponent {
     return true
   }
 
-  //Obtener la instancia del componente
-  public static getInstance():AddbookComponent{    
-    return this.instance
-  }
 
-  //*Funciones con interacion al service (BD)
-  //?Invoca a la alerta Error o guarda el documento
+
   saveBook(src: string) {
     if (this.checkField()) {
       this.book.image = src
-      this.bookService.addBook(this.book)
+
+      const btAddBook = BtaddbookComponent.getInstance()      
+      btAddBook.saveBook(this.book)
     }
   }
+  
 
   //?
   saveChanges() {
     console.log(`Book: ${this.book}`)
   }
 
+    //Get & Set
+
+  //Obtener la instancia del componente
+  public static getInstance():AddbookComponent{    
+    return this.instance
+  }
 
 
 }

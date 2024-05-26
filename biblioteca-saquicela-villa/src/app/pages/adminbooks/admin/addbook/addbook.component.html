@@ -49,13 +49,9 @@
                         <img src="assets/img/selectImage.jpg" alt="sala" #book_img>
                     </div>
                     @if (addBook) {
-                    <div class="campo__bt submit">
-                        <input (click)="saveBook(book_img.src)" class="bt" type="button" value="Guardar libro">
-                    </div>
+                        <app-btaddbook />                    
                     }@else{
-                    <div class="campo__bt submit">
-                        <input (click)="saveBook(book_img.src)" class="bt" type="button" value="Guardar cambios">
-                    </div>
+                        <app-btmodifybook />               
                     }
 
                 </div>

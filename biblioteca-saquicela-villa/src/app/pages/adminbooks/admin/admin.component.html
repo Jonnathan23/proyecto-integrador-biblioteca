@@ -41,7 +41,9 @@
 
 @if (adminLibrary) {
     <div class="cont">
-        <input (click)="hideAdminLibrary()" type="button" value="Cerrar">
+        <div class="cont__bt__cerrar">
+            <input class="bt__cerrar" (click)="hideAdminLibrary()" type="button" value="Cerrar">
+        </div>
         <app-addbook />
     </div>
 }
