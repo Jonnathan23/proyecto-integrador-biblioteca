@@ -25,6 +25,10 @@ export class BtaddbookComponent {
   saveBook(book:BookType){
     this.bookService.addBook(book)
   }
+
+  deleteBook(){
+    
+  }
   
   //Get & Set
 

@@ -28,8 +28,8 @@
                 <div class="book__text">
                     <p>{{book.description}}</p>
                     <div class="book__bts">
-                        <input (click)="selectBook(book)" class="book__bt" type="button" value="Modificar">
-                        <input class="book__bt" type="button" value="Eliminar">
+                        <input (click)="modifyBook(book)" class="book__bt" type="button" value="Modificar">
+                        <input (click)="delete(book)" class="book__bt" type="button" value="Eliminar">
                     </div>
                 </div>
 
@@ -44,6 +44,6 @@
         <div class="cont__bt__cerrar">
             <input class="bt__cerrar" (click)="hideAdminLibrary()" type="button" value="Cerrar">
         </div>
-        <app-addbook />
+        <app-addbook />        
     </div>
 }

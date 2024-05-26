@@ -15,6 +15,7 @@ import { BtmodifybookComponent } from "../btmodifybook/btmodifybook.component";
 export class AddbookComponent {
   private static instance: AddbookComponent;
 
+  // Determina si se agrega o se modifica
   addBook = true
 
   ourCategories = [...categories]
@@ -38,6 +39,7 @@ export class AddbookComponent {
     autor: '',
     category: ""
   }
+  
 
   constructor(private render: Renderer2) {
     if (AddbookComponent.instance) return AddbookComponent.instance
@@ -58,7 +60,7 @@ export class AddbookComponent {
 
       this.selected = true
     } else {
-      img.src = '../../../assets/img/sala.jpg'
+      img.src = 'assets/img/selectImage.jpg'
       this.selected = false
     }
   }
@@ -89,10 +91,7 @@ export class AddbookComponent {
     this.render.setAttribute(this.txtAutor.nativeElement, 'value', book.autor)
     this.render.setProperty(this.txtDescription.nativeElement, 'value', book.description)
     this.render.setProperty(this.cbCategory.nativeElement, 'value', book.category)
-    this.render.setAttribute(this.imgBook.nativeElement, 'src', book.image)
-
-
-    console.log(`Select: ${this.cbCategory.nativeElement.value}`)
+    this.render.setAttribute(this.imgBook.nativeElement, 'src', book.image)   
 
   }
 
@@ -118,6 +117,14 @@ export class AddbookComponent {
     return true
   }
 
+  clearInputs(){
+    this.book = {name: '', description: '', image: 'assets/img/selectImage.jpg', autor: '', category: this.cbText}
+    this.selectBook(this.book)
+
+    this.selected = false
+
+  }
+
 
 
   saveBook(src: string) {
@@ -135,12 +142,17 @@ export class AddbookComponent {
     console.log(`Book: ${this.book}`)
   }
 
+ 
+
     //Get & Set
 
   //Obtener la instancia del componente
-  public static getInstance():AddbookComponent{    
+  public static getInstance():AddbookComponent{        
     return this.instance
   }
 
+  setAddBook(option: boolean){
+    this.addBook = option
+  }
 
 }

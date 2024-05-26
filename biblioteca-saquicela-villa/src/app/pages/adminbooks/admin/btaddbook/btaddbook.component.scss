@@ -1,0 +1,15 @@
+@use '../../../../../styles/variables' as *;
+
+.campo__bt input{
+    background-color: $bt_color;
+    border: none;
+    padding: 2rem;        
+    border-radius: 1rem;
+    color: $blanco;    
+    font-family: $fuente;
+}
+
+.campo__bt input:hover{
+    background-color: $bt_color_selected;
+    cursor: pointer;
+}
