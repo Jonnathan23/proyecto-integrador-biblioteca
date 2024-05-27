@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input, Renderer2, ViewChild } from '@angular/core';
 import { errorInputs } from '../../../../../alerts/alerts';
-import { BookType } from '../../../../../assets/models/models';
+import { BookType, AdminBook } from '../../../../../assets/models/models';
 import { categories } from '../../../../../assets/data/categorias';
 import { BtaddbookComponent } from "../btaddbook/btaddbook.component";
 import { BtmodifybookComponent } from "../btmodifybook/btmodifybook.component";

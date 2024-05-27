@@ -1,8 +1,9 @@
 import { Component, Input, ViewChild } from '@angular/core';
-import { BookType } from '../../../../assets/models/models';
+import { AdminBook, BookType } from '../../../../assets/models/models';
 import { __values } from 'tslib';
 import { AddbookComponent } from "./addbook/addbook.component";
 import { confirmDelete } from '../../../../alerts/alerts';
+import { DatabookService } from '../../../services/databook.service';
 
 
 @Component({
@@ -15,7 +16,7 @@ import { confirmDelete } from '../../../../alerts/alerts';
 })
 
 export class AdminComponent {
-  @Input({ required: true }) books?: BookType[];
+  @Input({ required: true }) books?: AdminBook[];
   @ViewChild(AddbookComponent) addbookComponent!: AddbookComponent;
 
 
@@ -38,7 +39,7 @@ export class AdminComponent {
   }
 
   //Envia la informacion del libro seleccionado al componente AddBookComponent
-  modifyBook(book: BookType) {
+  modifyBook(book: AdminBook) {
     this.adminLibrary = true
 
     //Uso del setTimeout para esperar la instancia del componente
@@ -50,16 +51,14 @@ export class AdminComponent {
       addBookComponent.selectBook(book)
     }, 0)
 
-
   }
 
-  async delete(bookDelete: BookType) {
+  async delete(bookDelete: AdminBook) {
     const isConfirmed = await confirmDelete(bookDelete)
     if (isConfirmed) {
-      console.log('Se ha eliminado el libro')
+      const dataBook = DatabookService.getInstance()
 
+      dataBook.deleteBook(bookDelete)
     }
   }
-
 }
-

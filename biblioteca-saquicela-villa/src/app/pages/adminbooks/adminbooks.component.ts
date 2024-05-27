@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BookType } from '../../../assets/models/models';
+import { AdminBook, BookType } from '../../../assets/models/models';
 import { DatabookService } from '../../services/databook.service';
 import { BooksComponent } from "./books/books.component";
 import { AdminComponent } from './admin/admin.component';
@@ -13,7 +13,7 @@ import { AdminComponent } from './admin/admin.component';
 })
 export class AdminbooksComponent {
   admin = true
-  allBooks:BookType[] = []
+  allBooks:AdminBook[] = []
   
   constructor(private bookService:DatabookService){}
 

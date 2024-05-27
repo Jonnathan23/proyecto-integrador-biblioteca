@@ -16,7 +16,7 @@
             <!--Libros-->
             @for (book of books; track books) {
             <div class="book">
-                <div class="book--content">
+                <div class="book--content">                    
                     <h3 class="book--title"> {{book.name}}</h3>
                     <p><span>Autor:</span> {{book.autor}}</p>
                 </div>
@@ -32,7 +32,6 @@
                         <input (click)="delete(book)" class="book__bt" type="button" value="Eliminar">
                     </div>
                 </div>
-
             </div>
             }
         </div>
