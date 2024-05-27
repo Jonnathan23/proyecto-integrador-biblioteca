@@ -7,27 +7,27 @@ export function save() {
     Swal.fire({
         title: 'Se ha guardado con exito',
         icon: 'success',
-        timer: 3000,        
+        timer: 3000,
     })
 }
 
 // Borrar
-export function deleteSuccess(){
+export function deleteSuccess() {
     Swal.fire({
         title: 'Eliminado',
-        text:'Se ha borrado correctamente',
+        text: 'Se ha borrado correctamente',
         icon: 'info',
-        timer: 3000,        
+        timer: 3000,
     })
 }
 
 // Borrar
-export function errorDelete(){
+export function errorDelete() {
     Swal.fire({
         title: 'No se ha elimnado',
-        text:'Error al eliminar el libro',
+        text: 'Error al eliminar el libro',
         icon: 'error',
-        timer: 3000,        
+        timer: 3000,
     })
 }
 
@@ -77,17 +77,26 @@ export async function confirmDelete(bookDelete: BookType): Promise<boolean> {
 
 //* Usuario
 
-export function shortPassword(){
+export function shortPassword() {
     Swal.fire({
         title: 'Contraseña error',
-        text:'La contraseña es muy corta',
+        text: 'La contraseña es muy corta',
         icon: 'error',
-        position: 'top-left',
+        position: 'bottom',
 
-        showCancelButton:false,
-        showConfirmButton:false,
+        showCancelButton: false,
+        showConfirmButton: false,
+        closeButtonAriaLabel: 'X',
 
-        allowOutsideClick:true
+        allowOutsideClick: true,
+        backdrop: false,
+
+
+        timer: 3000,
+        
+
+
+
 
     })
 }

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { LoginUser, UserType } from '../../../assets/models/models';
 import { DatauserService } from '../../services/datauser.service';
-import { shortPassword } from '../../../alerts/alerts';
+
 
 @Component({
   selector: 'app-iniciarsesion',

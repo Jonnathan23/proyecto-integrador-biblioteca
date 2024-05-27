@@ -47,7 +47,7 @@ label{
     font-family: $fuente;
 }
 
-input[type="text"], 
+input[type="email"], 
 input[type="password"]{
     margin-bottom: 1rem;
     padding: 1rem;
@@ -93,3 +93,4 @@ input[type="password"]{
     cursor: pointer;
     text-decoration: underline;
 }
+

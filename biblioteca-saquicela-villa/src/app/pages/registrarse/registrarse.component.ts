@@ -33,13 +33,17 @@ export class RegistrarseComponent {
   }
 
   getPassword(password: string){
-    password.length > 6 ?this.newUser.password = password: shortPassword()
+    this.newUser.password = password
   }
 
   isAdmin(check: Event) {
     const isChecked = (check.target as HTMLInputElement).checked;
     this.newUser.admin = isChecked
     
+  }
+
+  isShortPassword(){
+    this.newUser.password.length <= 6 && shortPassword()
   }
 
   register() {

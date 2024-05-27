@@ -25,7 +25,7 @@
 
             <div class="campo">
                 <label for="contrasena">Contraseña: </label>
-                <input (input)="getPassword(password.value)" type="password" id="contrasena" name="contrasena" required #password>
+                <input (blur)="isShortPassword()"  (input)="getPassword(password.value)" type="password" id="contrasena" name="contrasena" required #password>
             </div>
 
             <div class="campo">
