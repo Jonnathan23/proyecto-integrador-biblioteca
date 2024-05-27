@@ -92,11 +92,6 @@ export function shortPassword() {
         backdrop: false,
 
 
-        timer: 3000,
-        
-
-
-
-
+        timer: 3000,        
     })
 }

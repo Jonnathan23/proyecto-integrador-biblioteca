@@ -21,4 +21,8 @@ export class AdminbooksComponent {
     this.bookService.getBooks().subscribe( (books) => this.allBooks = books)
   }
 
+  setAdmin(option : boolean){
+    this.admin = option
+  }
+
 }

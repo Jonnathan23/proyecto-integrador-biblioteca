@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from '@angular/fire/auth';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
 import { FirebaseApp } from '@angular/fire/app';
 import { LoginUser, UserType } from '../../assets/models/models';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class DatauserService {
   private static instance: DatauserService  
 
 
-  constructor(private fireStore: Firestore, private firebaseApp: FirebaseApp) {
+  constructor(private fireStore: Firestore, private firebaseApp: FirebaseApp, private router: Router) {
 
 
     if (DatauserService.instance) return DatauserService.instance
@@ -20,12 +21,31 @@ export class DatauserService {
   }
 
   async registerUser(user: UserType) {
-    await createUserWithEmailAndPassword(getAuth(this.firebaseApp), user.email, user.password)
-
+    try {      
+      await createUserWithEmailAndPassword(getAuth(this.firebaseApp), user.email, user.password)
+      console.log('Registrado correctamente')
+      this.router.navigate(['/adminbooks'])
+    } catch (error) {
+      console.log(`Error al registarse: \n${error}`)
+    }    
   }
 
   async loginUser(user: LoginUser) {
-    await signInWithEmailAndPassword(getAuth(this.firebaseApp), user.email, user.password)
+    try {
+      await signInWithEmailAndPassword(getAuth(this.firebaseApp), user.email, user.password)
+      console.log('Ingresa')
+      this.router.navigate(['/adminbooks'])
+    } catch (error) {
+      console.log(`Error al iniciar sesion\n${error}`)      
+    }
+  }
+
+  async back(){
+    try{
+      this.router.navigate(['/bienvenido'])
+    }catch(e){
+
+    }
   }
 
 

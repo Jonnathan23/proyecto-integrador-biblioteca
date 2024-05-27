@@ -46,7 +46,9 @@ export class RegistrarseComponent {
     this.newUser.password.length <= 6 && shortPassword()
   }
 
-  register() {
+ 
+  
+  register() {    
     this.userService.registerUser(this.newUser)
   }
 

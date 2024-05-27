@@ -1,7 +1,7 @@
 <main>
     <div class="form-container">
         <h2>Registrate</h2>
-        <form>
+        <form >
             <div class="campo">
                 <label for="nombre">Nombre: </label>
                 <input (input)="getName(name.value)"   type="text" id="nombre" name="nombre" required #name>
@@ -34,7 +34,7 @@
             </div>
 
             <div class="campo">
-                <a (click)="register()" class="campo__bt" type="submit">Registrarse</a>
+                <input (click)="register()" class="campo__bt" type="submit" value="Registrarse">                
                 <a class="campo__iniciar" routerLink="iniciar">Ya tienes Cuenta</a>
             </div>
 
