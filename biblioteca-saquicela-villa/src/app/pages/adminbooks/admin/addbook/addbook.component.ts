@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, Renderer2, ViewChild } from '@angular/core';
-import { error } from '../../../../../alerts/alerts';
+import { errorInputs } from '../../../../../alerts/alerts';
 import { BookType } from '../../../../../assets/models/models';
 import { categories } from '../../../../../assets/data/categorias';
 import { BtaddbookComponent } from "../btaddbook/btaddbook.component";
@@ -98,19 +98,19 @@ export class AddbookComponent {
   //Verificacion de campos llenos
   checkField(): boolean {
     if (!this.book.name) {
-      error('Nombre')
+      errorInputs('Nombre')
       return false;
     }
     if (!this.book.description) {
-      error('Descripción')
+      errorInputs('Descripción')
       return false;
     }
     if (!this.selected) {
-      error('Seleccionar Imagen')
+      errorInputs('Seleccionar Imagen')
       return false;
     }
     if (this.book.category === '') {
-      error('Seleccionar Categoria')
+      errorInputs('Seleccionar Categoria')
       return false;
     }
 

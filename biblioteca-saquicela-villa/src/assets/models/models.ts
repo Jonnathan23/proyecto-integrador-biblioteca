@@ -30,3 +30,5 @@ export type UserType = {
     password:string
     admin:boolean
 }
+
+export type LoginUser = Pick<UserType,'email'|'password'>

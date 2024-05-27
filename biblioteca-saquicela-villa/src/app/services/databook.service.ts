@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Firestore, addDoc, collection, deleteDoc, doc, getDocs, onSnapshot, query, setDoc, updateDoc } from '@angular/fire/firestore';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { BookType } from '../../assets/models/models';
-import { errorSave, save } from '../../alerts/alerts';
+import { deleteSuccess, errorDelete, errorSave, save } from '../../alerts/alerts';
 
 
 @Injectable({
@@ -49,8 +49,15 @@ export class DatabookService {
     updateDoc(doc(this.fireStore,'books'),Object.assign({},book))
   }
 
-  deleteBook(bookDelete: BookType){
-   // deleteDoc(doc(this.fireStore,'books'),Object.assign({},bookDelete))    
+  async deleteBook(bookDelete: BookType){
+   // deleteDoc(doc(this.fireStore,'books'),Object.assign({},bookDelete)) 
+   try {    
+     await deleteDoc(doc(this.fireStore,'books',bookDelete.name))
+     deleteSuccess()  
+
+   } catch (error) {
+    errorDelete()
+   }
   }
 
 

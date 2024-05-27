@@ -1,7 +1,8 @@
 import Swal from 'sweetalert2'
 import { BookType } from '../assets/models/models'
-//const btcolor = 'kk'
 
+//* Libros
+//Guardar
 export function save() {
     Swal.fire({
         title: 'Se ha guardado con exito',
@@ -10,7 +11,31 @@ export function save() {
     })
 }
 
-export function error(campo: string) {
+// Borrar
+export function deleteSuccess(){
+    Swal.fire({
+        title: 'Eliminado',
+        text:'Se ha borrado correctamente',
+        icon: 'info',
+        timer: 3000,        
+    })
+}
+
+// Borrar
+export function errorDelete(){
+    Swal.fire({
+        title: 'No se ha elimnado',
+        text:'Error al eliminar el libro',
+        icon: 'error',
+        timer: 3000,        
+    })
+}
+
+
+
+
+// Campos de agregar libro vacios
+export function errorInputs(campo: string) {
     Swal.fire({
         title: `Error al guardar`,
         text: `el campo ${campo} está vacio`,
@@ -19,6 +44,7 @@ export function error(campo: string) {
     })
 }
 
+// Error de guardar en la BD
 export function errorSave() {
     Swal.fire({
         title: `Error al guardar`,
@@ -28,6 +54,7 @@ export function errorSave() {
     })
 }
 
+//Confirmar Borrar un libro
 export async function confirmDelete(bookDelete: BookType): Promise<boolean> {
     const result = await Swal.fire({
         title: 'Eliminar',
@@ -45,4 +72,22 @@ export async function confirmDelete(bookDelete: BookType): Promise<boolean> {
     });
 
     return result.isConfirmed;
+}
+
+
+//* Usuario
+
+export function shortPassword(){
+    Swal.fire({
+        title: 'Contraseña error',
+        text:'La contraseña es muy corta',
+        icon: 'error',
+        position: 'top-left',
+
+        showCancelButton:false,
+        showConfirmButton:false,
+
+        allowOutsideClick:true
+
+    })
 }

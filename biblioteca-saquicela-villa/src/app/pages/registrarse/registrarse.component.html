@@ -4,33 +4,37 @@
         <form>
             <div class="campo">
                 <label for="nombre">Nombre: </label>
-                <input type="text" id="nombre" name="nombre" required>
+                <input (input)="getName(name.value)"   type="text" id="nombre" name="nombre" required #name>
 
             </div>
 
             <div class="campo">
                 <label for="apellido">Apellido: </label>
-                <input type="text" id="apellido" name="apellido" required>
+                <input (input)="getLastname(lastname.value)" type="text" id="apellido" name="apellido" required #lastname>
             </div>
 
             <div class="campo">
+                <label for="cell">Celular: </label>
+                <input (input)="getCell(cell.value)" type="email" id="cell" name="cell" required #cell>
+            </div>
 
+            <div class="campo">
                 <label for="correo">Correo Electrónico: </label>
-                <input type="email" id="correo" name="correo" required>
+                <input (input)="getEmail(email.value)" type="email" id="correo" name="correo" required #email>
             </div>
 
             <div class="campo">
                 <label for="contrasena">Contraseña: </label>
-                <input type="password" id="contrasena" name="contrasena" required>
+                <input (input)="getPassword(password.value)" type="password" id="contrasena" name="contrasena" required #password>
             </div>
 
             <div class="campo">
                 <label for="admin">Es administrador: </label>
-                <input class="campo__check" type="checkbox" id="admin" name="admin">
+                <input (change)="isAdmin($event)" class="campo__check" type="checkbox" id="admin" name="admin" #checkIsAdmin>
             </div>
 
             <div class="campo">
-                <a class="campo__bt" type="submit">Registrarse</a>
+                <a (click)="register()" class="campo__bt" type="submit">Registrarse</a>
                 <a class="campo__iniciar" routerLink="iniciar">Ya tienes Cuenta</a>
             </div>
 
