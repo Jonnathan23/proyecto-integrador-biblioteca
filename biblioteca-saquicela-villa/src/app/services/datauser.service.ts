@@ -42,8 +42,10 @@ export class DatauserService {
 
   async back(){
     try{
+      signOut(getAuth(this.firebaseApp))
       this.router.navigate(['/bienvenido'])
     }catch(e){
+      console.log(`Error al iniciar sesion\n${e}`)
 
     }
   }
