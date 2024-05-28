@@ -2,15 +2,15 @@ import { Component, ElementRef, Input, Renderer2, ViewChild } from '@angular/cor
 import { errorInputs } from '../../../../../alerts/alerts';
 import { BookType, AdminBook } from '../../../../../assets/models/models';
 import { categories } from '../../../../../assets/data/categorias';
-import { BtaddbookComponent } from "../btaddbook/btaddbook.component";
-import { BtmodifybookComponent } from "../btmodifybook/btmodifybook.component";
+import { BtaddbookComponent } from "./btaddbook/btaddbook.component";
+import { BtmodifybookComponent } from "./btmodifybook/btmodifybook.component";
 
 @Component({
-    selector: 'app-addbook',
-    standalone: true,
-    templateUrl: './addbook.component.html',
-    styleUrl: './addbook.component.scss',
-    imports: [BtaddbookComponent, BtmodifybookComponent]
+  selector: 'app-addbook',
+  standalone: true,
+  templateUrl: './addbook.component.html',
+  styleUrl: './addbook.component.scss',
+  imports: [BtaddbookComponent, BtmodifybookComponent]
 })
 export class AddbookComponent {
   private static instance: AddbookComponent;
@@ -39,7 +39,7 @@ export class AddbookComponent {
     autor: '',
     category: ""
   }
-  
+
 
   constructor(private render: Renderer2) {
     if (AddbookComponent.instance) return AddbookComponent.instance
@@ -86,13 +86,12 @@ export class AddbookComponent {
     this.book.description = desciption
   }
 
-  selectBook(book: BookType) {    
+  selectBook(book: BookType) {
     this.render.setAttribute(this.txtName.nativeElement, 'value', book.name)
     this.render.setAttribute(this.txtAutor.nativeElement, 'value', book.autor)
     this.render.setProperty(this.txtDescription.nativeElement, 'value', book.description)
     this.render.setProperty(this.cbCategory.nativeElement, 'value', book.category)
-    this.render.setAttribute(this.imgBook.nativeElement, 'src', book.image)   
-
+    this.render.setAttribute(this.imgBook.nativeElement, 'src', book.image)
   }
 
   //Verificacion de campos llenos
@@ -113,45 +112,30 @@ export class AddbookComponent {
       errorInputs('Seleccionar Categoria')
       return false;
     }
-
     return true
   }
 
-  clearInputs(){
-    this.book = {name: '', description: '', image: 'assets/img/selectImage.jpg', autor: '', category: this.cbText}
+  clearInputs() {
+    this.book = { name: '', description: '', image: 'assets/img/selectImage.jpg', autor: '', category: this.cbText }
     this.selectBook(this.book)
 
     this.selected = false
-
-  }
-
-
-
-  saveBook(src: string) {
-    if (this.checkField()) {
-      this.book.image = src
-
-      const btAddBook = BtaddbookComponent.getInstance()      
-      btAddBook.saveBook(this.book)
-    }
   }
   
+  //Get & Set
 
-  //?
-  saveChanges() {
-    console.log(`Book: ${this.book}`)
+  getBook():BookType | undefined{
+    if (this.checkField())  return this.book    
+      
+    return undefined
   }
 
- 
-
-    //Get & Set
-
   //Obtener la instancia del componente
-  public static getInstance():AddbookComponent{        
+  public static getInstance(): AddbookComponent {
     return this.instance
   }
 
-  setAddBook(option: boolean){
+  setAddBook(option: boolean) {
     this.addBook = option
   }
 

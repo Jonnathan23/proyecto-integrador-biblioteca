@@ -90,8 +90,7 @@ export function shortPassword() {
 
         allowOutsideClick: true,
         backdrop: false,
-
-
+        
         timer: 3000,        
     })
 }

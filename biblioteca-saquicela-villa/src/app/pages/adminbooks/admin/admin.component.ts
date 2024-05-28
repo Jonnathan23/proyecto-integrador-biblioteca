@@ -1,7 +1,7 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { AdminBook, BookType } from '../../../../assets/models/models';
 import { __values } from 'tslib';
-import { AddbookComponent } from "./addbook/addbook.component";
+import { AddbookComponent } from "./InputBook/addbook.component";
 import { confirmDelete } from '../../../../alerts/alerts';
 import { DatabookService } from '../../../services/databook.service';
 

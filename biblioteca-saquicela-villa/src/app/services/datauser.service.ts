@@ -22,8 +22,7 @@ export class DatauserService {
 
   async registerUser(user: UserType) {
     try {      
-      await createUserWithEmailAndPassword(getAuth(this.firebaseApp), user.email, user.password)
-      console.log('Registrado correctamente')
+      await createUserWithEmailAndPassword(getAuth(this.firebaseApp), user.email, user.password)      
       this.router.navigate(['/adminbooks'])
     } catch (error) {
       console.log(`Error al registarse: \n${error}`)
@@ -34,7 +33,8 @@ export class DatauserService {
     try {
       await signInWithEmailAndPassword(getAuth(this.firebaseApp), user.email, user.password)
       console.log('Ingresa')
-      this.router.navigate(['/adminbooks'])
+
+      this.router.navigate(['/adminbooks'])      
     } catch (error) {
       console.log(`Error al iniciar sesion\n${error}`)      
     }
