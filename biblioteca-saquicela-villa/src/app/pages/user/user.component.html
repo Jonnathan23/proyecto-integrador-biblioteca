@@ -1,9 +1,18 @@
 <main>
+    <div>
+        <!--Seccion administrador-->
+        @if(myUser.admin){
+        <app-useradmin />
+        }
+    </div>
+
+
+    <!--Seccion de datos-->
     <div class="form-container">
 
         <form>
             <fieldset>
-                <legend>Datos Usuario</legend>
+                <legend>Mis Datos</legend>
                 <div class="cont__campos">
                     <div class="campo">
                         <label for="nombre">Nombre: </label>
@@ -38,8 +47,8 @@
 
                     <div class="campo">
                         <label for="admin">Es administrador: </label>
-                        <input class="admin" (change)="isAdmin($event)" class="campo__check" type="checkbox" id="admin" name="admin"
-                            #checkIsAdmin>
+                        <input [disabled]="!myUser.admin" class="admin" (change)="isAdmin($event)" class="campo__check" type="checkbox" id="admin"
+                            name="admin" #checkIsAdmin>
                     </div>
 
                     <div class="change__img">
@@ -53,9 +62,7 @@
                             </div>
                             <input class="bt" type="submit" value="Guardar Cambios">
                         </div>
-                       
                     </div>
-
                 </div>
             </fieldset>
         </form>

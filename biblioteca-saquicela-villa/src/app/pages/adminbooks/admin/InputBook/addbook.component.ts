@@ -1,6 +1,5 @@
 import { Component, ElementRef, Input, Renderer2, ViewChild } from '@angular/core';
-import { errorInputs } from '../../../../../alerts/alerts';
-import { BookType, AdminBook } from '../../../../../assets/models/models';
+import { AdminBook } from '../../../../../assets/models/models';
 import { categories } from '../../../../../assets/data/categorias';
 import { BtaddbookComponent } from "./btaddbook/btaddbook.component";
 import { BtmodifybookComponent } from "./btmodifybook/btmodifybook.component";
@@ -114,7 +113,7 @@ export class AddbookComponent {
     if(this.book.category === this.cbText) return false
 
     if(!this.selected) return false
-    
+
     return true
   }
 

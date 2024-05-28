@@ -12,8 +12,7 @@ import { shortPassword } from '../../../alerts/alerts';
   styleUrl: './registrarse.component.scss'
 })
 export class RegistrarseComponent {
-  newUser:UserType = {name:'', lastname:'', cell:'', email:'', password:'', admin:false}
-
+  newUser:UserType = {id:'' ,name:'', lastname:'', cell:'', email:'', password:'', admin:false}
   constructor(private userService: DatauserService, private router: Router){}
 
   getName(name: string) {

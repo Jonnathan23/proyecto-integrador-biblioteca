@@ -17,7 +17,7 @@ export class UseradminComponent {
   constructor(private userService: DatauserService ){}
 
   ngOnInit(){
-    this.userService.getUsers().subscribe( (users) => this.allUsers = users)
+    //this.userService.getUsers().subscribe( (users) => this.allUsers = users)
   }
 
 

@@ -1,32 +1,23 @@
-<main>
-    <div class="cont">
-        <section class="cont--two--section">
-            <h3 class="cont--two--title">Usuarios Registrados</h3>
-           <!--  <div class="cont--search">
-                <input class="search--user" type="text" name="txtSearch" id="" placeholder="Buscar Usuario">
-            </div>-->
-        </section>
-        
+<div class="admin">
+    <div class="admin__cont">
         <div class="cont--users">
-        
+            <h3>Lista de usuarios</h3>
             @for (user of allUsers; track user) {
-            <div class="user">
-                <div class="user--content">                    
-                    <h3 class="user--Nombre"> {{user.name}}</h3>
-                    <p><span>Correo:</span> {{user.email}}</p>
-                </div>
-
-                <div class="user--img">
-                    <img src="{{user.image}}" alt="{{user.name}}">
-                </div>
-
-                <div class="book__bts">
-                    <!--  <input (click)="modifyUser(user)" class="book__bt" type="button" value="Modificar">
-                    <input (click)="delete(user)" class="book__bt" type="button" value="Eliminar">
-                -->
-                </div>
-            </div>
+                <button>
+                    <div class="user">
+                        <div class="user--content">                    
+                            <h3 class="user--Nombre"> {{user.name}}</h3>                           
+                        </div>
+        
+                        <div class="user--img">
+                            <img src="{{user.image}}" alt="{{user.name}}">
+                        </div>
+        
+                        <div class="book__bts">                          
+                        </div>
+                    </div>
+                </button>
             }
         </div>
     </div>
-</main>
+</div>

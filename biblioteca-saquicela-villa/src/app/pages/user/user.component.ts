@@ -1,46 +1,47 @@
 import { Component } from '@angular/core';
 import { UserType } from '../../../assets/models/models';
 import { shortPassword } from '../../../alerts/alerts';
+import { UseradminComponent } from "../useradmin/useradmin.component";
 
 @Component({
-  selector: 'app-user',
-  standalone: true,
-  imports: [],
-  templateUrl: './user.component.html',
-  styleUrl: './user.component.scss'
+    selector: 'app-user',
+    standalone: true,
+    templateUrl: './user.component.html',
+    styleUrl: './user.component.scss',
+    imports: [UseradminComponent]
 })
 export class UserComponent {
-  newUser:UserType = {name:'', lastname:'', cell:'', email:'', password:'', admin:false}
+  myUser:UserType = {id:'',name:'', lastname:'', cell:'', email:'', password:'', admin:true}
 
 
   getName(name: string) {
-    this.newUser.name = name
+    this.myUser.name = name
   }
 
   getLastname(lastname: string) {
-    this.newUser.lastname = lastname
+    this.myUser.lastname = lastname
   }
 
   getCell(cell:string){
-    this.newUser.cell = cell
+    this.myUser.cell = cell
   }
 
   getEmail(email: string) {
-    this.newUser.email = email
+    this.myUser.email = email
   }
 
   getPassword(password: string){
-    this.newUser.password = password
+    this.myUser.password = password
   }
 
   isAdmin(check: Event) {
     const isChecked = (check.target as HTMLInputElement).checked;
-    this.newUser.admin = isChecked
+    this.myUser.admin = isChecked
     
   }
 
   isShortPassword(){
-    this.newUser.password.length <= 6 && shortPassword()
+    this.myUser.password.length <= 6 && shortPassword()
   }
   
 }
