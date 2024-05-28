@@ -1,0 +1,46 @@
+@use '../../../assets/styles/variables' as *;
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-image: url('../../assets/img/biblioteca.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 150px;
+}
+
+header h1 {
+    text-align: left;
+    color: $blanco;
+}
+
+.tittle{
+    color: $white;
+    margin: 0;
+    font-size: 2rem;
+}
+.nav{
+    color: $blanco;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border: 1px solid transparent;
+    transition: border-color 0.3s;
+}
+
+.nav a:hover{
+    color: $blanco;
+    text-decoration: none;
+    padding: 1rem;
+    transition: background-color .3s ease;
+    cursor: pointer;
+    background-color: rgba($color: $blanco, $alpha: .60);
+    
+}
+
+@media(min-width:480px) {
+    div {
+        grid-template-rows: 20% 80%;
+    }
+}
