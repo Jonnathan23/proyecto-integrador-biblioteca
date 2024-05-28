@@ -48,7 +48,12 @@ export class AdminComponent {
       const addBookComponent = AddbookComponent.getInstance()
 
       addBookComponent.setAddBook(false)
-      addBookComponent.selectBook(book)
+      addBookComponent.fillData(book)
+
+      //Llena los datos del libro
+      addBookComponent.setBoook(book)
+
+      
     }, 0)
 
   }

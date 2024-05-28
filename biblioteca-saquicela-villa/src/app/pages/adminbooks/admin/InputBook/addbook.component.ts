@@ -22,7 +22,9 @@ export class AddbookComponent {
 
   // Verificador de la selección de img
   selected = false
-  cbText = 'Seleccione Categoria'
+  cbText = 'Seleccione Categoria';
+  srcImageNotFound = 'assets/img/selectImage.jpg'
+  
 
   //Seleccionar elementos del doom
   @ViewChild('name') txtName!: ElementRef;
@@ -33,7 +35,7 @@ export class AddbookComponent {
 
   //Inicializacion del objeto
   book: AdminBook = {
-    id:'',
+    id: '',
     name: '',
     description: '',
     image: '',
@@ -57,9 +59,9 @@ export class AddbookComponent {
     if (input.files?.[0]) {
       const reader = new FileReader()
       reader.onload = () => img.src = reader.result as string
-      reader.readAsDataURL(input.files[0])
-
-      this.selected = true
+      reader.readAsDataURL(input.files[0])      
+      this.selected = true     
+      
     } else {
       img.src = 'assets/img/selectImage.jpg'
       this.selected = false
@@ -74,17 +76,15 @@ export class AddbookComponent {
 
   }
 
-  getName(name: string) {
-    this.book.name = name
+  getAllContInputs(){
+    
+    this.book.name = this.txtName.nativeElement.value
+    this.book.autor = this.txtAutor.nativeElement.value
+    this.book.description = this.txtDescription.nativeElement.value
+    this.book.category = this.cbCategory.nativeElement.value
+    this.book.image = this.imgBook.nativeElement.src
 
-  }
-
-  getAutor(autor: string) {
-    this.book.autor = autor
-  }
-
-  getDescription(desciption: string) {
-    this.book.description = desciption
+    console.log(this.book)
   }
 
   fillData(book: AdminBook) {
@@ -96,38 +96,26 @@ export class AddbookComponent {
     this.render.setAttribute(this.imgBook.nativeElement, 'src', book.image)
   }
 
-  //Verificacion de campos llenos
-  checkField(): boolean {
-    if (!this.book.name) {
-      errorInputs('Nombre')
-      return false;
-    }
-    if (!this.book.description) {
-      errorInputs('Descripción')
-      return false;
-    }
-    if (!this.selected) {
-      errorInputs('Seleccionar Imagen')
-      return false;
-    }
-    if (this.book.category === '') {
-      errorInputs('Seleccionar Categoria')
-      return false;
-    }
-    return true
-  }
+  //Verificacion de campos llenos 
 
   clearInputs() {
-    this.book = {id:'', name: '', description: '', image: 'assets/img/selectImage.jpg', autor: '', category: this.cbText }
+    this.book = { id: '', name: '', description: '', image: this.srcImageNotFound, autor: '', category: this.cbText }
     this.fillData(this.book)
 
     this.selected = false
   }
-  
+
+
+
+
   //Get & Set
-  getBook(): undefined | AdminBook{
-    if (this.checkField())  return this.book    
-      
+   getBook(): undefined | AdminBook {   
+    this.getAllContInputs()
+    const validate = true
+    if (validate) {
+      return this.book
+    }
+    
     return undefined
   }
 
@@ -136,8 +124,9 @@ export class AddbookComponent {
     return this.instance
   }
 
-  setBoook(book: AdminBook){
+  setBoook(book: AdminBook) {
     this.book = book
+    console.log(this.book)
 
   }
 

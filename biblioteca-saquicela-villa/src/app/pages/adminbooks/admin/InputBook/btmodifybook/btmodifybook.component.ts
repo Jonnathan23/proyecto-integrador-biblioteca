@@ -23,7 +23,6 @@ export class BtmodifybookComponent {
   updateBook() {
     const inputBook = AddbookComponent.getInstance() //Obtiens al componente --> var addbok = new AddbookComponent()
     const book = inputBook.getBook()
-
     console.log(book)
 
     book ? this.bookService.updateBook(book):errorSave()    

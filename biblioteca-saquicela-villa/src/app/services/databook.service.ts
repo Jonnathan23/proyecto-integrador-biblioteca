@@ -37,12 +37,13 @@ export class DatabookService {
     });
   }
 
-  addBook(book: BookType) {    
+  async addBook(book: BookType) {    
     try{
-      addDoc(collection(this.fireStore, 'books'), Object.assign({}, book))
+      await addDoc(collection(this.fireStore, 'books'), Object.assign({}, book))
       save()
     }catch(e){
       errorSave()
+      console.log(e)
     }    
   }
 
@@ -50,7 +51,7 @@ export class DatabookService {
     try {      
       //updateDoc(doc(this.fireStore,'books'),Object.assign({},book))
       const update = book as BookType
-      setDoc(doc(this.fireStore,'books',book.id),Object.assign({},update))
+      await setDoc(doc(this.fireStore,'books',book.id),Object.assign({},update))
       console.log('Cambios actualizads')
 
     } catch (error) {
