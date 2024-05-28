@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HeaderbienvComponent } from './headerbienv/headerbienv.component';
 import { HeadersessionComponent } from './headersession/headersession.component';
+import { Router } from '@angular/router'; // Add this line
 
 @Component({
   selector: 'app-header',
@@ -19,11 +20,13 @@ export class HeaderComponent {
     HeaderComponent.instance = this;
    }
 
-  setIngreso(option: boolean) {
+   setIngreso(option: boolean) {
     this.ingreso = option;
   }
 
   public static getInstance() {
     return HeaderComponent.instance;
   }
+
+ 
 }

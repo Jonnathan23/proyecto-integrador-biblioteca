@@ -53,7 +53,7 @@ export class RegistrarseComponent {
   }
 
   goToSingIn(){
-    this.router.navigate(['/iniciar'])
+   this.router.navigate(['/iniciar'])
   }
 
   

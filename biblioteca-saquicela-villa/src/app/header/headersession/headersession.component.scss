@@ -45,8 +45,9 @@ header h1 {
 
 }
 
+/* WELCOME */
 
-div{
+.img-back {
     background-image: url('../../../assets/img/biblioteca.jpg');
     background-repeat: no-repeat;
     background-size: cover;
@@ -57,12 +58,44 @@ div{
 
 }
 
+.cont--welcome {
 
-
-
-@media(min-width:480px) {
-  div {
-        grid-template-rows: 20% 80%;
-    }
+    width: 80%;
+    height: 100%;
+    margin: auto;
 }
 
+.cont--welcome--text {
+    width: 90%;
+    height: 100%;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+
+    gap: 1.5rem;
+
+}
+
+.cont--welcome--text h2,
+.cont--welcome--text p {
+    color: $blanco;
+    text-align: justify;
+}
+
+@media(min-width:480px) {
+    .img-back {
+        grid-template-rows: 20% 80%;
+    }
+
+    .cont--welcome--text {
+        width: 60%;
+    }
+
+    .cont--welcome--text h2,
+    .cont--welcome--text p {
+        width: 60%;
+    }
+
+}

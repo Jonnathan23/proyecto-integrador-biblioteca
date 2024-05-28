@@ -23,6 +23,7 @@ export class DatauserService {
     try {      
       await createUserWithEmailAndPassword(getAuth(this.firebaseApp), user.email, user.password)      
       this.router.navigate(['/adminbooks'])
+      this.headerModif(true);
     } catch (error) {
       console.log(`Error al registarse: \n${error}`)
     }    
@@ -32,8 +33,7 @@ export class DatauserService {
     try {
       await signInWithEmailAndPassword(getAuth(this.firebaseApp), user.email, user.password)
       console.log('Ingresa')
-      const dadHeader = HeaderComponent.getInstance();
-      dadHeader.setIngreso(true);
+      this.headerModif(true);      
       this.router.navigate(['/adminbooks'])      
     } catch (error) {
       console.log(`Error al iniciar sesion\n${error}`)      
@@ -42,12 +42,12 @@ export class DatauserService {
 
   async back(){
     try{
-      signOut(getAuth(this.firebaseApp))
+      await signOut(getAuth(this.firebaseApp))
+      console.log('Saliendo');
       this.router.navigate(['/bienvenido'])
-      const dadHeader = HeaderComponent.getInstance();
-      dadHeader.setIngreso(false);
+      this.headerModif(false);
     }catch(e){
-      console.log(`Error al iniciar sesion\n${e}`)
+      console.log(`Error al cerrar sesion\n${e}`)
     }
   }
 
@@ -55,5 +55,8 @@ export class DatauserService {
 
   }
 
-
+  headerModif(opc: boolean){
+    const dadHeader = HeaderComponent.getInstance();
+      dadHeader.setIngreso(opc);
+  }
 }

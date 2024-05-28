@@ -1,13 +1,24 @@
-<div>
+<!-- Header de pagina de inicio-->
 
+<div class="img-back">
     <header>
-        <div class="title">
-            <h1>Biblioteca</h1>
-        </div>
-        <nav class="nav--main">
-            <a href="#">Atribuciones</a>
-            <a href="#">Perfil</a>
-            <a class="frame" href="#">Cerrar Sesión</a>
-        </nav>
-    </header>
+       <div class="title">
+           <h1>Biblioteca</h1>
+       </div>
+       <nav class="nav--main">
+          <a (click)="linkAtri()">Atribuciones</a> 
+          <a (click)="linkLibros()">Libros</a>
+          <a (click)="linkPerfil()">Perfil</a>
+        <a class="frame" (click)="back()"> Cerrar Sesión</a>
+           
+       </nav>
+   </header>
+
+   <div class="cont--welcome">
+       <section class="cont--welcome--text">
+           <h2>Bienvenido a nuestra biblioteca</h2>
+           <p>Creada con amor </p>
+
+       </section>
+   </div>
 </div>
