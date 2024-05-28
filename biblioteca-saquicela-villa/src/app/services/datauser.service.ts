@@ -13,8 +13,6 @@ export class DatauserService {
 
 
   constructor(private fireStore: Firestore, private firebaseApp: FirebaseApp, private router: Router) {
-
-
     if (DatauserService.instance) return DatauserService.instance
     DatauserService.instance = this
 
@@ -48,6 +46,10 @@ export class DatauserService {
       console.log(`Error al iniciar sesion\n${e}`)
 
     }
+  }
+
+  upDateUser(){
+
   }
 
 

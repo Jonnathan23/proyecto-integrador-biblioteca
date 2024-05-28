@@ -1,0 +1,74 @@
+@use '../../../styles/variables' as *;
+
+main {    
+    background-image: linear-gradient(to top, $degradado_azul_bot 0%, $degradado_azul_top 100%);    
+    padding: 3rem 0;
+}
+.form-container{
+    width: 90%;
+    margin: auto;
+    background-color: $fondoItem;
+    padding: 2rem;
+
+    box-shadow: 13px 20px 17px 3px rgba(0,0,0,.53);
+    
+}
+fieldset{
+    border: none;    
+}
+
+fieldset legend{
+    font-size: 3rem;
+    font-family: $fuente;
+    font-weight: bold;
+    margin-bottom: 2rem;
+}
+
+.cont__campos{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.campo{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.campo__txt{        
+    width: 80%;
+    margin: auto;
+    padding: 1rem;
+
+    background-color: $azul_oscuro;
+    color: $blanco;
+
+    border: none;    
+}
+
+.campo:nth-child(6){        
+    flex-direction: row;
+    gap: 1.5rem;
+}
+
+
+/** Botones */
+
+.campo__bt{
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.campo img {
+    border-radius: 50%;
+    opacity: .5;
+    max-width: 30rem;
+}

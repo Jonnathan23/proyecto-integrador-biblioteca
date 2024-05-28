@@ -1,20 +1,17 @@
 import { Component } from '@angular/core';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { UserType } from '../../../assets/models/models';
-import { DatauserService } from '../../services/datauser.service';
 import { shortPassword } from '../../../alerts/alerts';
 
 @Component({
-  selector: 'app-registrarse',
+  selector: 'app-user',
   standalone: true,
-  imports: [RouterOutlet, RouterLink],
-  templateUrl: './registrarse.component.html',
-  styleUrl: './registrarse.component.scss'
+  imports: [],
+  templateUrl: './user.component.html',
+  styleUrl: './user.component.scss'
 })
-export class RegistrarseComponent {
+export class UserComponent {
   newUser:UserType = {name:'', lastname:'', cell:'', email:'', password:'', admin:false}
 
-  constructor(private userService: DatauserService, private router: Router){}
 
   getName(name: string) {
     this.newUser.name = name
@@ -45,19 +42,5 @@ export class RegistrarseComponent {
   isShortPassword(){
     this.newUser.password.length <= 6 && shortPassword()
   }
-
- 
   
-  register() {    
-    this.userService.registerUser(this.newUser)
-  }
-
-  goToSingIn(){
-    this.router.navigate(['/iniciar'])
-  }
-
-  
-
-
-
 }
