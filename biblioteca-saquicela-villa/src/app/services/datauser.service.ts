@@ -4,6 +4,7 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, si
 import { FirebaseApp } from '@angular/fire/app';
 import { LoginUser, UserType } from '../../assets/models/models';
 import { Router } from '@angular/router';
+import { HeaderComponent } from '../header/header.component';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +32,8 @@ export class DatauserService {
     try {
       await signInWithEmailAndPassword(getAuth(this.firebaseApp), user.email, user.password)
       console.log('Ingresa')
-
+      const dadHeader = HeaderComponent.getInstance();
+      dadHeader.setIngreso(true);
       this.router.navigate(['/adminbooks'])      
     } catch (error) {
       console.log(`Error al iniciar sesion\n${error}`)      
@@ -42,9 +44,10 @@ export class DatauserService {
     try{
       signOut(getAuth(this.firebaseApp))
       this.router.navigate(['/bienvenido'])
+      const dadHeader = HeaderComponent.getInstance();
+      dadHeader.setIngreso(false);
     }catch(e){
       console.log(`Error al iniciar sesion\n${e}`)
-
     }
   }
 

@@ -1,4 +1,4 @@
-@use '../../../assets/styles/variables' as *;
+@use '../../../styles/variables' as *;
 /** BROWSER */
 header {    
     display: grid;
@@ -47,7 +47,7 @@ header h1 {
 
 
 div{
-    background-image: url('../../assets/img/biblioteca.jpg');
+    background-image: url('../../../assets/img/biblioteca.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     height: 50rem;

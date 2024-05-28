@@ -3,13 +3,14 @@ import { AdminBook, BookType } from '../../../assets/models/models';
 import { DatabookService } from '../../services/databook.service';
 import { BooksComponent } from "./books/books.component";
 import { AdminComponent } from './admin/admin.component';
+import { HeaderComponent } from '../../header/header.component';
 
 @Component({
     selector: 'app-adminbooks',
     standalone: true,
     templateUrl: './adminbooks.component.html',
     styleUrl: './adminbooks.component.scss',
-    imports: [BooksComponent, AdminComponent]
+    imports: [BooksComponent, AdminComponent, HeaderComponent]
 })
 export class AdminbooksComponent {
   admin = true
