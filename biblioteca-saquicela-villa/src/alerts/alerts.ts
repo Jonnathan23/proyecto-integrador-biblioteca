@@ -94,3 +94,21 @@ export function shortPassword() {
         timer: 3000,        
     })
 }
+
+export function errorSignIn() {
+    Swal.fire({
+        title: 'Error de Ingreso',
+        text: 'Usuario o contraseña incorrectos',
+        icon: 'error',
+        timer: 3000,
+    })  
+}
+
+export function modifyUser() {
+    Swal.fire({
+        title: 'Usuario modificado con exito',
+        icon: 'success',
+        timer: 3000,
+    })
+}
+

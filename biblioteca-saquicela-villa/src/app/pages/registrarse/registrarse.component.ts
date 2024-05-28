@@ -49,8 +49,8 @@ export class RegistrarseComponent {
  
   
   register() {    
-    this.userService.registerUser(this.newUser)
-  }
+     this.userService.registerUser(this.newUser)
+   }
 
   goToSingIn(){
    this.router.navigate(['/iniciar'])

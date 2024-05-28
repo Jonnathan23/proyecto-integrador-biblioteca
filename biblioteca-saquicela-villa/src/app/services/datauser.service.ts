@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Firestore } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, onSnapshot } from '@angular/fire/firestore';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
 import { FirebaseApp } from '@angular/fire/app';
 import { LoginUser, UserType } from '../../assets/models/models';
 import { Router } from '@angular/router';
 import { HeaderComponent } from '../header/header.component';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { deleteSuccess, errorDelete, modifyUser, save, errorSave  } from '../../alerts/alerts';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +14,8 @@ import { HeaderComponent } from '../header/header.component';
 export class DatauserService {
   private static instance: DatauserService  
 
+  private usersSubject = new BehaviorSubject<UserType[]>([]);
+  users$: Observable<UserType[]> = this.usersSubject.asObservable();
 
   constructor(private fireStore: Firestore, private firebaseApp: FirebaseApp, private router: Router) {
     if (DatauserService.instance) return DatauserService.instance
@@ -19,6 +23,29 @@ export class DatauserService {
 
   }
 
+  private loadUsers() {
+    const usersCollection = collection(this.fireStore, 'users');
+    onSnapshot(usersCollection, (snapshot) => {
+      const users: UserType[] = snapshot.docs.map(doc => {
+        const data = doc.data() as UserType;
+        data.id = doc.id
+        return { ...data };
+      });
+      this.usersSubject.next(users);
+    });
+  }
+
+  async addUser(user: UserType) {
+    try {
+      await addDoc(collection(this.fireStore, 'users'), Object.assign({}, user))
+       save()
+    } catch (error) {
+      errorSave()
+    }
+  }
+
+
+  //Registra un usuario en la base de datos
   async registerUser(user: UserType) {
     try {      
       await createUserWithEmailAndPassword(getAuth(this.firebaseApp), user.email, user.password)      
@@ -28,7 +55,7 @@ export class DatauserService {
       console.log(`Error al registarse: \n${error}`)
     }    
   }
-
+ //Ingreso del usuario
   async loginUser(user: LoginUser) {
     try {
       await signInWithEmailAndPassword(getAuth(this.firebaseApp), user.email, user.password)
@@ -58,5 +85,4 @@ export class DatauserService {
   headerModif(opc: boolean){
     const dadHeader = HeaderComponent.getInstance();
       dadHeader.setIngreso(opc);
-  }
-}
+  }}
