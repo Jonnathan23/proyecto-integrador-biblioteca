@@ -1,30 +1,32 @@
 @use '../../../styles/variables' as *;
 
-main {    
-    background-image: linear-gradient(to top, $degradado_azul_bot 0%, $degradado_azul_top 100%);    
+main {
+    background-image: linear-gradient(to top, $degradado_azul_bot 0%, $degradado_azul_top 100%);
     padding: 3rem 0;
 }
-.form-container{
+
+.form-container {
     width: 90%;
     margin: auto;
     background-color: $fondoItem;
     padding: 2rem;
 
-    box-shadow: 13px 20px 17px 3px rgba(0,0,0,.53);
-    
-}
-fieldset{
-    border: none;    
+    box-shadow: 13px 20px 17px 3px rgba(0, 0, 0, .53);
+
 }
 
-fieldset legend{
+fieldset {
+    border: none;
+}
+
+fieldset legend {
     font-size: 3rem;
     font-family: $fuente;
     font-weight: bold;
     margin-bottom: 2rem;
 }
 
-.cont__campos{
+.cont__campos {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -34,13 +36,14 @@ fieldset legend{
     align-items: center;
 }
 
-.campo{
+.campo {
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
 }
-.campo__txt{        
+
+.campo__txt {
     width: 80%;
     margin: auto;
     padding: 1rem;
@@ -48,27 +51,101 @@ fieldset legend{
     background-color: $azul_oscuro;
     color: $blanco;
 
-    border: none;    
+    border: none;
 }
 
-.campo:nth-child(6){        
+.campo:nth-child(6) {
     flex-direction: row;
     gap: 1.5rem;
 }
 
-
-/** Botones */
-
-.campo__bt{
-    width: 60%;
+.change__img {
     display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
     justify-content: center;
-    align-items: center;
+    align-items: center;    
 }
 
 
-.campo img {
+
+@media(min-width:480px) {
+    .campo {
+        display: grid;
+        grid-template-columns: 20% 80%;
+        height: 4rem;
+    }
+
+    .campo__txtn label {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media (min-width:780px) {
+    .cont__campos {
+        display: grid;
+        grid-template-columns: 50% 50%;
+    }
+
+    .change__img {
+        grid-column: 2/3;
+        grid-row: 1/6;       
+
+    }
+
+}
+/*IMG */
+.change__cont__img{
+    display: flex;
+    justify-content: center; 
+}
+
+.change__cont__img img {
     border-radius: 50%;
     opacity: .5;
-    max-width: 30rem;
+    width: 60%;
+}
+
+/** Botones */
+.campo__select__img {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+}
+
+.lb {
+    display: block;
+    text-align: center;
+    width: 100%;    
+}
+
+.bt {
+    background-color: $bt_color;
+    color: $blanco;
+    font-family: $fuente;
+
+    padding: 1.5rem 2.5rem;
+    border: none;
+    transition:background-color .3s ease, transform .3s ease ;
+}
+
+.select {
+    display: none;
+}
+
+.bt:hover{
+    cursor: pointer;
+    background-color: $bt_color_selected;
+    transform: scale(1.075);
+}
+.admin{
+    display: block;
+}
+
+.admin:hover{
+    cursor: pointer;
 }
