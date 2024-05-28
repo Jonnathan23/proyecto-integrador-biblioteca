@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { UserType } from '../../../assets/models/models';
 import { DatauserService } from '../../services/datauser.service';
 import { shortPassword } from '../../../alerts/alerts';
@@ -14,7 +14,7 @@ import { shortPassword } from '../../../alerts/alerts';
 export class RegistrarseComponent {
   newUser:UserType = {name:'', lastname:'', cell:'', email:'', password:'', admin:false}
 
-  constructor(private userService: DatauserService){}
+  constructor(private userService: DatauserService, private router: Router){}
 
   getName(name: string) {
     this.newUser.name = name
@@ -50,6 +50,10 @@ export class RegistrarseComponent {
   
   register() {    
     this.userService.registerUser(this.newUser)
+  }
+
+  goToSingIn(){
+    this.router.navigate(['/iniciar'])
   }
 
 

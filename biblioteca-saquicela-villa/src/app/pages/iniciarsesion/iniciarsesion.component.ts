@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { LoginUser, UserType } from '../../../assets/models/models';
 import { DatauserService } from '../../services/datauser.service';
 
@@ -14,7 +14,7 @@ import { DatauserService } from '../../services/datauser.service';
 export class IniciarsesionComponent {
   loginUser:LoginUser = {email:'', password:''}
 
-  constructor(private userService: DatauserService){}
+  constructor(private userService: DatauserService, private router: Router){}
 
   
   getEmail(email: string) {
@@ -29,6 +29,10 @@ export class IniciarsesionComponent {
   
   login() {
     this.userService.loginUser(this.loginUser)
+  }
+
+  goToRegister(){
+    this.router.navigate(['/registrarse'])
   }
 
 }
