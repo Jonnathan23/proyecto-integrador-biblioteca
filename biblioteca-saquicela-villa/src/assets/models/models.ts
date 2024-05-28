@@ -1,6 +1,6 @@
 // Estructura del Objeto libro
-export type BookType = {
-    
+export type AdminBook = {
+    id :string
     name: string
     description: string
     image: string
@@ -8,14 +8,8 @@ export type BookType = {
     category: string
 }
 
-export type AdminBook = Pick<BookType, 'name' | 'description' | 'image' | 'autor' | 'category'> &{
-    id:string
-}
+export type BookType = Pick<AdminBook, 'name' | 'description' | 'image' | 'autor' | 'category'> 
 
-export type BookExtraType = BookType & {
-    rankin: number
-
-}
 // Estructura de una categoria
 export type CategoryType = {
     title: string

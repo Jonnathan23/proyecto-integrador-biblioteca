@@ -46,8 +46,17 @@ export class DatabookService {
     }    
   }
 
-  updateBook(book: BookType){
-    updateDoc(doc(this.fireStore,'books'),Object.assign({},book))
+  async updateBook(book: AdminBook){
+    try {      
+      //updateDoc(doc(this.fireStore,'books'),Object.assign({},book))
+      const update = book as BookType
+      setDoc(doc(this.fireStore,'books',book.id),Object.assign({},update))
+      console.log('Cambios actualizads')
+
+    } catch (error) {
+      console.log('Error para actualizar')
+      
+    }
   }
 
   async deleteBook(bookDelete: AdminBook){

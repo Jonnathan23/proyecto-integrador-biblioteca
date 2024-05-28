@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { DatabookService } from '../../../../../services/databook.service';
 import { AddbookComponent } from '../addbook.component';
 import { errorSave } from '../../../../../../alerts/alerts';
+import { BookType } from '../../../../../../assets/models/models';
 
 @Component({
   selector: 'app-btaddbook',
@@ -22,7 +23,7 @@ export class BtaddbookComponent {
   
   saveBook() {
     const inputBook = AddbookComponent.getInstance() //Obtiens al componente --> var addbok = new AddbookComponent()
-    const book = inputBook.getBook()
+    const book = inputBook.getBook() as BookType
 
     book ? this.bookService.addBook(book):errorSave()    
   } 

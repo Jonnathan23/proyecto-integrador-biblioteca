@@ -32,7 +32,8 @@ export class AddbookComponent {
   @ViewChild('book_img') imgBook!: ElementRef;
 
   //Inicializacion del objeto
-  book: BookType = {
+  book: AdminBook = {
+    id:'',
     name: '',
     description: '',
     image: '',
@@ -86,7 +87,8 @@ export class AddbookComponent {
     this.book.description = desciption
   }
 
-  selectBook(book: BookType) {
+  fillData(book: AdminBook) {
+
     this.render.setAttribute(this.txtName.nativeElement, 'value', book.name)
     this.render.setAttribute(this.txtAutor.nativeElement, 'value', book.autor)
     this.render.setProperty(this.txtDescription.nativeElement, 'value', book.description)
@@ -116,15 +118,14 @@ export class AddbookComponent {
   }
 
   clearInputs() {
-    this.book = { name: '', description: '', image: 'assets/img/selectImage.jpg', autor: '', category: this.cbText }
-    this.selectBook(this.book)
+    this.book = {id:'', name: '', description: '', image: 'assets/img/selectImage.jpg', autor: '', category: this.cbText }
+    this.fillData(this.book)
 
     this.selected = false
   }
   
   //Get & Set
-
-  getBook():BookType | undefined{
+  getBook(): undefined | AdminBook{
     if (this.checkField())  return this.book    
       
     return undefined
@@ -133,6 +134,11 @@ export class AddbookComponent {
   //Obtener la instancia del componente
   public static getInstance(): AddbookComponent {
     return this.instance
+  }
+
+  setBoook(book: AdminBook){
+    this.book = book
+
   }
 
   setAddBook(option: boolean) {
