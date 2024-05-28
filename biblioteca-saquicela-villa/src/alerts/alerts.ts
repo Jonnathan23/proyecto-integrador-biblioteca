@@ -35,10 +35,10 @@ export function errorDelete() {
 
 
 // Campos de agregar libro vacios
-export function errorInputs(campo: string) {
+export function errorInputs() {
     Swal.fire({
         title: `Error al guardar`,
-        text: `el campo ${campo} está vacio`,
+        text: `Verifique que todos los campos estén llenos`,
         icon: 'error',
         timer: 5000
     })

@@ -42,8 +42,7 @@ export class DatabookService {
       await addDoc(collection(this.fireStore, 'books'), Object.assign({}, book))
       save()
     }catch(e){
-      errorSave()
-      console.log(e)
+      errorSave()      
     }    
   }
 

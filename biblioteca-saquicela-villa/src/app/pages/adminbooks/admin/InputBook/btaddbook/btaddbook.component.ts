@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { DatabookService } from '../../../../../services/databook.service';
 import { AddbookComponent } from '../addbook.component';
-import { errorSave } from '../../../../../../alerts/alerts';
+import { errorInputs, errorSave } from '../../../../../../alerts/alerts';
 import { BookType } from '../../../../../../assets/models/models';
 
 @Component({
@@ -26,7 +26,7 @@ export class BtaddbookComponent {
     
     const book = inputBook.getBook() as BookType
 
-    book ? this.bookService.addBook(book):errorSave()    
+    book ? this.bookService.addBook(book):errorInputs()    
   } 
 
 }

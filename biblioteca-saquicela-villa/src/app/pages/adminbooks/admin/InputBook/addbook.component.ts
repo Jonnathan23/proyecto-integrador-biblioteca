@@ -24,7 +24,7 @@ export class AddbookComponent {
   selected = false
   cbText = 'Seleccione Categoria';
   srcImageNotFound = 'assets/img/selectImage.jpg'
-  
+
 
   //Seleccionar elementos del doom
   @ViewChild('name') txtName!: ElementRef;
@@ -59,9 +59,9 @@ export class AddbookComponent {
     if (input.files?.[0]) {
       const reader = new FileReader()
       reader.onload = () => img.src = reader.result as string
-      reader.readAsDataURL(input.files[0])      
-      this.selected = true     
-      
+      reader.readAsDataURL(input.files[0])
+      this.selected = true
+
     } else {
       img.src = 'assets/img/selectImage.jpg'
       this.selected = false
@@ -76,8 +76,8 @@ export class AddbookComponent {
 
   }
 
-  getAllContInputs(){
-    
+  getAllContInputs() {
+
     this.book.name = this.txtName.nativeElement.value
     this.book.autor = this.txtAutor.nativeElement.value
     this.book.description = this.txtDescription.nativeElement.value
@@ -88,7 +88,6 @@ export class AddbookComponent {
   }
 
   fillData(book: AdminBook) {
-
     this.render.setAttribute(this.txtName.nativeElement, 'value', book.name)
     this.render.setAttribute(this.txtAutor.nativeElement, 'value', book.autor)
     this.render.setProperty(this.txtDescription.nativeElement, 'value', book.description)
@@ -105,17 +104,29 @@ export class AddbookComponent {
     this.selected = false
   }
 
+  checkInputs(): boolean {
+    if (!this.book.name) return false    
 
+    if(!this.book.autor) return false    
+
+    if(!this.book.description) return false
+
+    if(this.book.category === this.cbText) return false
+
+    if(!this.selected) return false
+    
+    return true
+  }
 
 
   //Get & Set
-   getBook(): undefined | AdminBook {   
+  getBook(): undefined | AdminBook {
     this.getAllContInputs()
-    const validate = true
+    const validate = this.checkInputs()
     if (validate) {
       return this.book
     }
-    
+
     return undefined
   }
 
