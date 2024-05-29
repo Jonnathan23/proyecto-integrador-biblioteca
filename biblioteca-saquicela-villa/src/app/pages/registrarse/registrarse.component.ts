@@ -13,7 +13,7 @@ import { errorInputs, shortPassword } from '../../../alerts/alerts';
 })
 export class RegistrarseComponent {
   imgDefault = 'assets/img/imageUser.jpg'
-  newUser:UserType = {id:'' ,name:'', lastname:'', cell:'', email:'', password:'', admin:false}
+  newUser:UserType = {idUser:'' ,idDoc:'' ,name:'', lastname:'', cell:'', email:'', password:'',image:this.imgDefault ,admin:false}
   constructor(private userService: DatauserService, private router: Router){}
 
    //Obtiene en variables los elementos del DOOM

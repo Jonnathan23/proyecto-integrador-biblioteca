@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { AdminBook, BookType } from '../../../assets/models/models';
+import { AdminBook, BookType, UserType } from '../../../assets/models/models';
 import { DatabookService } from '../../services/databook.service';
 import { BooksComponent } from "./books/books.component";
 import { AdminComponent } from './admin/admin.component';
 import { HeaderComponent } from '../../header/header.component';
+import { DatauserService } from '../../services/datauser.service';
 
 @Component({
     selector: 'app-adminbooks',
@@ -14,18 +15,22 @@ import { HeaderComponent } from '../../header/header.component';
 })
 export class AdminbooksComponent {
   private static instance : AdminbooksComponent
-  admin = true
-   
-
+  user!:UserType 
+  
+  
   constructor(){
+    this.fillUser()
+
     if(AdminbooksComponent.instance) return AdminbooksComponent.instance
     return AdminbooksComponent.instance = this
+    
   }
 
-
-  setAdmin(option : boolean){
-    this.admin = option
+  private fillUser(){
+    const userService = DatauserService.getInstance()
+    this.user = userService.getUserActive()
   }
+  
 
   public static getInstance(){
     if(!this.instance){

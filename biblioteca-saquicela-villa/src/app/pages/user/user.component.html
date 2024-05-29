@@ -16,40 +16,40 @@
                 <div class="cont__campos">
                     <div class="campo">
                         <label for="nombre">Nombre: </label>
-                        <input class="campo__txt" (input)="getName(name.value)" type="text" id="nombre" name="nombre"
+                        <input class="campo__txt" type="text" id="nombre" name="nombre"
                             required #name>
 
                     </div>
 
                     <div class="campo">
                         <label for="apellido">Apellido: </label>
-                        <input class="campo__txt" (input)="getLastname(lastname.value)" type="text" id="apellido"
+                        <input class="campo__txt"  type="text" id="apellido"
                             name="apellido" required #lastname>
                     </div>
 
                     <div class="campo">
                         <label for="cell">Celular: </label>
-                        <input class="campo__txt" (input)="getCell(cell.value)" type="email" id="cell" name="cell"
-                            required #cell>
-                    </div>
+                        <input class="campo__txt"  type="email" id="cell" name="cell"
+                        required #cell>
+                </div>
 
                     <div class="campo">
                         <label for="correo">Correo Electrónico: </label>
-                        <input class="campo__txt" (input)="getEmail(email.value)" type="email" id="correo" name="correo"
-                            required #email>
-                    </div>
+                        <input class="campo__txt"  type="email" id="correo" name="correo"
+                        required #email>
+              </div>
 
                     <div class="campo">
                         <label for="contrasena">Contraseña: </label>
-                        <input class="campo__txt" (blur)="isShortPassword()" (input)="getPassword(password.value)"
+                        <input class="campo__txt" (blur)="isShortPassword()" 
                             type="password" id="contrasena" name="contrasena" required #password>
                     </div>
 
                     <div class="campo">
                         <label for="admin">Es administrador: </label>
-                        <input [disabled]="!myUser.admin" class="admin" (change)="isAdmin($event)" class="campo__check" type="checkbox" id="admin"
+                        <input class="admin" (change)="isAdmin($event)" class="campo__check" type="checkbox" id="admin"
                             name="admin" #checkIsAdmin>
-                    </div>
+                   </div>
 
                     <div class="change__img">
                         <div class="change__cont__img">

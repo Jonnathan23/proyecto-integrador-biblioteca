@@ -12,7 +12,7 @@ import { DatauserService } from '../../services/datauser.service';
   styleUrl: './iniciarsesion.component.scss'
 })
 export class IniciarsesionComponent {
-  loginUser:LoginUser = {id:'' ,email:'', password:''}
+  loginUser:LoginUser = {email:'', password:''}
 
   constructor(private userService: DatauserService, private router: Router){}
 

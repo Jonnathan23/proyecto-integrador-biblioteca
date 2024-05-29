@@ -44,7 +44,6 @@ export class DatauserService {
     try {
 
       await addDoc(collection(this.fireStore, 'users'), Object.assign({}, user))      
-      save()
     } catch (error) {
       errorSave()
     }
@@ -73,7 +72,6 @@ export class DatauserService {
       
       console.log(`Error al registarse: \n${error}`)    }    
   }
-
  //Ingreso del usuario
   async loginUser(user: LoginUser) {
     try {
@@ -102,8 +100,7 @@ export class DatauserService {
       this.headerModif(false);
       this.router.navigate(['/bienvenido'])
 
-      this.userActive = {idUser:'' ,idDoc:'' ,name:'', lastname:'', cell:'', email:'', password:'',image:'' ,admin:false}
-    
+      this.userActive = {idUser:'' ,idDoc:'' ,name:'', lastname:'', cell:'', email:'', password:'',image:'' ,admin:false}    
       }catch(e){
       console.log(`Error al cerrar sesion\n${e}`)
     }
