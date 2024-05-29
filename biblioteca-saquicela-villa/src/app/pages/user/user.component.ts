@@ -5,21 +5,17 @@ import { UseradminComponent } from "../useradmin/useradmin.component";
 import { DatauserService } from '../../services/datauser.service';
 
 @Component({
-    selector: 'app-user',
-    standalone: true,
-    templateUrl: './user.component.html',
-    styleUrl: './user.component.scss',
-    imports: [UseradminComponent]
+  selector: 'app-user',
+  standalone: true,
+  templateUrl: './user.component.html',
+  styleUrl: './user.component.scss',
+  imports: [UseradminComponent]
 })
 export class UserComponent {
+  private static instance:UserComponent
   imgDefault = 'assets/img/imageUser.jpg'
   myUser!: UserType
-  
-  constructor(private userService: DatauserService){
-    this.myUser = this.userService.getUserActive()
-  }
 
-  imgSelec = false
   @ViewChild('name') txtName!: ElementRef;
   @ViewChild('lastname') txtLastname!: ElementRef;
   @ViewChild('cell') txtCell!: ElementRef;
@@ -27,6 +23,34 @@ export class UserComponent {
   @ViewChild('password') txtPassword!: ElementRef;
   @ViewChild('checkIsAdmin') checkIsAdmin!: ElementRef;
   @ViewChild('userImg') imgUser!: ElementRef;
+
+  constructor(private userService: DatauserService) {
+    this.myUser = this.userService.getUserActive()
+    setTimeout(() => this.loadDataUser(), 0)
+
+    if(UserComponent.instance) return UserComponent.instance
+    return UserComponent.instance = this
+
+  }
+
+  private loadDataUser() {
+    try {
+      this.txtName.nativeElement.value = this.myUser.name
+      this.txtLastname.nativeElement.value = this.myUser.lastname
+      this.txtCell.nativeElement.value = this.myUser.cell
+      this.txtEmail.nativeElement.value = this.myUser.email
+      this.txtPassword.nativeElement.value = this.myUser.password
+      this.checkIsAdmin.nativeElement.checked = this.myUser.admin
+      this.imgUser.nativeElement.src = this.myUser.image
+
+      this.imgDefault = this.myUser.image
+
+    } catch (error) {
+      console.log('Sin usuario')
+    }
+
+
+  }
 
   isAdmin(check: Event) {
     const isChecked = (check.target as HTMLInputElement).checked;
@@ -37,7 +61,6 @@ export class UserComponent {
 
   }
 
-
   //Funciones
   selectImg(e: Event, img: HTMLImageElement) {
     const input = e.target as HTMLInputElement
@@ -47,11 +70,10 @@ export class UserComponent {
       const reader = new FileReader()
       reader.onload = () => img.src = reader.result as string
       reader.readAsDataURL(input.files[0])
-      this.imgSelec = true
 
     } else {
       img.src = this.imgDefault
-      this.imgSelec = false
+
     }
   }
 
@@ -71,24 +93,33 @@ export class UserComponent {
     if (!this.txtCell.nativeElement.value) return false
     if (!this.txtEmail.nativeElement.value) return false
     if (!this.txtPassword.nativeElement.value) return false
-    if (!this.imgSelec) return false
+
 
     return true
   }
 
-  saveChanges(){
+  saveChanges() {
     const isVerify = this.checkInputs()
-    if(isVerify){
-      this.getAllInputs()            
+    if (isVerify) {
+      this.getAllInputs()
       this.userService.upDateUser(this.myUser)
-      
+
       return
     }
 
     errorInputs()
   }
 
-  setIdUser(id:string){
+  fillDataUser(user:UserType){
+    this.myUser = user
+    this.loadDataUser()    
+  }
+
+  setIdUser(id: string) {
     this.myUser.idUser = id
+  }
+
+  public static getIntance(){
+    return this.instance
   }
 }

@@ -5,6 +5,11 @@ main {
     padding: 3rem 0;
 }
 
+.cont_admin {
+    width: 90%;
+    margin: auto;
+}
+
 .form-container {
     width: 90%;
     margin: auto;
@@ -65,7 +70,7 @@ fieldset legend {
     gap: 2rem;
 
     justify-content: center;
-    align-items: center;    
+    align-items: center;
 }
 
 
@@ -92,20 +97,20 @@ fieldset legend {
 
     .change__img {
         grid-column: 2/3;
-        grid-row: 1/6;       
+        grid-row: 1/6;
 
     }
 
 }
+
 /*IMG */
-.change__cont__img{
+.change__cont__img {
     display: flex;
-    justify-content: center; 
+    justify-content: center;
 }
 
 .change__cont__img img {
     border-radius: 50%;
-    opacity: .5;
     width: 60%;
 }
 
@@ -120,7 +125,7 @@ fieldset legend {
 .lb {
     display: block;
     text-align: center;
-    width: 100%;    
+    width: 100%;
 }
 
 .bt {
@@ -130,22 +135,23 @@ fieldset legend {
 
     padding: 1.5rem 2.5rem;
     border: none;
-    transition:background-color .3s ease, transform .3s ease ;
+    transition: background-color .3s ease, transform .3s ease;
 }
 
 .select {
     display: none;
 }
 
-.bt:hover{
+.bt:hover {
     cursor: pointer;
     background-color: $bt_color_selected;
     transform: scale(1.075);
 }
-.admin{
+
+.admin {
     display: block;
 }
 
-.admin:hover{
+.admin:hover {
     cursor: pointer;
 }

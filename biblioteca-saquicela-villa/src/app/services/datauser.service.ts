@@ -127,6 +127,10 @@ export class DatauserService {
     return this.instance
   }
 
+  getUsers(){
+    return this.users$
+  }
+
   getUserActive() {
     return this.userActive
   }

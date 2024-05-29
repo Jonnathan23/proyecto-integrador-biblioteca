@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { DatabookService } from '../../../../../services/databook.service';
 import { AddbookComponent } from '../addbook.component';
-import { errorSave } from '../../../../../../alerts/alerts';
+import { errorInputs, errorSave } from '../../../../../../alerts/alerts';
 
 @Component({
   selector: 'app-btmodifybook',
@@ -25,7 +25,7 @@ export class BtmodifybookComponent {
     const book = inputBook.getBook()
     console.log(book)
 
-    book ? this.bookService.updateBook(book):errorSave()    
+    book ? this.bookService.updateBook(book):errorInputs()    
   } 
 
 }

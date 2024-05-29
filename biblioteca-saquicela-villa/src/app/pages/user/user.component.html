@@ -1,9 +1,15 @@
 <main>
-    <div>
+    <div class="cont__admin">
         <!--Seccion administrador-->
-        @if(myUser.admin){
-        <app-useradmin />
-        }
+        <!--
+            @if(myUser.admin){
+            <app-useradmin />
+            }
+        -->
+
+        @if(true){
+            <app-useradmin />
+            }
     </div>
 
 
@@ -30,14 +36,14 @@
                     <div class="campo">
                         <label for="cell">Celular: </label>
                         <input class="campo__txt"  type="email" id="cell" name="cell"
-                        required #cell>
-                </div>
+                            required #cell>
+                    </div>
 
                     <div class="campo">
                         <label for="correo">Correo Electrónico: </label>
                         <input class="campo__txt"  type="email" id="correo" name="correo"
-                        required #email>
-              </div>
+                            required #email>
+                    </div>
 
                     <div class="campo">
                         <label for="contrasena">Contraseña: </label>
@@ -49,18 +55,18 @@
                         <label for="admin">Es administrador: </label>
                         <input class="admin" (change)="isAdmin($event)" class="campo__check" type="checkbox" id="admin"
                             name="admin" #checkIsAdmin>
-                   </div>
+                    </div>
 
                     <div class="change__img">
                         <div class="change__cont__img">
-                            <img src="assets/img/imageUser.jpg" alt="">
+                            <img src="assets/img/imageUser.jpg" alt="" #userImg>
                         </div>
                         <div class="campo__select__img">
                             <div>
                                 <label class="bt lb" for="selectPhoto">Seleccionar foto</label>
-                                <input class="campo__bt select" type="file" name="selectPhoto" id="selectPhoto">
+                                <input (change)="selectImg($event, userImg)" class="campo__bt select" type="file" name="selectPhoto" id="selectPhoto">
                             </div>
-                            <input class="bt" type="submit" value="Guardar Cambios">
+                            <input (click)="saveChanges()" class="bt" type="submit" value="Guardar Cambios">
                         </div>
                     </div>
                 </div>
