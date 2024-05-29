@@ -32,8 +32,20 @@ export class UseradminComponent {
     userComponent.fillDataUser(user)
   }
 
+//Envia la informacion del usuario seleccionado al componente AddBookComponent
+  modifyUser(user:UserType){
+    setTimeout(() => {
+      const addUserComponent = UserComponent.getIntance()
 
+      addUserComponent.setAddUser(false)
+      addUserComponent.fillDataUser(user)
 
+      addUserComponent.setUser(user)
+    }, 0)
+    
+  }
+
+  
   
 
 

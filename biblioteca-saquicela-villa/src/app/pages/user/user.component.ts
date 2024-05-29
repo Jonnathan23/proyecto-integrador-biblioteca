@@ -3,6 +3,7 @@ import { UserType } from '../../../assets/models/models';
 import { errorInputs, shortPassword } from '../../../alerts/alerts';
 import { UseradminComponent } from "../useradmin/useradmin.component";
 import { DatauserService } from '../../services/datauser.service';
+import { user } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-user',
@@ -11,10 +12,16 @@ import { DatauserService } from '../../services/datauser.service';
   styleUrl: './user.component.scss',
   imports: [UseradminComponent]
 })
+
+
+
+
 export class UserComponent {
-  private static instance:UserComponent
+  private static instance: UserComponent
   imgDefault = 'assets/img/imageUser.jpg'
   myUser!: UserType
+  // Determina si se agrega o se modifica
+  addUser = true
 
   @ViewChild('name') txtName!: ElementRef;
   @ViewChild('lastname') txtLastname!: ElementRef;
@@ -24,11 +31,23 @@ export class UserComponent {
   @ViewChild('checkIsAdmin') checkIsAdmin!: ElementRef;
   @ViewChild('userImg') imgUser!: ElementRef;
 
+  user: UserType = {
+    idUser: '',
+    idDoc: '',
+    name: '',
+    lastname: '',
+    cell: '',
+    email: '',
+    password: '',
+    image: '',
+    admin: false
+  }
+
   constructor(private userService: DatauserService) {
     this.myUser = this.userService.getUserActive()
     setTimeout(() => this.loadDataUser(), 0)
 
-    if(UserComponent.instance) return UserComponent.instance
+    if (UserComponent.instance) return UserComponent.instance
     return UserComponent.instance = this
 
   }
@@ -110,16 +129,25 @@ export class UserComponent {
     errorInputs()
   }
 
-  fillDataUser(user:UserType){
+  fillDataUser(user: UserType) {
     this.myUser = user
-    this.loadDataUser()    
+    this.loadDataUser()
   }
 
   setIdUser(id: string) {
     this.myUser.idUser = id
   }
 
-  public static getIntance(){
+  //Obtener la instancia del componente
+  public static getIntance() {
     return this.instance
+  }
+
+  setUser(user: UserType) {
+    this.user = user
+  }
+
+  setAddUser(option: boolean) {
+    this.addUser = option
   }
 }
