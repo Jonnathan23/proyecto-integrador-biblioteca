@@ -31,6 +31,24 @@ export function errorDelete() {
     })
 }
 
+// Modifcar
+export function modifySuccess() {
+    Swal.fire({
+        title: 'Cambios Guardados',
+        text:'Se han guardado los datos correctamente',
+        icon: 'success',
+        timer: 3000,
+    })
+}
+
+export function errorModify() {
+    Swal.fire({
+        title: `Error al guardar las modificaciones`,
+        text: `Lo sentimos, hubo un error al momento de guardar los datos`,
+        icon: 'error',
+        timer: 5000
+    })
+}
 
 
 

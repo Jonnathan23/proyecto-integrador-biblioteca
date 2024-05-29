@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Firestore, addDoc, collection, deleteDoc, doc, getDocs, onSnapshot, query, setDoc, updateDoc } from '@angular/fire/firestore';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AdminBook, BookType } from '../../assets/models/models';
-import { deleteSuccess, errorDelete, errorSave, save } from '../../alerts/alerts';
+import { deleteSuccess, errorDelete, errorModify, errorSave, modifySuccess, save } from '../../alerts/alerts';
 
 
 @Injectable({
@@ -51,11 +51,9 @@ export class DatabookService {
       //updateDoc(doc(this.fireStore,'books'),Object.assign({},book))
       const update = book as BookType
       await setDoc(doc(this.fireStore,'books',book.id),Object.assign({},update))
-      console.log('Cambios actualizads')
-
+      modifySuccess()
     } catch (error) {
-      console.log('Error para actualizar')
-      
+      errorModify()      
     }
   }
 
