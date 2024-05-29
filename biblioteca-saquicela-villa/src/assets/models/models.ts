@@ -19,7 +19,8 @@ export type CategoryType = {
 
 // Estructura del Objeto Usuario
 export type UserType = {
-    id: string
+    idUser: string
+    idDoc: string
     name: string
     lastname: string
     cell: string
@@ -31,4 +32,4 @@ export type UserType = {
 
 export type AddUser = Pick<UserType, 'name'|'lastname'| 'cell'| 'email'| 'password'|'image'|'admin' >
 
-export type LoginUser = Pick<UserType, 'id' | 'email' | 'password'>
+export type LoginUser = Pick<UserType,'email' | 'password'>
