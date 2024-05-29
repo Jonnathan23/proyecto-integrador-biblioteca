@@ -1,15 +1,9 @@
 <main>
     <div class="cont__admin">
         <!--Seccion administrador-->
-        <!--
-            @if(myUser.admin){
-            <app-useradmin />
-            }
-        -->
-
-        @if(true){
-            <app-useradmin />
-            }
+        @if(myUser.admin){
+        <app-useradmin />
+        }
     </div>
 
 
@@ -18,37 +12,33 @@
 
         <form>
             <fieldset>
-                <legend>Mis Datos</legend>
+                <legend>Datos Personales</legend>
                 <div class="cont__campos">
                     <div class="campo">
                         <label for="nombre">Nombre: </label>
-                        <input class="campo__txt" type="text" id="nombre" name="nombre"
-                            required #name>
+                        <input class="campo__txt" type="text" id="nombre" name="nombre" required #name>
 
                     </div>
 
                     <div class="campo">
                         <label for="apellido">Apellido: </label>
-                        <input class="campo__txt"  type="text" id="apellido"
-                            name="apellido" required #lastname>
+                        <input class="campo__txt" type="text" id="apellido" name="apellido" required #lastname>
                     </div>
 
                     <div class="campo">
                         <label for="cell">Celular: </label>
-                        <input class="campo__txt"  type="email" id="cell" name="cell"
-                            required #cell>
+                        <input class="campo__txt" type="email" id="cell" name="cell" required #cell>
                     </div>
 
                     <div class="campo">
                         <label for="correo">Correo Electrónico: </label>
-                        <input class="campo__txt"  type="email" id="correo" name="correo"
-                            required #email>
+                        <input disabled class="campo__txt" type="email" id="correo" name="correo" required #email>
                     </div>
 
                     <div class="campo">
                         <label for="contrasena">Contraseña: </label>
-                        <input class="campo__txt" (blur)="isShortPassword()" 
-                            type="password" id="contrasena" name="contrasena" required #password>
+                        <input disabled class="campo__txt" (blur)="isShortPassword()" type="password" id="contrasena"
+                            name="contrasena" required #password>
                     </div>
 
                     <div class="campo">
@@ -64,7 +54,8 @@
                         <div class="campo__select__img">
                             <div>
                                 <label class="bt lb" for="selectPhoto">Seleccionar foto</label>
-                                <input (change)="selectImg($event, userImg)" class="campo__bt select" type="file" name="selectPhoto" id="selectPhoto">
+                                <input (change)="selectImg($event, userImg)" class="campo__bt select" type="file"
+                                    name="selectPhoto" id="selectPhoto">
                             </div>
                             <input (click)="saveChanges()" class="bt" type="submit" value="Guardar Cambios">
                         </div>

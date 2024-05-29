@@ -36,10 +36,8 @@ export class UseradminComponent {
   modifyUser(user:UserType){
     setTimeout(() => {
       const addUserComponent = UserComponent.getIntance()
-
-      addUserComponent.setAddUser(false)
-      addUserComponent.fillDataUser(user)
-
+      
+      addUserComponent.fillModifyUser(user)
       addUserComponent.setUser(user)
     }, 0)
     

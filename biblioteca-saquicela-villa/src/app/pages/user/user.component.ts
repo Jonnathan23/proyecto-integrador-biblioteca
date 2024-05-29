@@ -17,11 +17,10 @@ import { user } from '@angular/fire/auth';
 
 
 export class UserComponent {
+
   private static instance: UserComponent
   imgDefault = 'assets/img/imageUser.jpg'
   myUser!: UserType
-  // Determina si se agrega o se modifica
-  addUser = true
 
   @ViewChild('name') txtName!: ElementRef;
   @ViewChild('lastname') txtLastname!: ElementRef;
@@ -45,24 +44,24 @@ export class UserComponent {
 
   constructor(private userService: DatauserService) {
     this.myUser = this.userService.getUserActive()
-    setTimeout(() => this.loadDataUser(), 0)
+    setTimeout(() => this.loadDataUser(this.myUser), 0)
 
     if (UserComponent.instance) return UserComponent.instance
     return UserComponent.instance = this
 
   }
 
-  private loadDataUser() {
+  private loadDataUser(userDate: UserType) {
     try {
-      this.txtName.nativeElement.value = this.myUser.name
-      this.txtLastname.nativeElement.value = this.myUser.lastname
-      this.txtCell.nativeElement.value = this.myUser.cell
-      this.txtEmail.nativeElement.value = this.myUser.email
-      this.txtPassword.nativeElement.value = this.myUser.password
-      this.checkIsAdmin.nativeElement.checked = this.myUser.admin
-      this.imgUser.nativeElement.src = this.myUser.image
+      this.txtName.nativeElement.value = userDate.name
+      this.txtLastname.nativeElement.value = userDate.lastname
+      this.txtCell.nativeElement.value = userDate.cell
+      this.txtEmail.nativeElement.value = userDate.email
+      this.txtPassword.nativeElement.value = userDate.password
+      this.checkIsAdmin.nativeElement.checked = userDate.admin
+      this.imgUser.nativeElement.src = userDate.image
 
-      this.imgDefault = this.myUser.image
+      this.imgDefault = userDate.image
 
     } catch (error) {
       console.log('Sin usuario')
@@ -73,7 +72,7 @@ export class UserComponent {
 
   isAdmin(check: Event) {
     const isChecked = (check.target as HTMLInputElement).checked;
-    this.myUser.admin = isChecked
+    this.user.admin = isChecked
   }
   isShortPassword() {
     this.txtPassword.nativeElement.value.length < 8 && shortPassword();
@@ -97,13 +96,13 @@ export class UserComponent {
   }
 
   getAllInputs() {
-    this.myUser.name = this.txtName.nativeElement.value
-    this.myUser.lastname = this.txtLastname.nativeElement.value
-    this.myUser.cell = this.txtCell.nativeElement.value
-    this.myUser.email = this.txtEmail.nativeElement.value
-    this.myUser.password = this.txtPassword.nativeElement.value
-    this.myUser.image = this.imgUser.nativeElement.src
-    this.myUser.admin = this.checkIsAdmin.nativeElement.checked
+    this.user.name = this.txtName.nativeElement.value
+    this.user.lastname = this.txtLastname.nativeElement.value
+    this.user.cell = this.txtCell.nativeElement.value
+    this.user.email = this.txtEmail.nativeElement.value
+    this.user.password = this.txtPassword.nativeElement.value
+    this.user.image = this.imgUser.nativeElement.src
+    this.user.admin = this.checkIsAdmin.nativeElement.checked
   }
 
   checkInputs(): boolean {
@@ -121,7 +120,7 @@ export class UserComponent {
     const isVerify = this.checkInputs()
     if (isVerify) {
       this.getAllInputs()
-      this.userService.upDateUser(this.myUser)
+      this.userService.upDateUser(this.user)
 
       return
     }
@@ -131,7 +130,12 @@ export class UserComponent {
 
   fillDataUser(user: UserType) {
     this.myUser = user
-    this.loadDataUser()
+    this.loadDataUser(this.myUser)
+  }
+
+  fillModifyUser(user:UserType){
+    this.user = user
+    this.loadDataUser(this.user)
   }
 
   setIdUser(id: string) {
@@ -145,9 +149,5 @@ export class UserComponent {
 
   setUser(user: UserType) {
     this.user = user
-  }
-
-  setAddUser(option: boolean) {
-    this.addUser = option
   }
 }
