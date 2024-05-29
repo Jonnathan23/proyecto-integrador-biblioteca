@@ -112,3 +112,12 @@ export function modifyUser() {
     })
 }
 
+export function userExist(){
+    Swal.fire({
+        title: 'Fallo al registrarse',
+        text:'El usuario ya existe, use otro correo',
+        icon: 'error',
+        timer: 6000,
+    })
+}
+

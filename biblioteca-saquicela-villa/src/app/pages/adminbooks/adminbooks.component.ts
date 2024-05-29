@@ -13,17 +13,25 @@ import { HeaderComponent } from '../../header/header.component';
     imports: [BooksComponent, AdminComponent, HeaderComponent]
 })
 export class AdminbooksComponent {
+  private static instance : AdminbooksComponent
   admin = true
-  allBooks:AdminBook[] = []
-  
-  constructor(private bookService:DatabookService){}
+   
 
-  ngOnInit(){
-    this.bookService.getBooks().subscribe( (books) => this.allBooks = books)
+  constructor(){
+    if(AdminbooksComponent.instance) return AdminbooksComponent.instance
+    return AdminbooksComponent.instance = this
   }
+
 
   setAdmin(option : boolean){
     this.admin = option
+  }
+
+  public static getInstance(){
+    if(!this.instance){
+      this.instance = new AdminbooksComponent()
+    }
+    return this.instance
   }
 
 }

@@ -16,10 +16,18 @@ import { DatabookService } from '../../../services/databook.service';
 })
 
 export class AdminComponent {
-  @Input({ required: true }) books?: AdminBook[];
+
   @ViewChild(AddbookComponent) addbookComponent!: AddbookComponent;
 
+  books: AdminBook[] = [];
 
+  constructor(private bookService:DatabookService){ }
+
+  ngOnInit(){
+    this.bookService.getBooks().subscribe( (books) => this.books = books)
+  }
+
+  
   //Agregar o modificar
   adminLibrary = false
 

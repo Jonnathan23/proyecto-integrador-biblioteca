@@ -25,7 +25,10 @@ export type UserType = {
     cell: string
     email: string
     password: string
+    image: string
     admin: boolean
 }
+
+export type AddUser = Pick<UserType, 'name'|'lastname'| 'cell'| 'email'| 'password'|'image'|'admin' >
 
 export type LoginUser = Pick<UserType, 'id' | 'email' | 'password'>
