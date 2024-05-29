@@ -1,8 +1,25 @@
 <main>
     <div class="cont">
-        <h2>Biblioteca Virtual:</h2>
-        <p>Accede a una amplia colección de libros, revistas y recursos. <br>
-            Disfruta de clásicos literarios y aventuras desde la comodidad de tu hogar. <br> 
-            ¡Explora, aprende y disfruta!</p>
-    </div>
+        <section class="cont__biblioteca">
+            <h2>Biblioteca Virtual:</h2>
+            <p>Accede a una amplia colección de libros, revistas y recursos. <br>
+                Disfruta de clásicos literarios y aventuras desde la comodidad de tu hogar. <br>
+                ¡Explora, aprende y disfruta!</p>
+        </section>
+    
+        <aside>
+            <section class="cont__atribuciones">
+                <h2>Atribuciones:</h2>
+                <div>
+                    <ul>
+                        @for (at of atribuciones; track $index) {
+                        <li>
+                            <a href="{{at.url}}" target="_blank">{{at.texto}}</a>
+                        </li>
+                        }
+                    </ul>
+                </div>
+            </section>
+        </aside>
+    </div>    
 </main>

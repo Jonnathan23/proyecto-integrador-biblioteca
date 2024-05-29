@@ -14,7 +14,9 @@ import { DatauserService } from '../../services/datauser.service';
 export class IniciarsesionComponent {
   loginUser:LoginUser = {email:'', password:''}
 
-  constructor(private userService: DatauserService, private router: Router){}
+  constructor(private userService: DatauserService, private router: Router){
+    
+  }
 
   
   getEmail(email: string) {
@@ -34,5 +36,6 @@ export class IniciarsesionComponent {
   goToRegister(){
     this.router.navigate(['/registrarse'])
   }
+
 
 }

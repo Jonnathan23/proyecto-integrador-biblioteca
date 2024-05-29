@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-headerbienv',
@@ -8,5 +9,10 @@ import { Component } from '@angular/core';
   styleUrl: './headerbienv.component.scss'
 })
 export class HeaderbienvComponent {
+constructor(private route: Router) { }
+
+  goHome() {
+    this.route.navigate(['/bienvenido']);
+  } 
 
 }

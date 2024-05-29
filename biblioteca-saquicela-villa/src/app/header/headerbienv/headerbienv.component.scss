@@ -12,6 +12,16 @@ header h1 {
     color: $blanco;
 }
 
+.btn-home{
+    border: none;
+    background-color: transparent;
+    
+}
+
+.btn-home:hover {
+    cursor: pointer;
+}
+
 .nav--main {
     width: 100%;
     display: flex;

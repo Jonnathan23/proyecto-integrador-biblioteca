@@ -1,27 +1,28 @@
 import { Injectable } from '@angular/core';
-import { Firestore, addDoc, collection, doc, onSnapshot, setDoc } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, onSnapshot, setDoc, doc, getDocs } from '@angular/fire/firestore';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
 import { FirebaseApp } from '@angular/fire/app';
 import { AddUser, LoginUser, UserType } from '../../assets/models/models';
 import { Router } from '@angular/router';
 import { HeaderComponent } from '../header/header.component';
-import { BehaviorSubject, Observable, first, map } from 'rxjs';
-import { deleteSuccess, errorDelete, modifyUser, save, errorSave  } from '../../alerts/alerts';
-import { AdminbooksComponent } from '../pages/adminbooks/adminbooks.component';
+import { BehaviorSubject, Observable, Subscription, first, map } from 'rxjs';
+import { deleteSuccess, errorDelete, modifyUser, save, errorSave } from '../../alerts/alerts';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class DatauserService {
-  private static instance: DatauserService  
+  private static instance: DatauserService
 
   private usersSubject = new BehaviorSubject<UserType[]>([]);
   users$: Observable<UserType[]> = this.usersSubject.asObservable();
 
-  userActive!:UserType
+  userActive!: UserType
 
   constructor(private fireStore: Firestore, private firebaseApp: FirebaseApp, private router: Router) {
+    this.loadUsers()
+
     if (DatauserService.instance) return DatauserService.instance
     DatauserService.instance = this
 
@@ -40,94 +41,93 @@ export class DatauserService {
   }
 
   async addUser(user: UserType) {
-    console .log('Entro al añadir');
+    console.log('Entro al añadir')
     try {
 
-      await addDoc(collection(this.fireStore, 'users'), Object.assign({}, user))      
+      await addDoc(collection(this.fireStore, 'users'), Object.assign({}, user))
     } catch (error) {
       errorSave()
     }
   }
 
-
   //Registra un usuario en la base de datos
   async registerUser(user: UserType) {
-    try {    
+    try {
 
       const userRegister = await createUserWithEmailAndPassword(getAuth(this.firebaseApp), user.email, user.password)
       //Agrega un usuario a la base de datos
       user.idUser = userRegister.user.uid
+      this.userActive = user
 
       //Modifica los componentes segun el tipo de usuario
-      const adminbooksComponent = AdminbooksComponent.getInstance()
-      adminbooksComponent.setAdmin(user.admin)
+      this.router.navigate(['/adminbooks'])
+      //AdminbooksComponent.getInstance()     
 
       this.headerModif(true);
-      this.addUser(user)
+      this.addUser(user)      
 
-      this.userActive = user
-      this.router.navigate(['/adminbooks'])
-      
     } catch (error) {
-      
-      console.log(`Error al registarse: \n${error}`)    }    
+      console.log(`Error al registarse: \n${error}`)
+    }
   }
- //Ingreso del usuario
+
+  //Ingreso del usuario
   async loginUser(user: LoginUser) {
     try {
       const userLoginIn = await signInWithEmailAndPassword(getAuth(this.firebaseApp), user.email, user.password)
-      
+      console.log('clic')
       //encontrar al usuario      
       const searchUser = this.users$
+      let userFound: UserType | undefined
       searchUser.subscribe((users) => {
-        users.find(function(u){
-          if(u.idDoc == userLoginIn.user.uid){
-            console.log('Usuario Encontrado')
-          }
-        })
+        console.log(users)
+        userFound = users.find(u => u.idUser == userLoginIn.user.uid)
+        userFound ? this.userActive = userFound : console.log()
       })
+
       this.headerModif(true);
-      //this.router.navigate(['/adminbooks'])
+      this.router.navigate(['/adminbooks'])
+
     } catch (error) {
       console.log(`Error al iniciar sesion\n${error}`)
     }
   }
 
-  //Cierra Sesión
-  async back(){
-    try{
-      await signOut(getAuth(this.firebaseApp))      
+  //Cerrar Sesion
+  async back() {
+    try {
+      await signOut(getAuth(this.firebaseApp))
       this.headerModif(false);
       this.router.navigate(['/bienvenido'])
 
-      this.userActive = {idUser:'' ,idDoc:'' ,name:'', lastname:'', cell:'', email:'', password:'',image:'' ,admin:false}    
-      }catch(e){
+      this.userActive = { idUser: '', idDoc: '', name: '', lastname: '', cell: '', email: '', password: '', image: '', admin: false }
+    } catch (e) {
       console.log(`Error al cerrar sesion\n${e}`)
     }
   }
 
- //Actualizar el usuario
- async upDateUser(user: UserType) {
-  try {
-    //await setDoc(doc(this.fireStore,'users',user.id))
-    await setDoc(doc(this.fireStore, 'users', user.idDoc), Object.assign({}, user))
+  //Actualizar el usuario
+  async upDateUser(user: UserType) {
+    try {
+      //await setDoc(doc(this.fireStore,'users',user.id))
+      await setDoc(doc(this.fireStore, 'users', user.idDoc), Object.assign({}, user))
+      modifyUser()
+    } catch (error) {
 
-  } catch (error) {
-
+    }
   }
-}
- //Cambia al header de logeado
-  headerModif(opc: boolean){
+  //Cambia al header de logeado
+  headerModif(opc: boolean) {
     const dadHeader = HeaderComponent.getInstance();
-      dadHeader.setIngreso(opc);
+    dadHeader.setIngreso(opc);
   }
 
   //Get & Set
-  public static getInstance(){
+  public static getInstance() {
     return this.instance
   }
 
-  getUserActive(){
+  getUserActive() {
     return this.userActive
   }
 }
