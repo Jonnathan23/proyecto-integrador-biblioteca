@@ -22,8 +22,7 @@ export class BtaddbookComponent {
   }
   
   saveBook() {
-    const inputBook = AddbookComponent.getInstance()
-    
+    const inputBook = AddbookComponent.getInstance()    
     const book = inputBook.getBook() as BookType
 
     book ? this.bookService.addBook(book):errorInputs()    

@@ -56,9 +56,8 @@ export class AdminComponent {
       const addBookComponent = AddbookComponent.getInstance()
 
       addBookComponent.setAddBook(false)
-      addBookComponent.fillData(book)
-
-      //Llena los datos del libro
+      addBookComponent.setDefaultImage(book.image)
+      addBookComponent.fillData(book)      
       addBookComponent.setBoook(book)
 
       

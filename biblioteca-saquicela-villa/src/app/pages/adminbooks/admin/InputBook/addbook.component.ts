@@ -22,7 +22,8 @@ export class AddbookComponent {
   // Verificador de la selección de img
   selected = false
   cbText = 'Seleccione Categoria';
-  srcImageNotFound = 'assets/img/selectImage.jpg'
+  defaultImage = 'assets/img/selectImage.jpg'
+  
 
 
   //Seleccionar elementos del doom
@@ -44,7 +45,8 @@ export class AddbookComponent {
 
 
   constructor(private render: Renderer2) {
-    if (AddbookComponent.instance) return AddbookComponent.instance
+
+      if (AddbookComponent.instance) return AddbookComponent.instance
     AddbookComponent.instance = this;
   }
 
@@ -62,7 +64,7 @@ export class AddbookComponent {
       this.selected = true
 
     } else {
-      img.src = 'assets/img/selectImage.jpg'
+      img.src = this.defaultImage
       this.selected = false
     }
   }
@@ -97,7 +99,7 @@ export class AddbookComponent {
   //Verificacion de campos llenos 
 
   clearInputs() {
-    this.book = { id: '', name: '', description: '', image: this.srcImageNotFound, autor: '', category: this.cbText }
+    this.book = { id: '', name: '', description: '', image: this.defaultImage, autor: '', category: this.cbText }
     this.fillData(this.book)
 
     this.selected = false
@@ -112,7 +114,7 @@ export class AddbookComponent {
 
     if(this.book.category === this.cbText) return false
 
-    if(!this.selected) return false
+    if(this.addBook) if(!this.selected) return false
 
     return true
   }
@@ -142,6 +144,10 @@ export class AddbookComponent {
 
   setAddBook(option: boolean) {
     this.addBook = option
+  }
+
+  setDefaultImage(img:string){
+    this.defaultImage = img
   }
 
 }
