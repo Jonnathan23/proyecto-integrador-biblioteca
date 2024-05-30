@@ -94,3 +94,27 @@ input[type="password"]{
     text-decoration: underline;
 }
 
+
+.btn--google {
+    background-color: transparent;
+    color: $blanco;
+    border : 1px solid $blanco;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    font-family: $fuente;
+    width: 80%;
+    margin: 0 auto;
+    transition: background-color .3s ease, transform .3s ease;
+
+}
+
+.btn--google:hover {
+    cursor: pointer;
+    background-color: $blanco;
+    color: $azul_oscuro;
+    transform: scale(1.05);
+}

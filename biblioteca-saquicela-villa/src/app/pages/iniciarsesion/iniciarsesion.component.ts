@@ -37,5 +37,14 @@ export class IniciarsesionComponent {
     this.router.navigate(['/registrarse'])
   }
 
+  googleSignIn() {
+
+    this.userService.googleAuth().then(() => {
+      // Redirecciona después de la autenticación exitosa
+      this.router.navigate(['/adminbooks']);
+    }).catch(error => {
+      console.error('Error durante la autenticación:', error);
+    });
+  }
 
 }

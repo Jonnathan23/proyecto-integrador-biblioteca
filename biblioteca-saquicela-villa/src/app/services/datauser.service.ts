@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Firestore, addDoc, collection, onSnapshot, setDoc, doc, getDocs } from '@angular/fire/firestore';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
+import { getAuth, createUserWithEmailAndPassword, signInWithPopup, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
 import { FirebaseApp } from '@angular/fire/app';
 import { AddUser, LoginUser, UserType } from '../../assets/models/models';
 import { Router } from '@angular/router';
 import { HeaderComponent } from '../header/header.component';
 import { BehaviorSubject, Observable, Subscription, first, map } from 'rxjs';
 import { deleteSuccess, errorDelete, modifyUser, save, errorSave } from '../../alerts/alerts';
+import { signInWithRedirect,GoogleAuthProvider } from '@firebase/auth';
+
 
 
 @Injectable({
@@ -131,7 +133,33 @@ export class DatauserService {
     return this.users$
   }
 
+
   getUserActive() {
     return this.userActive
   }
+
+
+  //Autentificación Google
+  async googleAuth() {
+    try {
+      const provider = new GoogleAuthProvider()
+      const result = await signInWithPopup(getAuth(this.firebaseApp), provider)
+      const user = result.user
+      console.log(user)
+    } catch (error) {
+      console.log(`Error al autentificar con Google\n${error}`)
+    }
+  }
+
+ async googleLogin(){
+  try {
+    const provider = new GoogleAuthProvider()
+    await signInWithRedirect(getAuth(this.firebaseApp), provider)
+    this.router.navigateByUrl('/')
+  } catch (e) {
+    
+  }
+ }
+  
+
 }

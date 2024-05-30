@@ -32,11 +32,20 @@
                 <label for="admin">Es administrador: </label>
                 <input (change)="isAdmin($event)" class="campo__check" type="checkbox" id="admin" name="admin" #checkIsAdmin>
             </div>
+    
+            <div class="campo">
+                <button class="btn--google">
+                    <img src="https://img.icons8.com/color/48/000000/google-logo.png" />
+                    <span> Sign up with Google</span>
+                </button>
+
+            </div>
 
             <div class="campo">
-                <input (click)="register()" class="campo__bt" type="submit" value="Registrarse">                
-                <a (click)="goToSingIn()" class="campo__iniciar">Ya tienes Cuenta</a>
+                <input (click)="register()" class="campo__bt" type="submit" value="Sign up">                
+                <a (click)="goToSingIn()" class="campo__iniciar">Ya tienes Cuenta?</a>
             </div>
+
         </form>
     </div>
 </main>
