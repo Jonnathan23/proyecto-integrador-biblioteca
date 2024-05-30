@@ -32,11 +32,7 @@ export class IniciarsesionComponent {
   login() {
     this.userService.loginUser(this.loginUser)
   }
-
-  goToRegister(){
-    this.router.navigate(['/registrarse'])
-  }
-
+  
   googleSignIn() {
 
     this.userService.googleAuth().then(() => {

@@ -35,7 +35,7 @@ export function errorDelete() {
 export function modifySuccess() {
     Swal.fire({
         title: 'Cambios Guardados',
-        text:'Se han guardado los datos correctamente',
+        text: 'Se han guardado los datos correctamente',
         icon: 'success',
         timer: 3000,
     })
@@ -108,8 +108,8 @@ export function shortPassword() {
 
         allowOutsideClick: true,
         backdrop: false,
-        
-        timer: 3000,        
+
+        timer: 3000,
     })
 }
 
@@ -119,7 +119,7 @@ export function errorSignIn() {
         text: 'Usuario o contraseña incorrectos',
         icon: 'error',
         timer: 3000,
-    })  
+    })
 }
 
 export function modifyUser() {
@@ -130,12 +130,52 @@ export function modifyUser() {
     })
 }
 
-export function userExist(){
-    Swal.fire({
-        title: 'Fallo al registrarse',
-        text:'El usuario ya existe, use otro correo',
-        icon: 'error',
-        timer: 6000,
-    })
+export function errorForm(code: string) {
+    switch (code) {
+        case 'auth/email-already-in-use':
+            Swal.fire({
+                title: 'Fallo al registrarse',
+                text: 'El usuario ya existe, use otro correo',
+                icon: 'error',
+                timer: 6000,
+            });
+            break;
+        case 'auth/weak-password':
+            Swal.fire({
+                title: 'Fallo al registrarse',
+                text: 'La contraseña es muy corta',
+                icon: 'error',
+                timer: 6000,
+            });
+            break;
+
+        case 'auth/invalid-email':
+            Swal.fire({
+                title: 'Fallo al ingresar',
+                text: 'Correo inválido',
+                icon: 'error',
+                timer: 6000,
+            });
+            break;
+
+        case 'auth/invalid-credential':
+            Swal.fire({
+                title: 'Fallo al ingresar',
+                text: 'Contraseña incorrecta',
+                icon: 'error',
+                timer: 6000,
+            });
+            break;
+
+        default:
+            Swal.fire({
+                title: 'Fallo al registrarse',
+                text: 'Ocurrión un error inesperado',
+                icon: 'error',
+                timer: 6000,
+            });
+            break;
+    }
+
 }
 

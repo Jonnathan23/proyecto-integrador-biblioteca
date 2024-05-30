@@ -72,12 +72,4 @@ export class RegistrarseComponent {
     errorInputs()
    }
 
-  goToSingIn(){
-   this.router.navigate(['/iniciar'])
-  }
-
-  
-
-
-
 }

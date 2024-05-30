@@ -6,7 +6,7 @@ import { AddUser, LoginUser, UserType } from '../../assets/models/models';
 import { Router } from '@angular/router';
 import { HeaderComponent } from '../header/header.component';
 import { BehaviorSubject, Observable, Subscription, first, map } from 'rxjs';
-import { deleteSuccess, errorDelete, modifyUser, save, errorSave } from '../../alerts/alerts';
+import { deleteSuccess, errorDelete, modifyUser, save, errorSave, errorForm } from '../../alerts/alerts';
 import { signInWithRedirect,GoogleAuthProvider } from '@firebase/auth';
 
 
@@ -69,7 +69,7 @@ export class DatauserService {
       this.addUser(user)      
 
     } catch (error) {
-      console.log(`Error al registarse: \n${error}`)
+      this.controlErrors(error)
     }
   }
 
@@ -91,7 +91,7 @@ export class DatauserService {
       this.router.navigate(['/adminbooks'])
 
     } catch (error) {
-      console.log(`Error al iniciar sesion\n${error}`)
+      this.controlErrors(error)
     }
   }
 
@@ -118,6 +118,15 @@ export class DatauserService {
 
     }
   }
+
+  controlErrors(error :unknown){
+    if (error instanceof Error && 'code' in error) {
+      errorForm((error as { code: string }).code);
+    } else {      
+      errorForm("unknown_error");
+    }
+  }
+
   //Cambia al header de logeado
   headerModif(opc: boolean) {
     const dadHeader = HeaderComponent.getInstance();

@@ -20,8 +20,7 @@ export class UseradminComponent {
 
   constructor(private userService: DatauserService ){}
 
-  ngOnInit(){
-    //this.userService.getUsers().subscribe( (users) => this.allUsers = users)
+  ngOnInit(){    
     this.userService.getUsers().subscribe(users => this.users = users)
 
   }
@@ -32,7 +31,7 @@ export class UseradminComponent {
     userComponent.fillDataUser(user)
   }
 
-//Envia la informacion del usuario seleccionado al componente AddBookComponent
+//Envia la informacion del usuario seleccionado al componente 
   modifyUser(user:UserType){
     setTimeout(() => {
       const addUserComponent = UserComponent.getIntance()
@@ -42,9 +41,5 @@ export class UseradminComponent {
     }, 0)
     
   }
-
-  
-  
-
 
 }

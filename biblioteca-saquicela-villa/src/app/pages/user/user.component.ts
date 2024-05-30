@@ -94,7 +94,7 @@ export class UserComponent {
 
     }
   }
-
+  //Obtiene los datos del formulario para modificar
   getAllInputs() {
     this.user.name = this.txtName.nativeElement.value
     this.user.lastname = this.txtLastname.nativeElement.value
