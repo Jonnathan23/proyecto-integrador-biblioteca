@@ -4,17 +4,25 @@
         <form>
             <div class="campo">
                 <label   for="username">Email</label>
-                <input (input)="getEmail(email.value)"  type="email" id="username" name="username" required #email>
+                <input (input)="getEmail(email.value)"  type="email" id="username" name="username"   #email>
             </div>
 
             <div class="campo">
                 <label for="password">Password</label>
-                <input (input)="getPassword(password.value)" type="password" id="password" name="password" required #password>
+                <input (input)="getPassword(password.value)" type="password" id="password" name="password"   #password>
             </div>
 
             <div class="campo">
-                <a (click)="login()"  class="campo__bt" type="submit">Ingresar</a>
+                <a (click)="login()"  class="campo__bt" type="submit">Log In</a>
                 <a (click)="goToRegister()" class="campo__iniciar">Registrarse</a>
+            </div>
+
+            <div class="campo">
+                <button class="btn--google" >
+                    <img src="https://img.icons8.com/color/48/000000/google-logo.png" />
+                    <span>Log In with Google</span>
+                </button>
+
             </div>
 
         </form>
