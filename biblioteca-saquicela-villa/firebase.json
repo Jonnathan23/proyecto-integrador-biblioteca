@@ -1,1 +1,17 @@
-{}
+{
+  "hosting": {
+    "site": "proyecto-biblioteca-saquicela-villa-p64",
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
