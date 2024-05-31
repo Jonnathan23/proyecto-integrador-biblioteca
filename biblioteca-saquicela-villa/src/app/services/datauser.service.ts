@@ -68,7 +68,8 @@ export class DatauserService {
       this.router.navigate(['/adminbooks'])        
 
       this.headerModif(true);
-      this.addUser(user)      
+      this.addUser(user)     
+      this.sendStorage(this.userActive) 
 
     } catch (error) {
       this.controlErrors(error)

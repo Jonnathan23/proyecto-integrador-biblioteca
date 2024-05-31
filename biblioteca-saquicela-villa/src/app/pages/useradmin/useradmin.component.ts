@@ -14,32 +14,26 @@ import { UserComponent } from '../user/user.component';
 })
 export class UseradminComponent {
 
-  users:UserType[] = []
+  users: UserType[] = []
 
-  userSelec!:UserType
+  userSelec!: UserType
 
-  constructor(private userService: DatauserService ){}
+  constructor(private userService: DatauserService) { }
 
-  ngOnInit(){    
+  ngOnInit() {
     this.userService.getUsers().subscribe(users => this.users = users)
-
   }
 
-  selectedUser(user:UserType){
-    this.userSelec = user
-    const userComponent =   UserComponent.getIntance()
-    userComponent.fillDataUser(user)
-  }
 
-//Envia la informacion del usuario seleccionado al componente 
-  modifyUser(user:UserType){
+  //Envia la informacion del usuario seleccionado al componente 
+  modifyUser(user: UserType) {
     setTimeout(() => {
       const addUserComponent = UserComponent.getIntance()
-      
-      addUserComponent.fillModifyUser(user)
+
       addUserComponent.setUser(user)
+      addUserComponent.fillModifyUser(user)
     }, 0)
-    
+
   }
 
 }

@@ -48,9 +48,8 @@ export class UserComponent {
 
     this.myUser = this.userService.getStorage()
     console.log(this.myUser)
-    console.log('Regenero')
-    setTimeout(() => {this.loadDataUser(this.myUser)
-    }, 0)
+
+    setTimeout(() => this.loadDataUser(this.myUser), 0)
 
     if (UserComponent.instance) return UserComponent.instance
     return UserComponent.instance = this
@@ -96,6 +95,17 @@ export class UserComponent {
     }
   }
   
+  //Validacion de datos  
+  checkInputs(): boolean {
+    if (!this.txtName.nativeElement.value) return false
+    if (!this.txtLastname.nativeElement.value) return false
+    if (!this.txtCell.nativeElement.value) return false
+    if (!this.txtEmail.nativeElement.value) return false
+    if (!this.txtPassword.nativeElement.value) return false
+
+
+    return true
+  }
   //Obtiene los datos del formulario para modificar
   getAllInputs() {
     this.user.name = this.txtName.nativeElement.value
@@ -107,16 +117,6 @@ export class UserComponent {
     this.user.admin = this.checkIsAdmin.nativeElement.checked
   }
 
-  checkInputs(): boolean {
-    if (!this.txtName.nativeElement.value) return false
-    if (!this.txtLastname.nativeElement.value) return false
-    if (!this.txtCell.nativeElement.value) return false
-    if (!this.txtEmail.nativeElement.value) return false
-    if (!this.txtPassword.nativeElement.value) return false
-
-
-    return true
-  }
 
   saveChanges() {
     const isVerify = this.checkInputs()
