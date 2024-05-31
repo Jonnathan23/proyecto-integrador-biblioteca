@@ -5,6 +5,7 @@ import { BooksComponent } from "./books/books.component";
 import { AdminComponent } from './admin/admin.component';
 import { HeaderComponent } from '../../header/header.component';
 import { DatauserService } from '../../services/datauser.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-adminbooks',
@@ -20,15 +21,46 @@ export class AdminbooksComponent {
   
   constructor(){
     this.fillUser()
-
+    if(this.protection()) return
     if(AdminbooksComponent.instance) return AdminbooksComponent.instance
     return AdminbooksComponent.instance = this
     
   }
 
+  protection(){
+    try {      
+      const userService = DatauserService.getInstance()
+      const userLoged =  userService.getAuth().currentUser
+  
+      console.log(userLoged)
+      
+      if(!userLoged){
+        const router = new Router()
+        router.navigate(['/bienvenido'])
+        return true
+      }
+      return false
+
+    } catch (error) {
+      const router = new Router()
+        router.navigate(['/bienvenido'])      
+        return true
+    }
+  }
+
+
+  ngOnInit(){
+    
+
+  }
+
   private fillUser(){
-    const userService = DatauserService.getInstance()
-    this.user = userService.getUserActive()
+    try {      
+      const userService = DatauserService.getInstance()
+      this.user = userService.getUserActive()
+    } catch (error) {
+      
+    }
   }
   
 

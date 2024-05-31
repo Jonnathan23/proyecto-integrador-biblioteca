@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Firestore, addDoc, collection, onSnapshot, setDoc, doc, getDocs } from '@angular/fire/firestore';
-import { getAuth, createUserWithEmailAndPassword, signInWithPopup, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
+import { getAuth, createUserWithEmailAndPassword, signInWithPopup, signInWithEmailAndPassword, signOut} from '@angular/fire/auth';
 import { FirebaseApp } from '@angular/fire/app';
 import { AddUser, LoginUser, UserType } from '../../assets/models/models';
 import { Router } from '@angular/router';
 import { HeaderComponent } from '../header/header.component';
-import { BehaviorSubject, Observable, Subscription, first, map } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { deleteSuccess, errorDelete, modifyUser, save, errorSave, errorForm } from '../../alerts/alerts';
 import { signInWithRedirect,GoogleAuthProvider } from '@firebase/auth';
+import { get } from 'node:http';
 
 
 
@@ -21,6 +22,8 @@ export class DatauserService {
   users$: Observable<UserType[]> = this.usersSubject.asObservable();
 
   userActive!: UserType
+
+  auth = getAuth(this.firebaseApp)
 
   constructor(private fireStore: Firestore, private firebaseApp: FirebaseApp, private router: Router) {
     this.loadUsers()
@@ -55,15 +58,14 @@ export class DatauserService {
   //Registra un usuario en la base de datos
   async registerUser(user: UserType) {
     try {
-
-      const userRegister = await createUserWithEmailAndPassword(getAuth(this.firebaseApp), user.email, user.password)
+      
       //Agrega un usuario a la base de datos
+      const userRegister = await createUserWithEmailAndPassword(this.auth, user.email, user.password)
       user.idUser = userRegister.user.uid
       this.userActive = user
 
       //Modifica los componentes segun el tipo de usuario
-      this.router.navigate(['/adminbooks'])
-      //AdminbooksComponent.getInstance()     
+      this.router.navigate(['/adminbooks'])        
 
       this.headerModif(true);
       this.addUser(user)      
@@ -76,8 +78,8 @@ export class DatauserService {
   //Ingreso del usuario
   async loginUser(user: LoginUser) {
     try {
-      const userLoginIn = await signInWithEmailAndPassword(getAuth(this.firebaseApp), user.email, user.password)
-      console.log('clic')
+      const userLoginIn = await signInWithEmailAndPassword(this.auth, user.email, user.password)
+      
       //encontrar al usuario      
       const searchUser = this.users$
       let userFound: UserType | undefined
@@ -98,7 +100,7 @@ export class DatauserService {
   //Cerrar Sesion
   async back() {
     try {
-      await signOut(getAuth(this.firebaseApp))
+      await signOut(this.auth)
       this.headerModif(false);
       this.router.navigate(['/bienvenido'])
 
@@ -142,7 +144,9 @@ export class DatauserService {
     return this.users$
   }
 
-
+  getAuth(){
+    return this.auth
+  }
   getUserActive() {
     return this.userActive
   }

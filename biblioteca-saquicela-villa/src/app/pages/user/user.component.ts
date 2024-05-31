@@ -4,6 +4,7 @@ import { errorInputs, shortPassword } from '../../../alerts/alerts';
 import { UseradminComponent } from "../useradmin/useradmin.component";
 import { DatauserService } from '../../services/datauser.service';
 import { user } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user',
@@ -43,6 +44,8 @@ export class UserComponent {
   }
 
   constructor(private userService: DatauserService) {
+    if(this.protection()) return
+    
     this.myUser = this.userService.getUserActive()
     setTimeout(() => this.loadDataUser(this.myUser), 0)
 
@@ -120,7 +123,7 @@ export class UserComponent {
     const isVerify = this.checkInputs()
     if (isVerify) {
       this.getAllInputs()
-      this.userService.upDateUser(this.user)
+      this.userService.upDateUser(this.user)      
 
       return
     }
@@ -136,6 +139,28 @@ export class UserComponent {
   fillModifyUser(user:UserType){
     this.user = user
     this.loadDataUser(this.user)
+  }
+
+
+  protection(){
+    try {      
+      const userService = DatauserService.getInstance()
+      const userLoged =  userService.getAuth().currentUser
+  
+      console.log(userLoged)
+      
+      if(!userLoged){
+        const router = new Router()
+        router.navigate(['/bienvenido'])
+        return true
+      }
+      return false
+
+    } catch (error) {
+      const router = new Router()
+        router.navigate(['/bienvenido'])      
+        return true
+    }
   }
 
   setIdUser(id: string) {
