@@ -90,6 +90,7 @@ export class DatauserService {
       })
 
       this.headerModif(true);
+      this.sendStorage(this.userActive)
       this.router.navigate(['/adminbooks'])
 
     } catch (error) {
@@ -119,6 +120,14 @@ export class DatauserService {
     } catch (error) {
 
     }
+  }
+
+  sendStorage(user: UserType){
+    localStorage.setItem('userActive',JSON.stringify(user))
+  }
+
+  getStorage():UserType{
+    return JSON.parse(localStorage.getItem('userActive')!) as UserType
   }
 
   controlErrors(error :unknown){

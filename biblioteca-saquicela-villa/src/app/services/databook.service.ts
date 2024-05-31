@@ -40,7 +40,7 @@ export class DatabookService {
   async addBook(book: BookType) {    
     try{
       await addDoc(collection(this.fireStore, 'books'), Object.assign({}, book))
-      save()
+      save()      
     }catch(e){
       errorSave()      
     }    

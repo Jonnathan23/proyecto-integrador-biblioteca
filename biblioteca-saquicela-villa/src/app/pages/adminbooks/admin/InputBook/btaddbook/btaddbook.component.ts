@@ -20,12 +20,13 @@ export class BtaddbookComponent {
 
     BtaddbookComponent.instance = this
   }
-  
+
   saveBook() {
-    const inputBook = AddbookComponent.getInstance()    
+    const inputBook = AddbookComponent.getInstance()
     const book = inputBook.getBook() as BookType
 
-    book ? this.bookService.addBook(book):errorInputs()    
-  } 
+    book ? this.bookService.addBook(book)
+      .then(() => inputBook.clearInputs()) : errorInputs()
+  }
 
 }

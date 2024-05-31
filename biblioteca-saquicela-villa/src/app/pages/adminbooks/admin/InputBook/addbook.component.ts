@@ -89,20 +89,20 @@ export class AddbookComponent {
   }
 
   fillData(book: AdminBook) {
-    this.render.setAttribute(this.txtName.nativeElement, 'value', book.name)
-    this.render.setAttribute(this.txtAutor.nativeElement, 'value', book.autor)
+    this.render.setProperty(this.txtName.nativeElement, 'value', book.name)
+    this.render.setProperty(this.txtAutor.nativeElement, 'value', book.autor)
     this.render.setProperty(this.txtDescription.nativeElement, 'value', book.description)
     this.render.setProperty(this.cbCategory.nativeElement, 'value', book.category)
-    this.render.setAttribute(this.imgBook.nativeElement, 'src', book.image)
+    this.render.setProperty(this.imgBook.nativeElement, 'src', book.image)
   }
 
-  //Verificacion de campos llenos 
-
-  clearInputs() {
-    this.book = { id: '', name: '', description: '', image: this.defaultImage, autor: '', category: this.cbText }
-    this.fillData(this.book)
-
-    this.selected = false
+  clearInputs(){
+    this.defaultImage = 'assets/img/selectImage.jpg'
+    this.render.setProperty(this.txtName.nativeElement, 'value', "")
+    this.render.setProperty(this.txtAutor.nativeElement, 'value', "")
+    this.render.setProperty(this.txtDescription.nativeElement, 'value', "")
+    this.render.setProperty(this.cbCategory.nativeElement, 'value', this.cbText)
+    this.render.setProperty(this.imgBook.nativeElement, 'src', this.defaultImage)
   }
 
   checkInputs(): boolean {

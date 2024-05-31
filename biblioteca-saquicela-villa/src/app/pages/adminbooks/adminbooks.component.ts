@@ -57,7 +57,7 @@ export class AdminbooksComponent {
   private fillUser(){
     try {      
       const userService = DatauserService.getInstance()
-      this.user = userService.getUserActive()
+      this.user = userService.getStorage()
     } catch (error) {
       
     }

@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { UserType } from '../../../assets/models/models';
 import { errorInputs, shortPassword } from '../../../alerts/alerts';
 import { UseradminComponent } from "../useradmin/useradmin.component";
@@ -43,11 +43,14 @@ export class UserComponent {
     admin: false
   }
 
-  constructor(private userService: DatauserService) {
-    if(this.protection()) return
-    
-    this.myUser = this.userService.getUserActive()
-    setTimeout(() => this.loadDataUser(this.myUser), 0)
+  constructor(private userService: DatauserService, private render: Renderer2) {
+    if (this.protection()) return
+
+    this.myUser = this.userService.getStorage()
+    console.log(this.myUser)
+    console.log('Regenero')
+    setTimeout(() => {this.loadDataUser(this.myUser)
+    }, 0)
 
     if (UserComponent.instance) return UserComponent.instance
     return UserComponent.instance = this
@@ -55,23 +58,18 @@ export class UserComponent {
   }
 
   private loadDataUser(userDate: UserType) {
-    try {
-      this.txtName.nativeElement.value = userDate.name
-      this.txtLastname.nativeElement.value = userDate.lastname
-      this.txtCell.nativeElement.value = userDate.cell
-      this.txtEmail.nativeElement.value = userDate.email
-      this.txtPassword.nativeElement.value = userDate.password
-      this.checkIsAdmin.nativeElement.checked = userDate.admin
-      this.imgUser.nativeElement.src = userDate.image
+    this.render.setAttribute(this.txtName.nativeElement, 'value',userDate.name)
+    this.render.setAttribute(this.txtLastname.nativeElement, 'value',userDate.lastname)
+    this.render.setAttribute(this.txtCell.nativeElement, 'value',userDate.cell)
+    this.render.setAttribute(this.txtEmail.nativeElement, 'value',userDate.email)
+    this.render.setAttribute(this.txtPassword.nativeElement, 'value',userDate.password)
+    this.render.setProperty(this.checkIsAdmin.nativeElement, 'checked',userDate.admin)
+    this.render.setAttribute(this.imgUser.nativeElement, 'src',userDate.image)
 
-      this.imgDefault = userDate.image
-
-    } catch (error) {
-      console.log('Sin usuario')
-    }
-
-
+    this.imgDefault = userDate.image
   }
+
+
 
   isAdmin(check: Event) {
     const isChecked = (check.target as HTMLInputElement).checked;
@@ -97,6 +95,7 @@ export class UserComponent {
 
     }
   }
+  
   //Obtiene los datos del formulario para modificar
   getAllInputs() {
     this.user.name = this.txtName.nativeElement.value
@@ -123,7 +122,7 @@ export class UserComponent {
     const isVerify = this.checkInputs()
     if (isVerify) {
       this.getAllInputs()
-      this.userService.upDateUser(this.user)      
+      this.userService.upDateUser(this.user)
 
       return
     }
@@ -136,20 +135,20 @@ export class UserComponent {
     this.loadDataUser(this.myUser)
   }
 
-  fillModifyUser(user:UserType){
+  fillModifyUser(user: UserType) {
     this.user = user
     this.loadDataUser(this.user)
   }
 
 
-  protection(){
-    try {      
+  protection() {
+    try {
       const userService = DatauserService.getInstance()
-      const userLoged =  userService.getAuth().currentUser
-  
+      const userLoged = userService.getAuth().currentUser
+
       console.log(userLoged)
-      
-      if(!userLoged){
+
+      if (!userLoged) {
         const router = new Router()
         router.navigate(['/bienvenido'])
         return true
@@ -158,8 +157,8 @@ export class UserComponent {
 
     } catch (error) {
       const router = new Router()
-        router.navigate(['/bienvenido'])      
-        return true
+      router.navigate(['/bienvenido'])
+      return true
     }
   }
 
