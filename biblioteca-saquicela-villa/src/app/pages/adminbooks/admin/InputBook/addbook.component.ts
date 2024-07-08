@@ -3,6 +3,9 @@ import { AdminBook } from '../../../../../assets/models/models';
 import { categories } from '../../../../../assets/data/categorias';
 import { BtaddbookComponent } from "./btaddbook/btaddbook.component";
 import { BtmodifybookComponent } from "./btmodifybook/btmodifybook.component";
+import { SelectedbookService } from '../../../../services/forbook/selectedbook.service';
+import { DatabookService } from '../../../../services/forbook/databook.service';
+import { errorInputs } from '../../../../../alerts/alerts';
 
 @Component({
   selector: 'app-addbook',
@@ -12,18 +15,18 @@ import { BtmodifybookComponent } from "./btmodifybook/btmodifybook.component";
   imports: [BtaddbookComponent, BtmodifybookComponent]
 })
 export class AddbookComponent {
-  private static instance: AddbookComponent;
+
 
   // Determina si se agrega o se modifica
-  addBook = true
+  isAddingBook = true
 
   ourCategories = [...categories]
 
   // Verificador de la selección de img
-  selected = false
-  cbText = 'Seleccione Categoria';
+  imgIsSelected = false
+  cbText!: string;
   defaultImage = 'assets/img/selectImage.jpg'
-  
+
 
 
   //Seleccionar elementos del doom
@@ -44,13 +47,18 @@ export class AddbookComponent {
   }
 
 
-  constructor(private render: Renderer2) {
-
-      if (AddbookComponent.instance) return AddbookComponent.instance
-    AddbookComponent.instance = this;
+  constructor(private render: Renderer2, private selectedBookService: SelectedbookService, private bookService: DatabookService) {
+    this.cbText = selectedBookService.getCbText()
   }
 
+  ngOnInit() {
+    this.selectedBookService.getSelectedBook().subscribe((book) => {
+      this.book = book
+      this.isAddingBook = !this.book.id ? true : false
+      setTimeout(() => this.fillData(this.book), 0)
+    })
 
+  }
 
   //Funciones
   selectImg(e: Event, img: HTMLImageElement) {
@@ -61,20 +69,17 @@ export class AddbookComponent {
       const reader = new FileReader()
       reader.onload = () => img.src = reader.result as string
       reader.readAsDataURL(input.files[0])
-      this.selected = true
+      this.imgIsSelected = true
 
     } else {
       img.src = this.defaultImage
-      this.selected = false
+      this.imgIsSelected = false
     }
   }
 
   selectCategory(e: Event) {
     const category = e.target as HTMLInputElement
     this.book.category = category.value
-
-    console.log(this.book.category)
-
   }
 
   getAllContInputs() {
@@ -96,7 +101,7 @@ export class AddbookComponent {
     this.render.setProperty(this.imgBook.nativeElement, 'src', book.image)
   }
 
-  clearInputs(){
+  clearInputs() {
     this.defaultImage = 'assets/img/selectImage.jpg'
     this.render.setProperty(this.txtName.nativeElement, 'value', "")
     this.render.setProperty(this.txtAutor.nativeElement, 'value', "")
@@ -106,48 +111,34 @@ export class AddbookComponent {
   }
 
   checkInputs(): boolean {
-    if (!this.book.name) return false    
+    if (!this.book.name) return false
 
-    if(!this.book.autor) return false    
+    if (!this.book.autor) return false
 
-    if(!this.book.description) return false
+    if (!this.book.description) return false
 
-    if(this.book.category === this.cbText) return false
+    if (this.book.category === this.cbText) return false
 
-    if(this.addBook) if(!this.selected) return false
+    if (this.isAddingBook) if (!this.imgIsSelected) return false
 
     return true
   }
 
-
-  //Get & Set
-  getBook(): undefined | AdminBook {
+  saveBook() {
     this.getAllContInputs()
-    const validate = this.checkInputs()
-    if (validate) {
-      return this.book
+    const isValidate = this.checkInputs()
+    if (isValidate) {
+      this.bookService.addBook(this.book)
+      this.clearInputs()
+    } else {
+      errorInputs()
+
     }
-
-    return undefined
   }
 
-  //Obtener la instancia del componente
-  public static getInstance(): AddbookComponent {
-    return this.instance
+  updateBook() {
+    this.getAllContInputs()
+    const isValidate = this.checkInputs()
+    isValidate ? this.bookService.updateBook(this.book) : errorInputs()
   }
-
-  setBoook(book: AdminBook) {
-    this.book = book
-    console.log(this.book)
-
-  }
-
-  setAddBook(option: boolean) {
-    this.addBook = option
-  }
-
-  setDefaultImage(img:string){
-    this.defaultImage = img
-  }
-
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { DatabookService } from '../../../../../services/forbook/databook.service';
 import { AddbookComponent } from '../addbook.component';
 import { errorInputs, errorSave } from '../../../../../../alerts/alerts';
@@ -13,20 +13,12 @@ import { BookType } from '../../../../../../assets/models/models';
 })
 export class BtaddbookComponent {
 
-  private static instance: BtaddbookComponent;
-
-  constructor(private bookService: DatabookService) {
-    if (BtaddbookComponent.instance) return BtaddbookComponent.instance
-
-    BtaddbookComponent.instance = this
-  }
+  @Input({ required: true }) book!: BookType;
+  constructor(private bookService: DatabookService) { }
 
   saveBook() {
-    const inputBook = AddbookComponent.getInstance()
-    const book = inputBook.getBook() as BookType
-
-    book ? this.bookService.addBook(book)
-      .then(() => inputBook.clearInputs()) : errorInputs()
+    //this.bookService.addBook(this.book)
+    console.log(this.book)
   }
 
 }

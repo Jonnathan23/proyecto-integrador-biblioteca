@@ -4,6 +4,7 @@ import { __values } from 'tslib';
 import { AddbookComponent } from "./InputBook/addbook.component";
 import { confirmDelete } from '../../../../alerts/alerts';
 import { DatabookService } from '../../../services/forbook/databook.service';
+import { SelectedbookService } from '../../../services/forbook/selectedbook.service';
 
 
 @Component({
@@ -17,11 +18,9 @@ import { DatabookService } from '../../../services/forbook/databook.service';
 
 export class AdminComponent {
 
-  @ViewChild(AddbookComponent) addbookComponent!: AddbookComponent;
-
   books: AdminBook[] = [];
 
-  constructor(private bookService: DatabookService) { }
+  constructor(private bookService: DatabookService, private selectedBookService: SelectedbookService) { }
 
   ngOnInit() {
     this.bookService.getBooks().subscribe((books) => this.books = books)
@@ -32,45 +31,29 @@ export class AdminComponent {
   adminLibrary = false
 
   showAdminLibrary() {
-    this.adminLibrary = true
-
-    setTimeout(() => {
-      const addBookComponent = AddbookComponent.getInstance()
-      addBookComponent.setAddBook(true)
-      addBookComponent.clearInputs()
-    }, 0)
-
+    this.adminLibrary = true;
+    this.selectedBookService.resetBook();
   }
 
   hideAdminLibrary() {
     this.adminLibrary = false
   }
 
-  //Envia la informacion del libro seleccionado al componente AddBookComponent
+  
+  /**
+   * @description Envia la informacion del libro seleccionado al componente AddBookComponent
+   * por un servicio
+   * @param book 
+   */
   modifyBook(book: AdminBook) {
     this.adminLibrary = true
-
-    //Uso del setTimeout para esperar la instancia del componente
-    setTimeout(() => {
-      //Obtiene la instancia del componente para usar sus funciones    
-      const addBookComponent = AddbookComponent.getInstance()
-
-      addBookComponent.setAddBook(false)
-      addBookComponent.setDefaultImage(book.image)
-      addBookComponent.fillData(book)
-      addBookComponent.setBoook(book)
-
-
-    }, 0)
+    this.selectedBookService.setSelectedBook(book)
 
   }
 
   async delete(bookDelete: AdminBook) {
-    const isConfirmed = await confirmDelete(bookDelete)
-    if (isConfirmed) {
-      const dataBook = DatabookService.getInstance()
+    const isConfirmed = await confirmDelete(bookDelete)    
 
-      dataBook.deleteBook(bookDelete)
-    }
+    isConfirmed && this.bookService.deleteBook(bookDelete);
   }
 }

@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { DatabookService } from '../../../../../services/forbook/databook.service';
 import { AddbookComponent } from '../addbook.component';
 import { errorInputs } from '../../../../../../alerts/alerts';
+import { AdminBook, BookType } from '../../../../../../assets/models/models';
 
 @Component({
   selector: 'app-btmodifybook',
@@ -12,21 +13,12 @@ import { errorInputs } from '../../../../../../alerts/alerts';
 })
 export class BtmodifybookComponent {
 
-  private static instance: BtmodifybookComponent;
-
-  constructor(private bookService: DatabookService) {
-    if (BtmodifybookComponent.instance) return BtmodifybookComponent.instance
-
-    BtmodifybookComponent.instance = this
-  }
+  @Input( {required: true}) book!: AdminBook;
+  constructor(private bookService: DatabookService) {}
 
   updateBook() {
-    const inputBook = AddbookComponent.getInstance()
-    const book = inputBook.getBook()
-    console.log(book)
-
-    book ? this.bookService.updateBook(book)
-      .then(() => inputBook.clearInputs()) : errorInputs()
+    //this.bookService.updateBook(this.book)
+    console.log(this.book)
   }
 
 }
