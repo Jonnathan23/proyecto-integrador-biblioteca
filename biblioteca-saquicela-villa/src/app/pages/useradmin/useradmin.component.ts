@@ -4,6 +4,7 @@ import { HeaderComponent } from '../../header/header.component';
 import { DatauserService } from '../../services/foruser/datauser.service';
 import { UserType } from '../../../assets/models/models';
 import { UserComponent } from '../user/user.component';
+import { SelecteduserService } from '../../services/foruser/selecteduser.service';
 
 @Component({
   selector: 'app-useradmin',
@@ -14,26 +15,18 @@ import { UserComponent } from '../user/user.component';
 })
 export class UseradminComponent {
 
-  users: UserType[] = []
+  users:UserType[] = []
 
-  userSelec!: UserType
+  userSelec!:UserType
 
-  constructor(private userService: DatauserService) { }
+  constructor(private userService: DatauserService, private selectedUserService: SelecteduserService) { }
 
-  ngOnInit() {
+  ngOnInit(){    
     this.userService.getUsers().subscribe(users => this.users = users)
   }
 
-
-  //Envia la informacion del usuario seleccionado al componente 
-  modifyUser(user: UserType) {
-    setTimeout(() => {
-      const addUserComponent = UserComponent.getIntance()
-
-      addUserComponent.setUser(user)
-      addUserComponent.fillModifyUser(user)
-    }, 0)
-
+  selectedUser(user:UserType){
+    this.selectedUserService.setSelectedUser(user)
   }
 
 }

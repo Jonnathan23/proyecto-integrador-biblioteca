@@ -1,7 +1,13 @@
 <main>
     <div class="cont__admin">
         <!--Seccion administrador-->
-        @if(myUser.admin){
+        <!--
+            @if(myUser.admin){
+            <app-useradmin />
+            }
+        -->
+
+        @if(true){
         <app-useradmin />
         }
     </div>
@@ -12,7 +18,8 @@
 
         <form>
             <fieldset>
-                <legend>Datos Personales</legend>
+                <legend>Datos id</legend>
+                <p>id: {{userModify.idUser}}</p>
                 <div class="cont__campos">
                     <div class="campo">
                         <label for="nombre">Nombre: </label>
@@ -32,13 +39,12 @@
 
                     <div class="campo">
                         <label for="correo">Correo Electrónico: </label>
-                        <input disabled class="campo__txt" type="email" id="correo" name="correo" required #email>
+                        <input class="campo__txt" type="email" id="correo" name="correo" required #email>
                     </div>
 
                     <div class="campo">
                         <label for="contrasena">Contraseña: </label>
-                        <input disabled class="campo__txt" (blur)="isShortPassword()" type="password" id="contrasena"
-                            name="contrasena" required #password>
+                        <input class="campo__txt" type="password" id="contrasena" name="contrasena" required #password>
                     </div>
 
                     <div class="campo">
@@ -57,7 +63,7 @@
                                 <input (change)="selectImg($event, userImg)" class="campo__bt select" type="file"
                                     name="selectPhoto" id="selectPhoto">
                             </div>
-                            <input (click)="saveChanges()" class="bt" type="submit" value="Guardar Cambios">
+                            <input class="bt" type="submit" value="Guardar Cambios">
                         </div>
                     </div>
                 </div>
