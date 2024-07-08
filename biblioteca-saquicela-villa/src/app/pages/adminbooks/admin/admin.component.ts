@@ -3,7 +3,7 @@ import { AdminBook, BookType } from '../../../../assets/models/models';
 import { __values } from 'tslib';
 import { AddbookComponent } from "./InputBook/addbook.component";
 import { confirmDelete } from '../../../../alerts/alerts';
-import { DatabookService } from '../../../services/databook.service';
+import { DatabookService } from '../../../services/forbook/databook.service';
 
 
 @Component({
@@ -21,24 +21,24 @@ export class AdminComponent {
 
   books: AdminBook[] = [];
 
-  constructor(private bookService:DatabookService){ }
+  constructor(private bookService: DatabookService) { }
 
-  ngOnInit(){
-    this.bookService.getBooks().subscribe( (books) => this.books = books)
+  ngOnInit() {
+    this.bookService.getBooks().subscribe((books) => this.books = books)
   }
 
-  
+
   //Agregar o modificar
   adminLibrary = false
 
   showAdminLibrary() {
     this.adminLibrary = true
-    
-    setTimeout(()=>{
+
+    setTimeout(() => {
       const addBookComponent = AddbookComponent.getInstance()
       addBookComponent.setAddBook(true)
       addBookComponent.clearInputs()
-    },0)
+    }, 0)
 
   }
 
@@ -57,10 +57,10 @@ export class AdminComponent {
 
       addBookComponent.setAddBook(false)
       addBookComponent.setDefaultImage(book.image)
-      addBookComponent.fillData(book)      
+      addBookComponent.fillData(book)
       addBookComponent.setBoook(book)
 
-      
+
     }, 0)
 
   }

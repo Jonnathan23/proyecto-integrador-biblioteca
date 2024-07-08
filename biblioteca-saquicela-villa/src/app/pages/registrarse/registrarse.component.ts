@@ -1,7 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { UserType } from '../../../assets/models/models';
-import { DatauserService } from '../../services/datauser.service';
+import { DatauserService } from '../../services/foruser/datauser.service';
 import { errorInputs, shortPassword } from '../../../alerts/alerts';
 
 @Component({
@@ -13,25 +13,25 @@ import { errorInputs, shortPassword } from '../../../alerts/alerts';
 })
 export class RegistrarseComponent {
   imgDefault = 'assets/img/imageUser.jpg'
-  newUser:UserType = {idUser:'' ,idDoc:'' ,name:'', lastname:'', cell:'', email:'', password:'',image:this.imgDefault ,admin:false}
-  constructor(private userService: DatauserService, private router: Router){}
+  newUser: UserType = { idUser: '', idDoc: '', name: '', lastname: '', cell: '', email: '', password: '', image: this.imgDefault, admin: false }
+  constructor(private userService: DatauserService, private router: Router) { }
 
-   //Obtiene en variables los elementos del DOOM
-   @ViewChild('name') txtName!: ElementRef;
-   @ViewChild('lastname') txtLastname!: ElementRef;
-   @ViewChild('cell') txtCell!: ElementRef;
-   @ViewChild('email') txtEmail!: ElementRef;
-   @ViewChild('password') txtPassword!: ElementRef;
-   @ViewChild('checkIsAdmin') checkIsAdmin!: ElementRef; 
-   
+  //Obtiene en variables los elementos del DOOM
+  @ViewChild('name') txtName!: ElementRef;
+  @ViewChild('lastname') txtLastname!: ElementRef;
+  @ViewChild('cell') txtCell!: ElementRef;
+  @ViewChild('email') txtEmail!: ElementRef;
+  @ViewChild('password') txtPassword!: ElementRef;
+  @ViewChild('checkIsAdmin') checkIsAdmin!: ElementRef;
 
-   isAdmin(check: Event) {
+
+  isAdmin(check: Event) {
     const isChecked = (check.target as HTMLInputElement).checked;
     this.newUser.admin = isChecked
-    
+
   }
 
-  isShortPassword(){
+  isShortPassword() {
     this.txtEmail.nativeElement.value.length <= 6 && shortPassword()
   }
 
@@ -40,8 +40,8 @@ export class RegistrarseComponent {
     this.newUser.lastname = this.txtLastname.nativeElement.value
     this.newUser.cell = this.txtCell.nativeElement.value
     this.newUser.email = this.txtEmail.nativeElement.value
-    this.newUser.password = this.txtPassword.nativeElement.value    
-    this.newUser.admin = this.checkIsAdmin.nativeElement.checked  
+    this.newUser.password = this.txtPassword.nativeElement.value
+    this.newUser.admin = this.checkIsAdmin.nativeElement.checked
 
   }
 
@@ -50,7 +50,7 @@ export class RegistrarseComponent {
     if (!this.txtLastname.nativeElement.value) return false
     if (!this.txtCell.nativeElement.value) return false
     if (!this.txtEmail.nativeElement.value) return false
-    if (!this.txtPassword.nativeElement.value) return false  
+    if (!this.txtPassword.nativeElement.value) return false
 
     return true
   }
@@ -58,18 +58,18 @@ export class RegistrarseComponent {
 
 
 
- 
-  
-  register() {    
+
+
+  register() {
     const isVerify = this.checkInputs()
-    if(isVerify){
-      this.getAllInputs()      
+    if (isVerify) {
+      this.getAllInputs()
       const userService = DatauserService.getInstance()
-      userService.registerUser(this.newUser)      
-      
+      userService.registerUser(this.newUser)
+
       return
     }
     errorInputs()
-   }
+  }
 
 }

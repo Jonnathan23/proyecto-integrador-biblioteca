@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { DatauserService } from '../../services/datauser.service';
-import { RouterLink,Router } from '@angular/router';
+import { DatauserService } from '../../services/foruser/datauser.service';
+import { RouterLink, Router } from '@angular/router';
 import { HeaderComponent } from '../header.component';
 
 
@@ -24,20 +24,20 @@ export class HeadersessionComponent {
     console.log('Libros');
   }
 
-  linkPerfil() {  
+  linkPerfil() {
     this.router.navigate(['/usuario'])
     this.headerModif(true);
     console.log('Perfil');
   }
 
-  linkAtri() {  
+  linkAtri() {
     this.router.navigate(['/atribuciones'])
     this.headerModif(true);
     console.log('Atribuciones');
   }
 
-  headerModif(opc: boolean){
+  headerModif(opc: boolean) {
     const dadHeader = HeaderComponent.getInstance();
-      dadHeader.setIngreso(opc);
+    dadHeader.setIngreso(opc);
   }
 }

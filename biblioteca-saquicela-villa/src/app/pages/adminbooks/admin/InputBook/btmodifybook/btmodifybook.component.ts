@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { DatabookService } from '../../../../../services/databook.service';
+import { DatabookService } from '../../../../../services/forbook/databook.service';
 import { AddbookComponent } from '../addbook.component';
-import { errorInputs} from '../../../../../../alerts/alerts';
+import { errorInputs } from '../../../../../../alerts/alerts';
 
 @Component({
   selector: 'app-btmodifybook',

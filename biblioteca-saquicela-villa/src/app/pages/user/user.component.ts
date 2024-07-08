@@ -2,7 +2,7 @@ import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { UserType } from '../../../assets/models/models';
 import { errorInputs, shortPassword } from '../../../alerts/alerts';
 import { UseradminComponent } from "../useradmin/useradmin.component";
-import { DatauserService } from '../../services/datauser.service';
+import { DatauserService } from '../../services/foruser/datauser.service';
 import { user } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 
@@ -57,13 +57,13 @@ export class UserComponent {
   }
 
   private loadDataUser(userDate: UserType) {
-    this.render.setAttribute(this.txtName.nativeElement, 'value',userDate.name)
-    this.render.setAttribute(this.txtLastname.nativeElement, 'value',userDate.lastname)
-    this.render.setAttribute(this.txtCell.nativeElement, 'value',userDate.cell)
-    this.render.setAttribute(this.txtEmail.nativeElement, 'value',userDate.email)
-    this.render.setAttribute(this.txtPassword.nativeElement, 'value',userDate.password)
-    this.render.setProperty(this.checkIsAdmin.nativeElement, 'checked',userDate.admin)
-    this.render.setAttribute(this.imgUser.nativeElement, 'src',userDate.image)
+    this.render.setAttribute(this.txtName.nativeElement, 'value', userDate.name)
+    this.render.setAttribute(this.txtLastname.nativeElement, 'value', userDate.lastname)
+    this.render.setAttribute(this.txtCell.nativeElement, 'value', userDate.cell)
+    this.render.setAttribute(this.txtEmail.nativeElement, 'value', userDate.email)
+    this.render.setAttribute(this.txtPassword.nativeElement, 'value', userDate.password)
+    this.render.setProperty(this.checkIsAdmin.nativeElement, 'checked', userDate.admin)
+    this.render.setAttribute(this.imgUser.nativeElement, 'src', userDate.image)
 
     this.imgDefault = userDate.image
   }
@@ -94,7 +94,7 @@ export class UserComponent {
 
     }
   }
-  
+
   //Validacion de datos  
   checkInputs(): boolean {
     if (!this.txtName.nativeElement.value) return false
