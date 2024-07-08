@@ -35,7 +35,7 @@ export class UserComponent {
   @ViewChild('checkIsAdmin') checkAdmin!: ElementRef;
   @ViewChild('userImg') imgUser!: ElementRef;
 
-  constructor(private render:Renderer2,private loginService: LoginserviceService, private selectedUser: SelecteduserService) {
+  constructor(private render: Renderer2, private loginService: LoginserviceService, private selectedUser: SelecteduserService) {
     //this.loadDataUser()
   }
   ngOnInit() {
@@ -47,20 +47,23 @@ export class UserComponent {
     //this.selectedUser.getSelectedUser().subscribe((user) => this.userModify = user)
     this.selectedUser.getSelectedUser().subscribe((user) => {
       //this.userModify = user.idUser ? user : this.loginService.getUserStorage()
-      
+
       if (user.idUser) {
         this.userModify = user
       } else {
         this.userModify = this.loginService.getUserStorage()!
       }
 
-      this.nombre = this.userModify.name
-      this.apellido = this.userModify.lastname
-      this.cell = this.userModify.cell
-      this.correo = this.userModify.email
-      this.myPassword = this.userModify.password
-      this.render.setProperty(this.checkAdmin.nativeElement, 'checked', this.userModify.admin)
-      this.render.setProperty(this.imgUser.nativeElement,'src', this.userModify.image)
+      setTimeout(() => {
+        this.nombre = this.userModify.name
+        this.apellido = this.userModify.lastname
+        this.cell = this.userModify.cell
+        this.correo = this.userModify.email
+        this.myPassword = this.userModify.password
+        this.render.setProperty(this.checkAdmin.nativeElement, 'checked', this.userModify.admin ?? false)
+        this.render.setProperty(this.imgUser.nativeElement, 'src', this.userModify.image)
+
+      }, 0)
 
     })
   }
