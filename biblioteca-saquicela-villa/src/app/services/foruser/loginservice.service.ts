@@ -7,6 +7,7 @@ import { DatauserService } from './datauser.service';
 import { LocalstorageService } from '../../../storage/localstorage.service';
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { SelecteduserService } from './selecteduser.service';
+import { errorSignIn, userExist } from '../../../alerts/alerts';
 
 @Injectable({
   providedIn: 'root'
@@ -46,7 +47,7 @@ export class LoginserviceService {
       this.router.navigate(['/adminbooks'])
 
     } catch (error) {
-      console.log(`Error al registarse: \n${error}`)
+      userExist()
     }
   }
 
@@ -64,7 +65,7 @@ export class LoginserviceService {
       this.router.navigate(['/adminbooks']);
 
     } catch (error) {
-      console.log(`Error al iniciar sesion\n${error}`)
+      errorSignIn()
     }
   }
 
@@ -80,7 +81,7 @@ export class LoginserviceService {
       this.router.navigate(['/bienvenido']);
 
     } catch (e) {
-      console.log(`Error al cerrar sesion\n${e}`)
+
     }
   }
 

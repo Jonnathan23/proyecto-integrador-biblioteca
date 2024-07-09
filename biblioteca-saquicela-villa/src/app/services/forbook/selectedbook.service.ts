@@ -21,16 +21,14 @@ export class SelectedbookService {
  * @param book 
  */
   setSelectedBook(book:AdminBook){  
-    this.selectedBook.next(book);
-    console.log(this.selectedBook$)
+    this.selectedBook.next(book);    
   }
   
   /**
    * @description reinicia el valor del libro en el observable
    */
   resetBook(){    
-    this.selectedBook.next(this.restarBook);
-    console.log(this.selectedBook$)
+    this.selectedBook.next(this.restarBook);    
   }
 
   getRestarBook(){

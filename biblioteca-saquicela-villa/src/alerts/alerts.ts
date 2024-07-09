@@ -154,3 +154,9 @@ export function userExist() {
         timer: 6000,
     })
 }
+
+export function failBack(){
+    Swal.fire({
+        title:'Fallo al cerrar sesión'
+    })
+}

@@ -67,7 +67,8 @@ export class DatauserService {
     let userFound: UserType | undefined
     searchUser.subscribe((users) => {
       userFound = users.find(u => u.idUser == userLogin.user.uid)
-      userFound ? this.userActive = userFound : console.log()
+      if (userFound) this.userActive = userFound
+
     })
 
     return userFound;

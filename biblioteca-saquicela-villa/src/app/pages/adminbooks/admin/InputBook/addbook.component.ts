@@ -93,9 +93,7 @@ export class AddbookComponent {
     this.book.autor = this.txtAutor.nativeElement.value
     this.book.description = this.txtDescription.nativeElement.value
     this.book.category = this.cbCategory.nativeElement.value
-    this.book.image = this.imgBook.nativeElement.src
-
-    console.log(this.book)
+    this.book.image = this.imgBook.nativeElement.src    
   }
 
   /**

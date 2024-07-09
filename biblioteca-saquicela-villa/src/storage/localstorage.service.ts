@@ -17,7 +17,7 @@ export class LocalstorageService extends StorageService {
         localStorage.setItem(key, data);
       }
     } catch (error) {
-      //console.log(error);
+      
     }
 
   }
@@ -29,7 +29,7 @@ export class LocalstorageService extends StorageService {
         return JSON.parse(data) as T;
       }
     } catch (error) {
-      // console.log(error)
+      
     }
     return null;
 

@@ -18,10 +18,8 @@ export class AdminbooksComponent {
   constructor(private loginService: LoginserviceService) { }
   ngOnInit() {
      this.loginService.getUserActive().subscribe((user) => {
-       const userLocal = this.loginService.getUserStorage()!;
- 
-       this.user = userLocal.idUser ? userLocal : user;
-       if (this.user.admin) console.log("Validado")
+       const userLocal = this.loginService.getUserStorage()!; 
+       this.user = userLocal.idUser ? userLocal : user;       
      })
    }    
 }
