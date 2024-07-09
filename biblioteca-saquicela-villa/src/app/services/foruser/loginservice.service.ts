@@ -77,7 +77,7 @@ export class LoginserviceService {
       this.localStorageService.clear();
       this.localStorageService.setItem(this.keyUser, this.userRestart);
       this.userActive.next(this.userRestart);
-      //this.selectedUser.setSelectedUser(this.userRestart)
+      this.selectedUser.setSelectedUser(this.userRestart)
       this.router.navigate(['/bienvenido']);
 
     } catch (e) {
