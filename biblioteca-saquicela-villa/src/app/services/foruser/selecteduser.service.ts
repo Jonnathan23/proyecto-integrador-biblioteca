@@ -24,4 +24,8 @@ export class SelecteduserService {
   getSelectedUser() {
     return this.selectedUser$;
   }
+
+  getImgDefault(){
+    return this.imgDefault
+  }
 }

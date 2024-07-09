@@ -17,12 +17,9 @@ import { FormsModule } from '@angular/forms';
   imports: [UseradminComponent, FormsModule]
 })
 
-
-
-
 export class UserComponent {
 
-  imgDefault = 'assets/img/imageUser.jpg'
+  imgDefault:string 
   myUser!: UserType  //Usuario dueño de la sesión
   userModify!: UserType  //
 
@@ -35,18 +32,19 @@ export class UserComponent {
   @ViewChild('checkIsAdmin') checkAdmin!: ElementRef;
   @ViewChild('userImg') imgUser!: ElementRef;
 
-  constructor(private render: Renderer2, private loginService: LoginserviceService, private selectedUser: SelecteduserService) {
+  constructor(private render: Renderer2, private loginService: LoginserviceService, private selectedUser: SelecteduserService, private userService: DatauserService) {
     //this.loadDataUser()
+    this.imgDefault = this.selectedUser.getImgDefault()
   }
+
   ngOnInit() {
     this.loginService.getUserActive().subscribe((user) => {
       const userLocal = this.loginService.getUserStorage()!;
       this.myUser = userLocal.idUser ? userLocal : user;
     })
+    
 
-    //this.selectedUser.getSelectedUser().subscribe((user) => this.userModify = user)
-    this.selectedUser.getSelectedUser().subscribe((user) => {
-      //this.userModify = user.idUser ? user : this.loginService.getUserStorage()
+    this.selectedUser.getSelectedUser().subscribe((user) => {     
 
       if (user.idUser) {
         this.userModify = user
@@ -69,34 +67,7 @@ export class UserComponent {
   }
 
 
-  /*
-    private loadDataUser() {
-      try {
-        this.txtName.nativeElement.value = this.myUser.name
-        this.txtLastname.nativeElement.value = this.myUser.lastname
-        this.txtCell.nativeElement.value = this.myUser.cell
-        this.txtEmail.nativeElement.value = this.myUser.email
-        this.txtPassword.nativeElement.value = this.myUser.password
-        this.checkIsAdmin.nativeElement.checked = this.myUser.admin
-        this.imgUser.nativeElement.src = this.myUser.image
   
-        this.imgDefault = this.myUser.image
-  
-      } catch (error) {
-        console.log('Sin usuario')
-      }
-  
-  
-    }
-  */
-
-  isAdmin(check: Event) {
-    const isChecked = (check.target as HTMLInputElement).checked;
-    this.myUser.admin = isChecked
-  }
-
-
-  //Funciones
   selectImg(e: Event, img: HTMLImageElement) {
     const input = e.target as HTMLInputElement
 
@@ -112,30 +83,36 @@ export class UserComponent {
     }
   }
 
-  /*
-    getAllInputs() {
-      this.myUser.name = this.txtName.nativeElement.value
-      this.myUser.lastname = this.txtLastname.nativeElement.value
-      this.myUser.cell = this.txtCell.nativeElement.value
-      this.myUser.email = this.txtEmail.nativeElement.value
-      this.myUser.password = this.txtPassword.nativeElement.value
-      this.myUser.image = this.imgUser.nativeElement.src
-      this.myUser.admin = this.checkIsAdmin.nativeElement.checked
-    }
-  
-    checkInputs(): boolean {
-      if (!this.txtName.nativeElement.value) return false
-      if (!this.txtLastname.nativeElement.value) return false
-      if (!this.txtCell.nativeElement.value) return false
-      if (!this.txtEmail.nativeElement.value) return false
-      if (!this.txtPassword.nativeElement.value) return false
-  
-  
-      return true
-    }
-  
-  */
+  getAllInputs() {
+    this.userModify.name = this.nombre
+    this.userModify.lastname = this.apellido
+    this.userModify.cell = this.cell
+    this.userModify.email = this.correo
+    this.userModify.password = this.myPassword
+    this.userModify.image = this.imgUser.nativeElement.src
+    this.userModify.admin = this.checkAdmin.nativeElement.checked
+  }
+
+  checkInputs(): boolean {
+    this.getAllInputs()
+
+    if (!this.nombre) return false
+    if (!this.apellido) return false
+    if (!this.cell) return false
+    if (!this.correo) return false
+    if (!this.myPassword) return false
+
+
+    return true
+  }
   saveChanges() {
+    const isVerify = this.checkInputs()
+
+    if (isVerify) {
+      this.userService.upDateUser(this.userModify)
+      return
+    }
+    errorInputs()   
 
   }
 }
