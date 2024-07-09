@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Firestore, addDoc, collection, deleteDoc, doc, getDocs, onSnapshot, query, setDoc, updateDoc } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, deleteDoc, doc, onSnapshot, setDoc } from '@angular/fire/firestore';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AdminBook, BookType } from '../../../assets/models/models';
-import { deleteSuccess, errorDelete, errorModify, errorSave, modifySuccess, save } from '../../../alerts/alerts';
+import { deleteSuccess, errorDelete, errorModifyBook, errorSave, modifyBook, saveBook } from '../../../alerts/alerts';
 
 
 @Injectable({
@@ -40,7 +40,7 @@ export class DatabookService {
   async addBook(book: BookType) {
     try {
       await addDoc(collection(this.fireStore, 'books'), Object.assign({}, book))
-      save()
+      saveBook()
     } catch (e) {
       errorSave()
     }
@@ -51,9 +51,9 @@ export class DatabookService {
       //updateDoc(doc(this.fireStore,'books'),Object.assign({},book))
       const update = book as BookType
       await setDoc(doc(this.fireStore, 'books', book.id), Object.assign({}, update))
-      modifySuccess()
+      modifyBook()
     } catch (error) {
-      errorModify()
+      errorModifyBook()
     }
   }
 

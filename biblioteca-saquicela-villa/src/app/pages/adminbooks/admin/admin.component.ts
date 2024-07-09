@@ -1,5 +1,5 @@
-import { Component, Input, ViewChild } from '@angular/core';
-import { AdminBook, BookType } from '../../../../assets/models/models';
+import { Component } from '@angular/core';
+import { AdminBook } from '../../../../assets/models/models';
 import { __values } from 'tslib';
 import { AddbookComponent } from "./InputBook/addbook.component";
 import { confirmDelete } from '../../../../alerts/alerts';

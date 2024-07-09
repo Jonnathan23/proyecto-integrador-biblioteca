@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
-import { LoginUser, UserType } from '../../../assets/models/models';
-import { DatauserService } from '../../services/foruser/datauser.service';
+import { RouterLink, RouterOutlet } from '@angular/router';
+import { LoginUser,} from '../../../assets/models/models';
 import { FormsModule, NgForm } from '@angular/forms';
 import { LoginserviceService } from '../../services/foruser/loginservice.service';
 

@@ -3,7 +3,6 @@ import { AdminComponent } from '../adminbooks/admin/admin.component';
 import { HeaderComponent } from '../../header/header.component';
 import { DatauserService } from '../../services/foruser/datauser.service';
 import { UserType } from '../../../assets/models/models';
-import { UserComponent } from '../user/user.component';
 import { SelecteduserService } from '../../services/foruser/selecteduser.service';
 
 @Component({

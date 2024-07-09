@@ -3,11 +3,10 @@ import { UserType } from '../../../assets/models/models';
 import { errorInputs, shortPassword } from '../../../alerts/alerts';
 import { UseradminComponent } from "../useradmin/useradmin.component";
 import { DatauserService } from '../../services/foruser/datauser.service';
-import { user } from '@angular/fire/auth';
-import { Router } from '@angular/router';
 import { LoginserviceService } from '../../services/foruser/loginservice.service';
 import { SelecteduserService } from '../../services/foruser/selecteduser.service';
 import { FormsModule } from '@angular/forms';
+import { ErrorShortPassword } from '../../../errors/errors';
 
 @Component({
   selector: 'app-user',
@@ -19,7 +18,7 @@ import { FormsModule } from '@angular/forms';
 
 export class UserComponent {
 
-  imgDefault:string 
+  imgDefault: string
   myUser!: UserType  //Usuario dueño de la sesión
   userModify!: UserType  //
 
@@ -32,8 +31,7 @@ export class UserComponent {
   @ViewChild('checkIsAdmin') checkAdmin!: ElementRef;
   @ViewChild('userImg') imgUser!: ElementRef;
 
-  constructor(private render: Renderer2, private loginService: LoginserviceService, private selectedUser: SelecteduserService, private userService: DatauserService) {
-    //this.loadDataUser()
+  constructor(private render: Renderer2, private loginService: LoginserviceService, private selectedUser: SelecteduserService, private userService: DatauserService) {    
     this.imgDefault = this.selectedUser.getImgDefault()
   }
 
@@ -42,9 +40,9 @@ export class UserComponent {
       const userLocal = this.loginService.getUserStorage()!;
       this.myUser = userLocal.idUser ? userLocal : user;
     })
-    
 
-    this.selectedUser.getSelectedUser().subscribe((user) => {     
+
+    this.selectedUser.getSelectedUser().subscribe((user) => {
 
       if (user.idUser) {
         this.userModify = user
@@ -67,7 +65,7 @@ export class UserComponent {
   }
 
 
-  
+
   selectImg(e: Event, img: HTMLImageElement) {
     const input = e.target as HTMLInputElement
 
@@ -96,23 +94,23 @@ export class UserComponent {
   checkInputs(): boolean {
     this.getAllInputs()
 
-    if (!this.nombre) return false
-    if (!this.apellido) return false
-    if (!this.cell) return false
-    if (!this.correo) return false
-    if (!this.myPassword) return false
+    try {
+      if (!this.nombre) return false
+      if (!this.apellido) return false
+      if (!this.cell) return false
+      if (!this.correo) return false
+      if (!this.myPassword) return false
+      if (this.myPassword.length < 8) throw new ErrorShortPassword('Contraseña demasiado corta')
 
+      return true
+    } catch (error) {
+      if (error instanceof ErrorShortPassword) shortPassword()
 
-    return true
+      return false
+    }
   }
   saveChanges() {
-    const isVerify = this.checkInputs()
-
-    if (isVerify) {
-      this.userService.upDateUser(this.userModify)
-      return
-    }
-    errorInputs()   
-
+    const isVerify = this.checkInputs()    
+    isVerify ? this.userService.upDateUser(this.userModify) : errorInputs()
   }
 }

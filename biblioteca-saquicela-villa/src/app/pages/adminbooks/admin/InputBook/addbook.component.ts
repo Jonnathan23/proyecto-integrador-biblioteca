@@ -1,8 +1,6 @@
-import { Component, ElementRef, Input, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { AdminBook } from '../../../../../assets/models/models';
 import { categories } from '../../../../../assets/data/categorias';
-import { BtaddbookComponent } from "./btaddbook/btaddbook.component";
-import { BtmodifybookComponent } from "./btmodifybook/btmodifybook.component";
 import { SelectedbookService } from '../../../../services/forbook/selectedbook.service';
 import { DatabookService } from '../../../../services/forbook/databook.service';
 import { errorInputs } from '../../../../../alerts/alerts';
@@ -12,7 +10,7 @@ import { errorInputs } from '../../../../../alerts/alerts';
   standalone: true,
   templateUrl: './addbook.component.html',
   styleUrl: './addbook.component.scss',
-  imports: [BtaddbookComponent, BtmodifybookComponent]
+  imports: []
 })
 export class AddbookComponent {
 
@@ -61,6 +59,11 @@ export class AddbookComponent {
   }
 
   //Funciones
+  /**
+   * @description convierte la imagen seleccionada en formato URL
+   * @param e Evento del mismo componente
+   * @param img 
+   */
   selectImg(e: Event, img: HTMLImageElement) {
     const input = e.target as HTMLInputElement
 
@@ -82,8 +85,10 @@ export class AddbookComponent {
     this.book.category = category.value
   }
 
+  /**
+   * @description Obtiene la informacion de todos los campos del formulario
+   */
   getAllContInputs() {
-
     this.book.name = this.txtName.nativeElement.value
     this.book.autor = this.txtAutor.nativeElement.value
     this.book.description = this.txtDescription.nativeElement.value
@@ -93,6 +98,10 @@ export class AddbookComponent {
     console.log(this.book)
   }
 
+  /**
+   * @description Llena los datos del formulario con el libro que se la ha pasado como parametro
+   * @param book 
+   */
   fillData(book: AdminBook) {
     this.render.setProperty(this.txtName.nativeElement, 'value', book.name)
     this.render.setProperty(this.txtAutor.nativeElement, 'value', book.autor)
@@ -101,6 +110,9 @@ export class AddbookComponent {
     this.render.setProperty(this.imgBook.nativeElement, 'src', book.image)
   }
 
+  /**
+   * @description Reinicia los campos del formulario
+   */
   clearInputs() {
     this.defaultImage = 'assets/img/selectImage.jpg'
     this.render.setProperty(this.txtName.nativeElement, 'value', "")
@@ -110,6 +122,10 @@ export class AddbookComponent {
     this.render.setProperty(this.imgBook.nativeElement, 'src', this.defaultImage)
   }
 
+  /**
+   * @description Verifica que todos los campos del formulario hayan sido llenados
+   * @returns boolean
+   */
   checkInputs(): boolean {
     if (!this.book.name) return false
 
@@ -124,6 +140,9 @@ export class AddbookComponent {
     return true
   }
 
+  /**
+   * @description Guarda la información del libro a nuestra BD
+   */
   saveBook() {
     this.getAllContInputs()
     const isValidate = this.checkInputs()
@@ -136,6 +155,9 @@ export class AddbookComponent {
     }
   }
 
+  /**
+   * @description Actualiza la información del libro a nuestra BD
+   */
   updateBook() {
     this.getAllContInputs()
     const isValidate = this.checkInputs()
