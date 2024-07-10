@@ -14,6 +14,11 @@ export function saveBook() {
 }
 
 /**
+ * * 
+ * ! No pose validacion para nulo
+ * ? No entiendo el camino del objeto
+ * TODO: falta la validaciion
+ * * Falta esto
  * @description Alerta de modificacion exitosa del libro
  */
 export function modifyBook() {
