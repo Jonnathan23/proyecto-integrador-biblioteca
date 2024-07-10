@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HeaderbienvComponent } from './headerbienv/headerbienv.component';
 import { HeadersessionComponent } from './headersession/headersession.component';
 import { Router } from '@angular/router'; // Add this line
+import { LoginserviceService } from '../services/foruser/loginservice.service';
 
 @Component({
   selector: 'app-header',
@@ -12,20 +13,21 @@ import { Router } from '@angular/router'; // Add this line
 })
 export class HeaderComponent {
 
-  ingreso= false;
-  private static instance: HeaderComponent;
+  ingreso: boolean = false;
 
-  constructor() {
-    if (HeaderComponent.instance) return HeaderComponent.instance;
-    HeaderComponent.instance = this;
-   }
+  constructor(private loginService: LoginserviceService) { }
 
-   setIngreso(option: boolean) {
-    this.ingreso = option;
-  }
+  ngOnInit() {
+    this.loginService.getUserActive().subscribe((user) => {
+      const userLocal = this.loginService.getUserStorage()!;
+     
+      if (userLocal.idUser) {
+        this.ingreso = true;
+      } else {
+        this.ingreso = user.idUser ? true : false;
+      }
 
-  public static getInstance() {
-    return HeaderComponent.instance;
+    })
   }
 
  

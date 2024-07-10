@@ -1,30 +1,21 @@
 <main>
     <div class="form-container">
         <h2>Iniciar Sesión</h2>
-        <form>
+        <form (submit)="login(miFormulario)"  #miFormulario="ngForm">
             <div class="campo">
-                <label   for="username">Email</label>
-                <input (input)="getEmail(email.value)"  type="email" id="username" name="username"   #email>
+                <label for="username">Email</label>
+                <input name="email" type="email" id="username" required #email="ngModel" ngModel>
             </div>
 
             <div class="campo">
                 <label for="password">Password</label>
-                <input (input)="getPassword(password.value)" type="password" id="password" name="password"   #password>
+                <input name="password" type="password" id="password" required #password="ngModel" ngModel>
             </div>
 
             <div class="campo">
-                <a (click)="login()"  class="campo__bt" type="submit">Log In</a>                
+                <button class="campo__bt" type="submit">Ingresar</button>
                 <a routerLink="/registrarse" class="campo__iniciar">Registrarse</a>
             </div>
-
-            <div class="campo">
-                <button class="btn--google" >
-                    <img src="https://img.icons8.com/color/48/000000/google-logo.png" />
-                    <span>Log In with Google</span>
-                </button>
-
-            </div>
-
         </form>
     </div>
 </main>

@@ -1,50 +1,54 @@
 <main>
     <div class="cont__admin">
-        <!--Seccion administrador-->
         @if(myUser.admin){
         <app-useradmin />
         }
     </div>
-
-
+    
     <!--Seccion de datos-->
     <div class="form-container">
 
         <form>
             <fieldset>
-                <legend>Datos Personales</legend>
+                <legend>Datos id</legend>
+                <p>id: {{userModify.idUser}}</p>
                 <div class="cont__campos">
                     <div class="campo">
                         <label for="nombre">Nombre: </label>
-                        <input class="campo__txt" type="text" id="nombre" name="nombre" required #name>
+                        <input class="campo__txt" type="text" id="nombre" name="nombre" required #name
+                            [(ngModel)]="nombre">
 
                     </div>
 
                     <div class="campo">
                         <label for="apellido">Apellido: </label>
-                        <input class="campo__txt" type="text" id="apellido" name="apellido" required #lastname>
+                        <input class="campo__txt" type="text" id="apellido" name="apellido" required #lastname
+                            [(ngModel)]="apellido">
                     </div>
 
                     <div class="campo">
                         <label for="cell">Celular: </label>
-                        <input class="campo__txt" type="email" id="cell" name="cell" required #cell>
+                        <input class="campo__txt" type="email" id="cell" name="cell" required #cellphone
+                            [(ngModel)]="cell">
                     </div>
 
                     <div class="campo">
                         <label for="correo">Correo Electrónico: </label>
-                        <input disabled class="campo__txt" type="email" id="correo" name="correo" required #email>
+                        <input class="campo__txt" type="email" id="correo" name="correo" required #email
+                            [(ngModel)]="correo">
                     </div>
 
                     <div class="campo">
                         <label for="contrasena">Contraseña: </label>
-                        <input disabled class="campo__txt" (blur)="isShortPassword()" type="password" id="contrasena"
-                            name="contrasena" required #password>
+                        <input class="campo__txt" type="password" id="contrasena" name="contrasena" required #password
+                            [(ngModel)]="myPassword">
                     </div>
 
                     <div class="campo">
                         <label for="admin">Es administrador: </label>
-                        <input class="admin" (change)="isAdmin($event)" class="campo__check" type="checkbox" id="admin"
-                            name="admin" #checkIsAdmin>
+                        <!--<input class="admin" (change)="isAdmin($event)" class="campo__check" type="checkbox" id="admin"
+                            name="admin" #checkIsAdmin>-->
+                        <input class="admin" class="campo__check" type="checkbox" id="admin" name="admin" #checkIsAdmin>
                     </div>
 
                     <div class="change__img">

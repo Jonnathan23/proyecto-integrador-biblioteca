@@ -2,8 +2,10 @@ import Swal from 'sweetalert2'
 import { BookType } from '../assets/models/models'
 
 //* Libros
-//Guardar
-export function save() {
+/**
+ * @description alerta para el guardado exitosamente
+ */
+export function saveBook() {
     Swal.fire({
         title: 'Se ha guardado con exito',
         icon: 'success',
@@ -11,7 +13,39 @@ export function save() {
     })
 }
 
-// Borrar
+/**
+ * * 
+ * ! No pose validacion para nulo
+ * ? No entiendo el camino del objeto
+ * TODO: falta la validaciion
+ * * Falta esto
+ * @description Alerta de modificacion exitosa del libro
+ */
+export function modifyBook() {
+    Swal.fire({
+        title: 'Modificado correctamente',
+        icon: 'success',
+        timer: 3000,
+        timerProgressBar: true
+    })
+}
+
+/**
+ * @description Alerta de error al modificar el libro
+ */
+export function errorModifyBook() {
+    Swal.fire({
+        title: 'Error al modificar el libro',
+        icon: 'error',
+        text: 'Lo sentimos, hubo un error al modificar',
+        timer: 4000
+    })
+}
+
+//* Borrar
+/**
+ * @description alerta para informar de que se ha eliminado correctamente
+ */
 export function deleteSuccess() {
     Swal.fire({
         title: 'Eliminado',
@@ -21,7 +55,9 @@ export function deleteSuccess() {
     })
 }
 
-// Borrar
+/**
+ * @description error con la BD al borrar la información
+ */
 export function errorDelete() {
     Swal.fire({
         title: 'No se ha elimnado',
@@ -31,28 +67,13 @@ export function errorDelete() {
     })
 }
 
-// Modifcar
-export function modifySuccess() {
-    Swal.fire({
-        title: 'Cambios Guardados',
-        text: 'Se han guardado los datos correctamente',
-        icon: 'success',
-        timer: 3000,
-    })
-}
-
-export function errorModify() {
-    Swal.fire({
-        title: `Error al guardar las modificaciones`,
-        text: `Lo sentimos, hubo un error al momento de guardar los datos`,
-        icon: 'error',
-        timer: 5000
-    })
-}
 
 
 
 // Campos de agregar libro vacios
+/**
+ * @description Alerta para formulario con error por campos vacios
+ */
 export function errorInputs() {
     Swal.fire({
         title: `Error al guardar`,
@@ -63,6 +84,9 @@ export function errorInputs() {
 }
 
 // Error de guardar en la BD
+/**
+ * @description Alerta de error al guardar pero en la BD
+ */
 export function errorSave() {
     Swal.fire({
         title: `Error al guardar`,
@@ -72,7 +96,12 @@ export function errorSave() {
     })
 }
 
-//Confirmar Borrar un libro
+
+/**
+ * @description Confirmar Borrar un libro
+ * @param bookDelete 
+ * @returns Promesa<Boolean>
+ */
 export async function confirmDelete(bookDelete: BookType): Promise<boolean> {
     const result = await Swal.fire({
         title: 'Eliminar',
@@ -94,7 +123,9 @@ export async function confirmDelete(bookDelete: BookType): Promise<boolean> {
 
 
 //* Usuario
-
+/**
+ * @description Advertencia de que la contraseña es muy corta
+ */
 export function shortPassword() {
     Swal.fire({
         title: 'Contraseña error',
@@ -113,6 +144,9 @@ export function shortPassword() {
     })
 }
 
+/**
+ * @description Alerta de error al ingresar
+ */
 export function errorSignIn() {
     Swal.fire({
         title: 'Error de Ingreso',
@@ -122,6 +156,9 @@ export function errorSignIn() {
     })
 }
 
+/**
+ * @description Alerta de modificacion exitosa al usuario
+ */
 export function modifyUser() {
     Swal.fire({
         title: 'Usuario modificado con exito',
@@ -130,52 +167,23 @@ export function modifyUser() {
     })
 }
 
-export function errorForm(code: string) {
-    switch (code) {
-        case 'auth/email-already-in-use':
-            Swal.fire({
-                title: 'Fallo al registrarse',
-                text: 'El usuario ya existe, use otro correo',
-                icon: 'error',
-                timer: 6000,
-            });
-            break;
-        case 'auth/weak-password':
-            Swal.fire({
-                title: 'Fallo al registrarse',
-                text: 'La contraseña es muy corta',
-                icon: 'error',
-                timer: 6000,
-            });
-            break;
-
-        case 'auth/invalid-email':
-            Swal.fire({
-                title: 'Fallo al ingresar',
-                text: 'Correo inválido',
-                icon: 'error',
-                timer: 6000,
-            });
-            break;
-
-        case 'auth/invalid-credential':
-            Swal.fire({
-                title: 'Fallo al ingresar',
-                text: 'Contraseña incorrecta',
-                icon: 'error',
-                timer: 6000,
-            });
-            break;
-
-        default:
-            Swal.fire({
-                title: 'Fallo al registrarse',
-                text: 'Ocurrión un error inesperado',
-                icon: 'error',
-                timer: 6000,
-            });
-            break;
-    }
-
+/**
+ * @description Alerta de error Usuario existente
+ */
+export function userExist() {
+    Swal.fire({
+        title: 'Fallo al registrarse',
+        text: 'El usuario ya existe, use otro correo',
+        icon: 'error',
+        timer: 6000,
+    })
 }
 
+/**
+ * @description Alerta de error fallo al cerrar la sesión a nivel de Validación
+ */
+export function failBack() {
+    Swal.fire({
+        title: 'Fallo al cerrar sesión'
+    })
+}

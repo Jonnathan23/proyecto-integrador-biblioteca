@@ -5,6 +5,7 @@ import { IniciarsesionComponent } from './pages/iniciarsesion/iniciarsesion.comp
 import { RegistrarseComponent } from './pages/registrarse/registrarse.component';
 import { AdminbooksComponent } from './pages/adminbooks/adminbooks.component';
 import { UserComponent } from './pages/user/user.component';
+import { authGuard } from './guards/login.guard';
 
 
 
@@ -12,9 +13,9 @@ import { UserComponent } from './pages/user/user.component';
 export const routes: Routes = [    
     {path:'bienvenido', component:BienvenidaComponent},
     {path:'iniciar', component:IniciarsesionComponent},
-    {path:'adminbooks', component:AdminbooksComponent}, 
+    {path:'adminbooks', component:AdminbooksComponent, canActivate:[authGuard]}, 
     {path:'registrarse', component: RegistrarseComponent},
-    {path:'usuario', component:UserComponent},
+    {path:'usuario', component:UserComponent, canActivate:[authGuard]},
     {path: '', redirectTo:'bienvenido', pathMatch:'full'},
 
 ];

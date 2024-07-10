@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component} from '@angular/core';
 import { BookType } from '../../../../assets/models/models';
-import { DatabookService } from '../../../services/databook.service';
+import { DatabookService } from '../../../services/forbook/databook.service';
 
 @Component({
   selector: 'app-books',
@@ -10,16 +10,16 @@ import { DatabookService } from '../../../services/databook.service';
   styleUrl: './books.component.scss'
 })
 export class BooksComponent {
-  private static instance :BooksComponent
+  private static instance: BooksComponent
   books: BookType[] = [];
 
-  constructor(private bookService:DatabookService){
-    if(BooksComponent.instance) return BooksComponent.instance
+  constructor(private bookService: DatabookService) {
+    if (BooksComponent.instance) return BooksComponent.instance
     return BooksComponent.instance = this
   }
 
-  ngOnInit(){
-    this.bookService.getBooks().subscribe( (books) => this.books = books)
+  ngOnInit() {
+    this.bookService.getBooks().subscribe((books) => this.books = books)
   }
 
 }

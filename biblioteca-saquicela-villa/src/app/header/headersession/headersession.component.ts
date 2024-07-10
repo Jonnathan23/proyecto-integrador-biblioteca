@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { DatauserService } from '../../services/datauser.service';
-import { RouterLink,Router } from '@angular/router';
+import { DatauserService } from '../../services/foruser/datauser.service';
+import { RouterLink, Router } from '@angular/router';
 import { HeaderComponent } from '../header.component';
+import { LoginserviceService } from '../../services/foruser/loginservice.service';
 
 
 @Component({
@@ -13,31 +14,9 @@ import { HeaderComponent } from '../header.component';
 })
 export class HeadersessionComponent {
 
-  constructor(private useService: DatauserService, private router: Router) { }
+  constructor(private loginService: LoginserviceService, private router: Router) { }
 
   back() {
-    this.useService.back();
-  }
-  linkLibros() {
-    this.router.navigate(['/adminbooks'])
-    this.headerModif(true);
-    console.log('Libros');
-  }
-
-  linkPerfil() {  
-    this.router.navigate(['/usuario'])
-    this.headerModif(true);
-    console.log('Perfil');
-  }
-
-  linkAtri() {  
-    this.router.navigate(['/atribuciones'])
-    this.headerModif(true);
-    console.log('Atribuciones');
-  }
-
-  headerModif(opc: boolean){
-    const dadHeader = HeaderComponent.getInstance();
-      dadHeader.setIngreso(opc);
+    this.loginService.back();
   }
 }
