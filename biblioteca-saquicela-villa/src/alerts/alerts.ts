@@ -2,7 +2,6 @@ import Swal from 'sweetalert2'
 import { BookType } from '../assets/models/models'
 
 //* Libros
-//Guardar
 /**
  * @description alerta para el guardado exitosamente
  */
@@ -14,7 +13,9 @@ export function saveBook() {
     })
 }
 
-
+/**
+ * @description Alerta de modificacion exitosa del libro
+ */
 export function modifyBook() {
     Swal.fire({
         title: 'Modificado correctamente',
@@ -24,6 +25,9 @@ export function modifyBook() {
     })
 }
 
+/**
+ * @description Alerta de error al modificar el libro
+ */
 export function errorModifyBook() {
     Swal.fire({
         title: 'Error al modificar el libro',
@@ -62,6 +66,9 @@ export function errorDelete() {
 
 
 // Campos de agregar libro vacios
+/**
+ * @description Alerta para formulario con error por campos vacios
+ */
 export function errorInputs() {
     Swal.fire({
         title: `Error al guardar`,
@@ -72,6 +79,9 @@ export function errorInputs() {
 }
 
 // Error de guardar en la BD
+/**
+ * @description Alerta de error al guardar pero en la BD
+ */
 export function errorSave() {
     Swal.fire({
         title: `Error al guardar`,
@@ -129,6 +139,9 @@ export function shortPassword() {
     })
 }
 
+/**
+ * @description Alerta de error al ingresar
+ */
 export function errorSignIn() {
     Swal.fire({
         title: 'Error de Ingreso',
@@ -138,6 +151,9 @@ export function errorSignIn() {
     })
 }
 
+/**
+ * @description Alerta de modificacion exitosa al usuario
+ */
 export function modifyUser() {
     Swal.fire({
         title: 'Usuario modificado con exito',
@@ -146,6 +162,9 @@ export function modifyUser() {
     })
 }
 
+/**
+ * @description Alerta de error Usuario existente
+ */
 export function userExist() {
     Swal.fire({
         title: 'Fallo al registrarse',
@@ -155,8 +174,11 @@ export function userExist() {
     })
 }
 
-export function failBack(){
+/**
+ * @description Alerta de error fallo al cerrar la sesión a nivel de Validación
+ */
+export function failBack() {
     Swal.fire({
-        title:'Fallo al cerrar sesión'
+        title: 'Fallo al cerrar sesión'
     })
 }
