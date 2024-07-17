@@ -1,5 +1,10 @@
 @if (ingreso) {
-    <app-headersession/>
+    @if (isAdmin) {
+        <app-headersession/>
+    }@else {
+        <app-headeruser></app-headeruser>
+    }
+
 }@else {   
     <app-headerbienv/>
 }
