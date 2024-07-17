@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { LoginserviceService } from '../../services/foruser/loginservice.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-headeruser',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './headeruser.component.html',
   styleUrl: './headeruser.component.scss'
 })
