@@ -1,4 +1,4 @@
-import { CategoryType } from "../models/models";
+import { CategoryType, StateBook } from "../models/models";
 
 // Arreglo de categorias
 export const categories: CategoryType [] = [
@@ -34,3 +34,9 @@ export const categories: CategoryType [] = [
     }
 
 ] ;
+
+export const statesBook:StateBook[] = [
+    { id:1, description: 'disponible'},
+    { id:2, description: 'prestado'},
+    { id:3, description: 'reservado'},
+]

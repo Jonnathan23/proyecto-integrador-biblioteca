@@ -1,6 +1,6 @@
 import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { AdminBook } from '../../../../../assets/models/models';
-import { categories } from '../../../../../assets/data/categorias';
+import { categories } from '../../../../../assets/data/data';
 import { SelectedbookService } from '../../../../services/forbook/selectedbook.service';
 import { DatabookService } from '../../../../services/forbook/databook.service';
 import { errorInputs } from '../../../../../alerts/alerts';
