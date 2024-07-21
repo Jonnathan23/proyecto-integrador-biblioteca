@@ -4,22 +4,17 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { AdminBook, BookType } from '../../../assets/models/models';
 import { deleteSuccess, errorDelete, errorModifyBook, errorSave, modifyBook, saveBook } from '../../../alerts/alerts';
 
-
 @Injectable({
   providedIn: 'root'
 })
-export class DatabookService {
-  private static instance: DatabookService;
+
+export class DatabookService {  
 
   private booksSubject = new BehaviorSubject<AdminBook[]>([]);
   books$: Observable<AdminBook[]> = this.booksSubject.asObservable();
 
   constructor(private fireStore: Firestore) {
-    this.loadBooks()
-
-    // Se asegura de que solo se instancie un solo objeto
-    if (DatabookService.instance) return DatabookService.instance;
-    DatabookService.instance = this;
+    this.loadBooks()    
   }
 
   private loadBooks() {
@@ -68,14 +63,8 @@ export class DatabookService {
     }
   }
 
-
-
   //Get & Set
   getBooks(): Observable<AdminBook[]> {
     return this.books$;
-  }
-
-  static getInstance() {
-    return DatabookService.instance
   }
 }

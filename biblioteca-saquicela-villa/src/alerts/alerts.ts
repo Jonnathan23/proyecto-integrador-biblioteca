@@ -13,14 +13,7 @@ export function saveBook() {
     })
 }
 
-/**
- * * 
- * ! No pose validacion para nulo
- * ? No entiendo el camino del objeto
- * TODO: falta la validaciion
- * * Falta esto
- * @description Alerta de modificacion exitosa del libro
- */
+/** @description Alerta de modificacion exitosa del libro*/
 export function modifyBook() {
     Swal.fire({
         title: 'Modificado correctamente',
@@ -30,15 +23,25 @@ export function modifyBook() {
     })
 }
 
-/**
- * @description Alerta de error al modificar el libro
- */
+/** @description Alerta de error al modificar el libro*/
 export function errorModifyBook() {
     Swal.fire({
         title: 'Error al modificar el libro',
         icon: 'error',
         text: 'Lo sentimos, hubo un error al modificar',
         timer: 4000
+    })
+}
+
+
+/** @description Alerta de guardado con exito el prestamo */
+export function addLendBookSuccess(){
+    Swal.fire({
+        title: 'Reservacion exitosa',
+        text:'Se ha reservado el libro correctamente',
+        icon: 'success',
+        timer: 4000,
+        timerProgressBar: true
     })
 }
 
