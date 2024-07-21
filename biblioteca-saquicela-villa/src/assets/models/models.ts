@@ -25,7 +25,7 @@ export type AdminSateBook = AdminBook & {
 /** @description Modelo para el historial de prestamos de libros */
 export type LendBookHistory = Pick<AdminBook, 'id' | 'name' | 'category'> & {
     nameUser: string
-    date: Date | string
+    date: Date | string    
 }
 
 /** @description Modelo para el historial de devoluciones de libros */

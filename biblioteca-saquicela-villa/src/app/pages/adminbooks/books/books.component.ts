@@ -1,17 +1,19 @@
 import { Component} from '@angular/core';
-import { BookType } from '../../../../assets/models/models';
+import { AdminBook, BookType } from '../../../../assets/models/models';
 import { DatabookService } from '../../../services/forbook/databook.service';
+import { AsidebookComponent } from "./asidebook/asidebook.component";
 
 @Component({
   selector: 'app-books',
   standalone: true,
-  imports: [],
+  imports: [AsidebookComponent],
   templateUrl: './books.component.html',
   styleUrl: './books.component.scss'
 })
 export class BooksComponent {
   private static instance: BooksComponent
-  books: BookType[] = [];
+  books: AdminBook[] = [];
+  isLendingBook = false;
 
   constructor(private bookService: DatabookService) {
     if (BooksComponent.instance) return BooksComponent.instance
@@ -20,6 +22,14 @@ export class BooksComponent {
 
   ngOnInit() {
     this.bookService.getBooks().subscribe((books) => this.books = books)
+  }
+
+  setAsideBook(book:AdminBook){
+
+  }
+
+  hideAsideBook(){
+    this.isLendingBook = false
   }
 
 }
