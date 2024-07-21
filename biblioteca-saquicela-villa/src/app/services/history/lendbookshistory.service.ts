@@ -46,6 +46,10 @@ export class LendbookshistoryService {
     }
   }
 
+  getLendsBoos(){
+    return this.lendsBooks$;
+  }
+
 
 
 }

@@ -43,21 +43,18 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 2rem;
+    gap: 3.5rem;
 }
 
 .history {
     background-color: $fondoItem;
-    padding: 3rem;
-    width: 80%;
-    height: 95%;
-    margin: auto;
+    box-shadow: 13px 20px 17px 3px rgba(0, 0, 0, .53);
+    padding: 2rem;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
-    box-shadow: 13px 20px 17px 3px rgba(0, 0, 0, .53);
-
+    gap: 1.5rem;
 }
 
 .history--title {
@@ -70,8 +67,7 @@ main {
 
 @media(min-width:480px) {
     .cont--history {
-        display: grid;
-        grid-template-columns: 50% 50%;
+        flex-direction: row;
     }
 
     .history {
@@ -80,26 +76,56 @@ main {
 
 }
 
+.content-text {
+    width: 100%;
+    text-align: center;
+}
+
 .lends--list {
     list-style: none;
+    width: 100%;
+    padding: 0;
     margin: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 .lends--item {
     margin: 0;
+    padding: 1rem 0;
+    min-height: 1rem;
+
     display: flex;
-    min-height: 1.5rem;
-    justify-content: space-around;
-    align-items: center;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    color: $blanco;
+    transition: background-color .1s ease;
+}
+.lends--item:hover {    
+    background-color: rgba(36, 34, 117, .55);
 }
 
 .book--list {
-    list-style: none;
     margin: 0;
-
+    list-style: none;
+}
+.book--list--users{
+    margin-left: 1.5rem;
+    background-color: aqua;
 }
 
-.book--plus {
+
+
+.book--button {
     background-color: transparent;
     border: none;
+    transition: opacity .3s ease;
+}
+
+.book--button:hover{
+    cursor: pointer;
+    opacity: .65;
 }
