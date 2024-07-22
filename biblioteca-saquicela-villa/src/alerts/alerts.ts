@@ -45,6 +45,17 @@ export function addLendBookSuccess(){
     })
 }
 
+/** @description Alerta de guardado con exito el prestamo */
+export function addLendBookError(){
+    Swal.fire({
+        title: 'Fallo al reservar el libro',
+        text:'Lo sentimos, el libro se encuentra reservado o prestado',
+        icon: 'error',
+        timer: 4000,
+        timerProgressBar: true
+    })
+}
+
 //* Borrar
 /**
  * @description alerta para informar de que se ha eliminado correctamente
@@ -93,7 +104,7 @@ export function errorInputs() {
 export function errorSave() {
     Swal.fire({
         title: `Error al guardar`,
-        text: `Lo sentimos, hubo un error al momento de guardar`,
+        text: `Lo sentimos, hubo un error al momento de guardar, intentelo más tarde`,
         icon: 'error',
         timer: 5000
     })

@@ -37,6 +37,7 @@ export class AdminComponent {
 
   hideAdminLibrary() {
     this.adminLibrary = false
+    this.bookService.updateBooksBD()
   }
 
   

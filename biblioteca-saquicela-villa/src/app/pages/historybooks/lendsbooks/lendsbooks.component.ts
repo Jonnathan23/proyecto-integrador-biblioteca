@@ -22,7 +22,7 @@ export class LendsbooksComponent {
    *  * Se puede validar desde el back - end
    */
   ngOnInit() {
-    this.lendBookService.getLendsBoos().subscribe((lends) => this.lendsBooks = lends.filter((lend) => this.book.name === lend.name))
+    this.lendBookService.getLendsBooks().subscribe((lends) => this.lendsBooks = lends.filter((lend) => this.book.name === lend.name))
     console.log(this.lendsBooks)
   }
 }

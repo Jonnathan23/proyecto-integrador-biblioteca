@@ -4,6 +4,7 @@
         <form class="formulary" action="">
             <fieldset>
                 <legend>Datos del libro</legend>
+                <legend>Estado: {{book.state}} </legend>
 
                 <div class="contenedor-campos">
                     <div class="campo ">
@@ -31,19 +32,30 @@
                         <select name="" id="" #cbCategory disabled>
                             <option disabled selected [value]="cbText">{{cbText}}</option>                            
                         </select>
-                    </div>                 
+                    </div>
+                    
+                    <div class="campo ">
+                        <label for="">Tiempo de reserva</label>
+                        <select (change)="selectDate($event)" name="" id="" #cbDates>
+                            <option disabled selected [value]="cbDate">{{cbDate}}</option>
+
+                            @for (date of datesLend; track date) {
+                            <option value="{{date.id}}">{{date.description}}</option>
+                            }
+                        </select>
+                    </div>
 
                     <div class="img__selected">
                         <img src="assets/img/selectImage.jpg" alt="sala" #book_img>
                     </div>                    
 
                     <div class="campo__bt submit">
-                        <input (click)="aside()" class="bt" type="button" value="Apartar Libro">
+                        <input (click)="saveMyBook()" class="bt" type="button" value="Obtener">
                     </div>
 
-                    
-                    
-                  
+                    <div class="campo__bt submit">
+                        <input (click)="aside()" class="bt" type="button" value="Apartar Libro">
+                    </div>
 
                 </div>
             </fieldset>

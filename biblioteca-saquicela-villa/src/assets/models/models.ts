@@ -1,3 +1,9 @@
+/** @description Modelo para indicar los estados del libro*/
+export type StateBook = {
+    id: number
+    description: string
+}
+
 // Estructura del Objeto libro
 export type AdminBook = {
     id: string
@@ -6,24 +12,17 @@ export type AdminBook = {
     image: string
     autor: string
     category: string
+    state: StateBook['description']    
 }
 
 /** @description Modelo para guardar un nuevo libro que no se ha creado con anterioridad sin la necesidad de colocar el id*/
-export type BookType = Pick<AdminBook, 'name' | 'description' | 'image' | 'autor' | 'category'>
+export type BookType = Pick<AdminBook, 'name' | 'description' | 'image' | 'autor' | 'category' | 'state'>
 
-/** @description Modelo para indicar los estados del libro*/
-export type StateBook = {
-    id: number
-    description: string
-}
-
-/** @description Modelo que hereda del AdminBook, posee el estado actual del libro */
-export type AdminSateBook = AdminBook & {
-    state: StateBook['description']
-}
 
 /** @description Modelo para el historial de prestamos de libros */
 export type LendBookHistory = Pick<AdminBook, 'id' | 'name' | 'category'> & {
+    idBook:string
+    idUser:string
     nameUser: string
     date: Date | string    
 }
@@ -52,6 +51,12 @@ export type UserType = {
     password: string
     image: string
     admin: boolean
+}
+
+export type Dates = {
+    id:number
+    description : string
+    days:number
 }
 
 export type AddUser = Pick<UserType, 'name'|'lastname'| 'cell'| 'email'| 'password'|'image'|'admin' >

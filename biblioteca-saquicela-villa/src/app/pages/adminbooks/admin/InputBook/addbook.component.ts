@@ -35,18 +35,12 @@ export class AddbookComponent {
   @ViewChild('book_img') imgBook!: ElementRef;
 
   //Inicializacion del objeto
-  book: AdminBook = {
-    id: '',
-    name: '',
-    description: '',
-    image: '',
-    autor: '',
-    category: ""
-  }
+  book: AdminBook
 
 
   constructor(private render: Renderer2, private selectedBookService: SelectedbookService, private bookService: DatabookService) {
-    this.cbText = selectedBookService.getCbText()
+    this.cbText = this.selectedBookService.getCbText()
+    this.book = this.selectedBookService.getRestarBook()
   }
 
   ngOnInit() {
@@ -145,6 +139,7 @@ export class AddbookComponent {
     this.getAllContInputs()
     const isValidate = this.checkInputs()
     if (isValidate) {
+      this.book.state = this.selectedBookService.getDefaultSate()
       this.bookService.addBook(this.book)
       this.clearInputs()
     } else {

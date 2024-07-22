@@ -3,6 +3,7 @@ import { Firestore, addDoc, collection, deleteDoc, doc, onSnapshot, setDoc } fro
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AdminBook, BookType } from '../../../assets/models/models';
 import { deleteSuccess, errorDelete, errorModifyBook, errorSave, modifyBook, saveBook } from '../../../alerts/alerts';
+import { statesBook } from '../../../assets/data/data';
 
 @Injectable({
   providedIn: 'root'
@@ -42,8 +43,7 @@ export class DatabookService {
   }
 
   async updateBook(book: AdminBook) {
-    try {
-      //updateDoc(doc(this.fireStore,'books'),Object.assign({},book))
+    try {      
       const update = book as BookType
       await setDoc(doc(this.fireStore, 'books', book.id), Object.assign({}, update))
       modifyBook()
@@ -52,8 +52,7 @@ export class DatabookService {
     }
   }
 
-  async deleteBook(bookDelete: AdminBook) {
-    // deleteDoc(doc(this.fireStore,'books'),Object.assign({},bookDelete)) 
+  async deleteBook(bookDelete: AdminBook) {    
     try {
       await deleteDoc(doc(this.fireStore, 'books', bookDelete.id))
       deleteSuccess()
@@ -66,5 +65,15 @@ export class DatabookService {
   //Get & Set
   getBooks(): Observable<AdminBook[]> {
     return this.books$;
+  }
+
+  async updateBooksBD(){
+    console.log('updating...')
+    this.books$.subscribe((books) => {
+      books.forEach((book) => {
+        book.state = statesBook[0].description
+        this.updateBook(book)
+      })
+    })
   }
 }
