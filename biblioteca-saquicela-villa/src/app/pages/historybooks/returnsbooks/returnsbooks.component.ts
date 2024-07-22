@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { AdminBook, ReturnBookHistory } from '../../../../assets/models/models';
+import { AdminBook, BookHistory } from '../../../../assets/models/models';
+import { ReturnbookshistoryService } from '../../../services/history/returnbookshistory.service';
 
 @Component({
   selector: 'app-returnsbooks',
@@ -10,9 +11,11 @@ import { AdminBook, ReturnBookHistory } from '../../../../assets/models/models';
 })
 export class ReturnsbooksComponent {
   @Input({ required: true }) book!: AdminBook;
-  returnsBooks: ReturnBookHistory[] = [];
+  returnsBooks: BookHistory[] = [];
 
-  ngOnInit(){
-    
+  constructor(private returnBookSerive: ReturnbookshistoryService) { }
+
+  ngOnInit() {
+    this.returnBookSerive.getReturnBooks().subscribe((returns) => this.returnsBooks = returns.filter((rbook)=> this.book.name === rbook.name ))
   }
 }

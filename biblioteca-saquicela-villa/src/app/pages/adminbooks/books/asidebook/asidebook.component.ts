@@ -1,6 +1,6 @@
 import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { SelectedbookService } from '../../../../services/forbook/selectedbook.service';
-import { AdminBook, LendBookHistory, StateBook } from '../../../../../assets/models/models';
+import { AdminBook, BookHistory, StateBook } from '../../../../../assets/models/models';
 import { dates, statesBook } from '../../../../../assets/data/data';
 import { LendbookshistoryService } from '../../../../services/history/lendbookshistory.service';
 import { LoginserviceService } from '../../../../services/foruser/loginservice.service';
@@ -20,7 +20,7 @@ export class AsidebookComponent {
   cbDate!: string;
   datesLend = [...dates]
   states: StateBook[] = [...statesBook]
-  lendBook: LendBookHistory;
+  lendBook: BookHistory;
 
   @ViewChild('name') txtName!: ElementRef;
   @ViewChild('autor') txtAutor!: ElementRef;

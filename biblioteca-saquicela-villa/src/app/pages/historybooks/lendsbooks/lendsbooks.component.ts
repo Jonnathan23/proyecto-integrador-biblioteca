@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { AdminBook, LendBookHistory } from '../../../../assets/models/models';
+import { AdminBook, BookHistory } from '../../../../assets/models/models';
 import { LendbookshistoryService } from '../../../services/history/lendbookshistory.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { LendbookshistoryService } from '../../../services/history/lendbookshist
 export class LendsbooksComponent {
   @Input({ required: true }) book!: AdminBook;
 
-  lendsBooks: LendBookHistory[] = []
+  lendsBooks: BookHistory[] = []
 
   constructor(private lendBookService: LendbookshistoryService) { }
 

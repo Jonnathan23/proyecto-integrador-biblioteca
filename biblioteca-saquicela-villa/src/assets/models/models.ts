@@ -12,7 +12,7 @@ export type AdminBook = {
     image: string
     autor: string
     category: string
-    state: StateBook['description']    
+    state: StateBook['description']
 }
 
 /** @description Modelo para guardar un nuevo libro que no se ha creado con anterioridad sin la necesidad de colocar el id*/
@@ -20,19 +20,12 @@ export type BookType = Pick<AdminBook, 'name' | 'description' | 'image' | 'autor
 
 
 /** @description Modelo para el historial de prestamos de libros */
-export type LendBookHistory = Pick<AdminBook, 'id' | 'name' | 'category'> & {
-    idBook:string
-    idUser:string
-    nameUser: string
-    date: Date | string    
-}
-
-/** @description Modelo para el historial de devoluciones de libros */
-export type ReturnBookHistory = Pick<AdminBook , 'id'| 'name' | 'category'> & {
+export type BookHistory = Pick<AdminBook, 'id' | 'name' | 'category'> & {
+    idBook: string
+    idUser: string
     nameUser: string
     date: Date | string
 }
-
 // Estructura de una categoria
 export type CategoryType = {
     title: string
@@ -54,18 +47,18 @@ export type UserType = {
 }
 
 export type Dates = {
-    id:number
-    description : string
-    days:number
+    id: number
+    description: string
+    days: number
 }
 
-export type AddUser = Pick<UserType, 'name'|'lastname'| 'cell'| 'email'| 'password'|'image'|'admin' >
+export type AddUser = Pick<UserType, 'name' | 'lastname' | 'cell' | 'email' | 'password' | 'image' | 'admin'>
 
-export type LoginUser = Pick<UserType,'email' | 'password'>
+export type LoginUser = Pick<UserType, 'email' | 'password'>
 
 //Atribuciones
 
 export type Atribuciones = {
-    url:string
-    texto:string
+    url: string
+    texto: string
 }
