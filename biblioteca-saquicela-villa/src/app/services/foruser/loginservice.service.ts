@@ -55,8 +55,8 @@ export class LoginserviceService {
   async loginUser(user: LoginUser) {
     try {
       const userLoginIn = await signInWithEmailAndPassword(this.auth, user.email, user.password);
-
       const userFound = await this.userService.searchUser(userLoginIn);
+      
       this.userActive.next(userFound!);
       this.localStorageService.setItem(this.keyUser, userFound);
       this.selectedUser.setSelectedUser(userFound!)

@@ -71,7 +71,7 @@ export class AsidebookComponent {
   selectDate(e: Event) {
     const date = e.target as HTMLInputElement
     const currentDate = new Date();
-    const today = currentDate
+    const today = new Date()
     currentDate.setDate(currentDate.getDate() + dates[+date.value - 1].days)
     this.lendBook.date = `${this.lendBookService.formatDate(today)} - ${this.lendBookService.formatDate(currentDate)}`
   }

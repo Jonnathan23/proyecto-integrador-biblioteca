@@ -29,19 +29,19 @@ export class ReturnbookshistoryService {
     });
   }
 
-  async addReturndBook(lendBook: BookHistory, book: AdminBook) {
+  async addReturndBook(returnBook: BookHistory, book: AdminBook) {
     try {
       await this.bookService.updateBook(book)
-      await addDoc(collection(this.fireStore, 'books'), Object.assign({}, lendBook))
-      addLendBookSuccess()
+      await addDoc(collection(this.fireStore, 'lendsBooks'), Object.assign({}, returnBook))
+     // addreturnBookSuccess()
     } catch (error) {
       errorSave()
     }
   }
 
-  async deleteReturnBook(lendBook: BookHistory) {
+  async deleteReturnBook(returnBook: BookHistory) {
     try {
-      await deleteDoc(doc(this.fireStore, 'books', lendBook.id))
+      await deleteDoc(doc(this.fireStore, 'lendsBooks', returnBook.id))
       deleteSuccess()
 
     } catch (error) {

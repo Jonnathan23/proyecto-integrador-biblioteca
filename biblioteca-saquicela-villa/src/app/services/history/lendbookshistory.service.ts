@@ -4,6 +4,7 @@ import { AdminBook, BookHistory } from '../../../assets/models/models';
 import { Firestore, onSnapshot, addDoc, collection, deleteDoc, doc } from '@angular/fire/firestore';
 import { addLendBookSuccess, deleteSuccess, errorDelete, errorSave } from '../../../alerts/alerts';
 import { DatabookService } from '../forbook/databook.service';
+import { MybooksService } from './mybooks.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class LendbookshistoryService {
   private lendsBooksSubject = new BehaviorSubject<BookHistory[]>([]);
   lendsBooks$: Observable<BookHistory[]> = this.lendsBooksSubject.asObservable()
 
-  constructor(private fireStore: Firestore, private bookService: DatabookService) {
+  constructor(private fireStore: Firestore, private bookService: DatabookService, private myBookService: MybooksService) {
     this.loadLendsBooks()
   }
 
@@ -32,6 +33,7 @@ export class LendbookshistoryService {
   async addLendBook(lendBook: BookHistory, book: AdminBook) {
     try {
       await this.bookService.updateBook(book)
+      await this.myBookService.addMyBook(lendBook.idUser, lendBook.nameUser, book.id, book.name, book.state)
       await addDoc(collection(this.fireStore, 'lendsBooks'), Object.assign({}, lendBook))
       addLendBookSuccess()
     } catch (error) {

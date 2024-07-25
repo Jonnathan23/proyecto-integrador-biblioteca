@@ -19,6 +19,16 @@ export type AdminBook = {
 export type BookType = Pick<AdminBook, 'name' | 'description' | 'image' | 'autor' | 'category' | 'state'>
 
 
+/** @description Modelo para tabla de my books */
+export type MyBooksModel = {
+    id: string
+    idUser: string
+    nameUser: string
+    idBook: string
+    nameBook: string
+    stateBook: StateBook['description']
+}
+
 /** @description Modelo para el historial de prestamos de libros */
 export type BookHistory = Pick<AdminBook, 'id' | 'name' | 'category'> & {
     idBook: string
@@ -57,7 +67,6 @@ export type AddUser = Pick<UserType, 'name' | 'lastname' | 'cell' | 'email' | 'p
 export type LoginUser = Pick<UserType, 'email' | 'password'>
 
 //Atribuciones
-
 export type Atribuciones = {
     url: string
     texto: string
